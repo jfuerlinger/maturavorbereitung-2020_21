@@ -10,6 +10,8 @@ Das Eregbnis der überarbeteiteten Ausarbeitung ist der Fragenkatalog zur Matura
 
 ## Themen
 
+### Themen (G.Köck + Ego)
+
 | Thema                                     | Beschreibung                                                                                                                                           | Schüler |
 |-------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|:-------:|
 | Collections und Generics                  | Generische Methoden und Klassen, Constraints in C#, Arten von Collections, Einsatz von Generics in Collections                                         |   TBD   |
@@ -23,11 +25,10 @@ Das Eregbnis der überarbeteiteten Ausarbeitung ist der Fragenkatalog zur Matura
 | Interfaces                                | Ziele und Einsatzgebiete von Interfaces, Contract-First-Design, Beispiele aus dem .NET-Framework                                                       |   TBD   |
 | Reflection                                | Grundkonzepte, Einsatzmöglichkeiten                                                                                                                    |   TBD   |
 | ASP.NET Razor Page - Grundlagen           | Grundlegende Architektur, Routing, Details zu Controller, View (Razor, PartialView, _Layout …) und Model, dynamische Datentypen (ViewBag), Html-Helper |   TBD   |
-| ASP.NET Razor Page - Validierung          | Grundlegende Architektur, Routing, Details zu Controller, View (Razor, PartialView, _Layout …) und Model, dynamische Datentypen (ViewBag), Html-Helper |   TBD   |
 | Repository- und UnitOfWork-Pattern        | Varianten (DI, Singleton, …), Ziele, Einsatzgebiete                                                                                                    |   TBD   |
 | REST-Services mit Web-API                 | Grundarchitektur im Zusammenhang mit ASP.NET Core, REST-Grundlagen, Entwickeln und Debuggen, Hosting                                                   |   TBD   |
 | Events und Delegates                      | xxx                                                                                                                                                    |   TBD   |
-| Linq                                      | Verwendung, Operatoren, Materialisierungszeitpunkt                                                                                                     |   TBD   |
+| Linq                                      | Zugrundeliegendes Muster, Verwendung, Operatoren, Materialisierungszeitpunkt                                                                           |   TBD   |
 | EF Überblick und CodeFirst                | Architektur, Varianten, CodeFirst Grundlagen (Convention over Configuration, Annotationen, Relationen, Vererbung,  Concurrency, ...)                   |   TBD   |
 | EF CodeFirst Validation                   | Arten der Validierung, Auslösen und Verarbeiten von Validierungsfehlern                                                                                |   TBD   |
 | WPF Grundlagen                            | Ziele, Unterschiede zu WinForms, Überblick XAML, Markup-Extensions, Dependency-Property, Attached-Property, Eventhandling                              |   TBD   |
@@ -35,11 +36,46 @@ Das Eregbnis der überarbeteiteten Ausarbeitung ist der Fragenkatalog zur Matura
 | WPF-DataBinding                           | xxx                                                                                                                                                    |   TBD   |
 | MVVM-Pattern                              | Allgemeine Beschreibung, Ziele, Konkrete Umsetzung in WPF                                                                                              |   TBD   |
 | **JavaScript, jQuery und Ajax	Grundlagen** | JavaScript, jQuery-Selektoren, Einsatzgebiete, DOM, Eventhandling, Ajax, clientseitige Validierung                                                     |   TBD   |
+| Serialisierung / Deserialisierung         | Einsatzgebiete und Verwendung (JSON)                                                                                                                   |   TBD   |
 
 
 
 
 
+### Themen (G.Gehrer)
+
+
+| 1.  | Spezifikation, Verifikation, Algorithmus, Programm, Prozess, Thread           |    |
+|-----|-------------------------------------------------------------------------------|----|
+| 2.  | Unterprogramme, Funktionen, Module, Klassen, Packages, Bibliotheken           |    |
+| 3.  | Erstellungsprozess eines Programms (Compiler, Interpreter, Linker, Make, Ant) |    |
+| 4.  | Steuerelemente von imperativer Programmiersprachen                            |    |
+| 5.  | Typensystem (Valuetype, Reference-Type)                                       |    |
+| 6.  | Speichermanagement (Stack, Heap, GB-Collector)                                |    |
+| 7.  | Parameterübergabe (Call by value, Call by reference)                          |    |
+| 8.  | Objektorientierung (allgemein)                                                |    |
+| 9.  | Gleichheit von Objekten (Equals/HashCode-Vertrag)                             |    |
+| 10. | Boxing und Unboxing                                                           |    |
+| 11. | Klonen von Objekten                                                           |    |
+| 12. | Einheitliches Typsystem                                                       |    |
+| 13. | Konstruktoren und Destruktoren                                                |    |
+| 14. | Vererbung, Mehrfachvererbung, Interfaces, Abstrakte Basisklassen              |    |
+| 15. | Klassenmitglieder und Objektmitglieder                                        |    |
+| 16. | Überladungen                                                                  |    |
+| 17. | Polymorphismus                                                                |    |
+| 18. | Datenbankzugriff                                                              |    |
+| 19. | Serialisierung und Deserialisierung                                           |    |
+| 20. | Event-Handling                                                                |    |
+| 21. | Exception-Handling                                                            |    |
+| 22. | Abstrakte Datenstrukturen (Stack, Queue und Liste)                            |    |
+| 23. | Multithreading                                                                |    |
+| 24. | Interprozesskommunikation (IPC)                                               |    |
+| 25. | Prozesssynchronisation (fork, signal, wait, exec)                             |    |
+| 26. | .NET-Architektur                                                              |    |
+| 27. | Generics                                                                      |    |
+| 28. | Reflection                                                                    | KD |
+| 29. | Mehrschichtanwendungen                                                        |    |
+| 30. | Design Patterns (Singleton, Interface, Iterator, Observer, MVC)               |    |
 
 
 
