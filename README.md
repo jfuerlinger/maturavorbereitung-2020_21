@@ -8,14 +8,14 @@ Als Vorbereitung zur Matura werden die wichtigsten Themen aus dem Unterricht noc
 
 1. Jeder Schüler sucht sich ein Thema aus (Frist: 22.12.2021, 21:25 Uhr), welches selbstständig bearbeitet werden muss! Info per MS Teams an Josef Fürlinger (inkl. Name des GitHub-Accounts des Schülers).
 
-2. Zur Ausarbeitung wird durch den Schüler eine lokale ein eigener Branch mit der Namenskonvention "topic/<thema>" erstellt.
+2. Zur Ausarbeitung wird durch den Schüler ein eigener Branch mit der Namenskonvention "topic/thema-name" erstellt.
 
-3. Die Ausarbeitung erfolgt per Markdown im `topic`-Branch. In einem eigenen Sub-Folder (siehe dazu die Vorlage -> `./collections-und-generics/README.md`). Zusätzlich bitte die eigene README.md-Datei in der Themenliste unten verlinken!
+3. Die Ausarbeitung erfolgt per Markdown in einem eigenen Sub-Folder (siehe dazu die Vorlage -> `./collections-und-generics/README.md`) im jeweiligen `topic`-Branch des Schülers. Zusätzlich bitte die eigene README.md-Datei (Subfolder) in der Themenliste unten verlinken!
    Hinweise zur Verwendung von Markdown (Tabellen, Code-Fragmente, Bilder, etc.) finden Sie hier: [Markdown Cheat Sheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
 
-4. Wenn ein Teilbereich der Ausarbeitung abgeschlossen ist - **jedoch spätestens zwei Wochen vor der Präsentation** - wird per Pullrequest die Ausarbeitung in den `main`-Branch übernommen. Diese Änderungen werden durch die Lehrperson freigegeben oder gegebenfalls kommentiert umd mit weiteren Anweisungen versehen. Siehe dazu folgendes Tutorial: [GitHub Tutorial (Branches, Pullrequests, etc.)](https://guides.github.com/activities/hello-world).
+4. Wenn ein Teil der Ausarbeitung abgeschlossen ist - **jedoch spätestens zwei Wochen vor der Präsentation** - wird per Pullrequest die Ausarbeitung in den `main`-Branch übernommen. Diese Änderungen werden durch die Lehrperson freigegeben oder gegebenfalls kommentiert umd mit weiteren Anweisungen versehen. Siehe dazu folgendes Tutorial: [GitHub Tutorial (Branches, Pullrequests, etc.)](https://guides.github.com/activities/hello-world).
 
-5. Die Ausarbeitung wird vor der Klasse präsentiert (**mind. 15 Minuten und max. 30 Minuten**) und vor dieser verteidigt.
+5. Die Ausarbeitung wird vor der Klasse präsentiert (**mind. 15 Minuten und max. 30 Minuten**) und anschließend in einer Diskussion verteidigt.
 
 6. Pro Woche werden ca. drei Themen präsentiert.
 
