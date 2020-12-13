@@ -21,33 +21,35 @@ Als Vorbereitung zur Matura werden die wichtigsten Themen aus dem Unterricht noc
 
 ## Themen
 
-| Thema                                                          | Beschreibung                                                                                                                                        | Schüler | Datum |
-|----------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|:-------:|:-----:|
-| [Collections und Generics](collections-und-generics/README.md) | Generische Methoden und Klassen, Constraints in C#, Arten von Collections, Einsatz von Generics in Collections                                      |   TBD   |  TBD  |
-| [Exceptionhandling](exceptionhandling/README.md)               | Ziele, Grundkonzepte des Exceptionhandlings, Definition eigener Exceptions, Verwendung von geschachtelten Exceptions                                |   TBD   |  TBD  |
-| Muster "Singleton"                                             | Aufbau und Einsatzgebiete, Unterschied zu statischer Klasse, threadsichere Variante                                                                 |   TBD   |  TBD  |
-| Muster "Observer"                                              | Aufbau und Einsatzgebiete, Beteiligte Akteure, Implementierungsvarianten (Interfaces, Delegates, Events)                                            |   TBD   |  TBD  |
-| Muster "Iterator"                                              | Aufbau und Einsatzgebiete, Beteiligte Akteure, Best Practices                                                                                       |   TBD   |  TBD  |
-| Referenz- und Wertetypen                                       | Grundlegende Unterschiede, Boxing/Unboxing in C#, Bedeutung der Referenzsemantik, **Verwendung als lokale Variablen und private Felder**            |   TBD   |  TBD  |
-| Vererbung und Polymorphie                                      | Grundlagen der Vererbung, Ziele, Mehrfachvererbung, Probleme im Zusammenhang mit Vererbung, Polymorphie                                             |   TBD   |  TBD  |
-| Interfaces                                                     | Ziele und Einsatzgebiete von Interfaces, Contract-First-Design, Beispiele aus dem .NET-Framework                                                    |   TBD   |  TBD  |
-| ASP.NET Core - Razor Pages                                     | Grundlegende Architektur, Routing, Details Page-Models, View (Razor, PartialView, _Layout …) und Model, dynamische Datentypen (ViewBag), Tag-Helper |   TBD   |  TBD  |
-| ASP.NET Core - Authentication / Authorization                  | Grundlegende Architektur, Routing, Details Page-Models, View (Razor, PartialView, _Layout …) und Model, dynamische Datentypen (ViewBag), Tag-Helper |   TBD   |  TBD  |
-| Repository- und UnitOfWork-Pattern                             | Varianten (DI, Singleton, …), Ziele, Einsatzgebiete                                                                                                 |   TBD   |  TBD  |
-| REST-Services mit Web-API                                      | Grundarchitektur im Zusammenhang mit ASP.NET Core, REST-Grundlagen, Entwickeln und Debuggen, Hosting                                                |   TBD   |  TBD  |
-| Events und Delegates                                           | Anwendungsgebiete bzw. Ziele, Unterschiede, Beispiele, Best Practices, etc.                                                                         |   TBD   |  TBD  |
-| LINQ                                                           | Zugrundeliegendes Muster, Verwendung, Operatoren, Materialisierungszeitpunkt                                                                        |   TBD   |  TBD  |
-| EF CodeFirst - Überblick                                       | Architektur, Varianten, CodeFirst Grundlagen (Convention over Configuration, Annotationen, Relationen, Vererbung,  Concurrency, ...)                |   TBD   |  TBD  |
-| EF CodeFirst - Validation                                      | Arten der Validierung, Auslösen und Verarbeiten von Validierungsfehlern                                                                             |   TBD   |  TBD  |
-| WPF Grundlagen                                                 | Ziele, Unterschiede zu WinForms, Überblick XAML, Markup-Extensions, Dependency-Property, Attached-Property, Eventhandling                           |   TBD   |  TBD  |
-| WPF-Layouts und Controls                                       | Verschiedene Layouts, Beispiele, Best-Practices                                                                                                     |   TBD   |  TBD  |
-| WPF-DataBinding                                                | XAML-Expressions, Trigger, Binding per Code, Datenkonversation, Collection-Binding                                                                  |   TBD   |  TBD  |
-| MVVM-Pattern                                                   | Allgemeine Beschreibung, Ziele, Konkrete Umsetzung in WPF                                                                                           |   TBD   |  TBD  |
-| Reflection                                                     | Grundkonzepte, Einsatzmöglichkeiten, dynamisches Laden, Runtime Infos, etc.                                                                         |   TBD   |  TBD  |
-| Serialisierung / Deserialisierung (JSON)                       | Einsatzgebiete und Verwendung, Unterschiede Json.NET und System.Text.Json                                                                                                                |   TBD   |  TBD  |
-| Multithreading                                                 | Grundlagen, Ziele, Umsetzung mit Thread und Runnable, Erweiterte Konzepte (BackgroundWorker, AsyncTask, …), Neuerungen in .NET 4                    |   TBD   |  TBD  |
+| Thema                                                          | Beschreibung                                                                                                                                        | Schüler |   Datum    |
+|----------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|:-------:|:----------:|
+| [Collections und Generics](collections-und-generics/README.md) | Generische Methoden und Klassen, Constraints in C#, Arten von Collections, Einsatz von Generics in Collections                                      |   TBD   | 19.01.2021 |
+| [Exceptionhandling](exceptionhandling/README.md)               | Ziele, Grundkonzepte des Exceptionhandlings, Definition eigener Exceptions, Verwendung von geschachtelten Exceptions                                |   TBD   | 19.01.2021 |
+| Muster "Singleton"                                             | Aufbau und Einsatzgebiete, Unterschied zu statischer Klasse, threadsichere Variante                                                                 |   TBD   | 19.01.2021 |
+| Muster "Observer"                                              | Aufbau und Einsatzgebiete, Beteiligte Akteure, Implementierungsvarianten (Interfaces, Delegates, Events)                                            |   TBD   | 26.01.2021 |
+| Muster "Iterator"                                              | Aufbau und Einsatzgebiete, Beteiligte Akteure, Best Practices                                                                                       |   TBD   | 26.01.2021 |
+| Referenz- und Wertetypen                                       | Grundlegende Unterschiede, Boxing/Unboxing in C#, Performance, Bedeutung der Referenzsemantik                                                       |   TBD   | 26.01.2021 |
+| Neuerung in C# 7.0, 8.0 und 9.0                                | Tuples, Discards, Pattern Matching, Local Functions, readonly Members, Nullable Reference Types, Asynchronous Streams, etc.                         |   TBD   | 26.01.2021 |
+| Vererbung und Polymorphie                                      | Grundlagen der Vererbung, Ziele, Mehrfachvererbung, Probleme im Zusammenhang mit Vererbung, Polymorphie                                             |   TBD   | 02.02.2021 |
+| Interfaces                                                     | Ziele und Einsatzgebiete von Interfaces, Contract-First-Design, Beispiele aus dem .NET-Framework                                                    |   TBD   | 02.02.2021 |
+| ASP.NET Core - Razor Pages                                     | Grundlegende Architektur, Routing, Details Page-Models, View (Razor, PartialView, _Layout …) und Model, dynamische Datentypen (ViewBag), Tag-Helper |   TBD   | 02.02.2021 |
+| Repository- und UnitOfWork-Pattern                             | Einsatzgebiet, Vorteile, Dependency Injection, Singleton, Generische Repositories                                                                   |   TBD   | 09.02.2021 |
+| REST-Services mit Web-API                                      | Grundarchitektur im Zusammenhang mit ASP.NET Core, REST-Grundlagen, Entwickeln und Debuggen, Hosting                                                |   TBD   | 09.02.2021 |
+| Events und Delegates                                           | Anwendungsgebiete bzw. Ziele, Unterschiede, Beispiele, Best Practices, etc.                                                                         |   TBD   | 09.02.2021 |
+| LINQ                                                           | Zugrundeliegendes Muster, Verwendung, Operatoren, Materialisierungszeitpunkt                                                                        |   TBD   | 23.02.2021 |
+| EF CodeFirst - Überblick                                       | Architektur, Varianten, CodeFirst Grundlagen (Convention over Configuration, Annotationen, Relationen, Vererbung,  Concurrency, ...)                |   TBD   | 23.02.2021 |
+| EF CodeFirst - Validation                                      | Arten der Validierung, Auslösen und Verarbeiten von Validierungsfehlern                                                                             |   TBD   | 23.02.2021 |
+| WPF Grundlagen                                                 | Ziele, Unterschiede zu WinForms, Überblick XAML, Markup-Extensions, Dependency-Property, Attached-Property, Eventhandling                           |   TBD   | 02.03.2021 |
+| WPF-Layouts und Controls                                       | Verschiedene Layouts, Beispiele, Best-Practices                                                                                                     |   TBD   | 02.03.2021 |
+| WPF-DataBinding                                                | XAML-Expressions, Trigger, Binding per Code, Datenkonversation, Collection-Binding                                                                  |   TBD   | 02.03.2021 |
+| MVVM-Pattern                                                   | Allgemeine Beschreibung, Ziele, Konkrete Umsetzung in WPF                                                                                           |   TBD   | 02.03.2021 |
+| Continuous Integration & Continuous Delivery (Azure)           | Grundkonzept, Beispiele per Azure Devops, yaml-Syntax, Build-Pipelines, Release-Pipelines                                                           |   TBD   | 09.03.2021 |
+| ASP.NET Core - Authentication / Authorization                  | Grundlegende Architektur, Authentication vs. Authorization, vorgefertigte Building Blocks, Json Web Token, Microsoft Identitiy, Identity Server     |   TBD   | 09.03.2021 |
+| Reflection                                                     | Grundkonzepte, Einsatzmöglichkeiten, dynamisches Laden, Runtime Infos, etc.                                                                         |   TBD   | 16.03.2021 |
+| Serialisierung / Deserialisierung (JSON)                       | Einsatzgebiete und Verwendung, Unterschiede Json.NET und System.Text.Json                                                                           |   TBD   | 16.03.2021 |
+| Multithreading                                                 | Grundlagen, Ziele, Umsetzung mit Thread und Runnable, Erweiterte Konzepte (BackgroundWorker, AsyncTask, …), Neuerungen in .NET 4                    |   TBD   | 23.03.2021 |
 
+## Ressourcen
 
-
-
-
+* [Markdown Cheat Sheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+* [GitHub Tutorial (Branches, Pullrequests, etc.)](https://guides.github.com/activities/hello-world)
