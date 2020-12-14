@@ -6,7 +6,7 @@ Als Vorbereitung zur Matura werden die wichtigsten Themen aus dem Unterricht noc
 
 ## Ablauf
 
-1. Jeder Schüler sucht sich ein Thema aus (Frist: 22.12.2021, 21:25 Uhr), welches selbstständig bearbeitet werden muss! Info per MS Teams an Josef Fürlinger (inkl. Name des GitHub-Accounts des Schülers).
+1. Jeder Schüler sucht sich ein Thema aus (**Frist: 22.12.2021, 21:25 Uhr**), welches selbstständig bearbeitet werden muss! Info per MS Teams an Josef Fürlinger (inkl. Name des GitHub-Accounts des Schülers).
 
 2. Zur Ausarbeitung wird durch den Schüler ein eigener Branch mit der Namenskonvention "topic/thema-name" erstellt.
 
