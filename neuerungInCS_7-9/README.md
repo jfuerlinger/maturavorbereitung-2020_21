@@ -10,18 +10,18 @@ Man kann ein Tupel erstellen, indem Sie jedem Member einen Wert zuweisen und ihn
 (string Alpha, string Beta) namedLetters = ("a", "b");
 Console.WriteLine($"{namedLetters.Alpha}, {namedLetters.Beta}");
 ```
-In einer Tupelzuweisung können auch die Namen der Felder aur der rechten Seite der Zuweisung angegeben werden:
+In einer Tupelzuweisung können auch die Namen der Felder auf der rechten Seite angegeben werden:
 ```cs
 var alphabetStart = (Alpha: "a", Beta: "b");
 Console.WriteLine($"{alphabetStart.Alpha}, {alphabetStart.Beta}");
 ```
-Das *Entpacken* (Dekonstruieren) eines Tupels, die von einer Methode zurückgegeben werden funktioniert wie folgt. Dazu werden für jeden Wert im Tupel seperate Variablen deklariert. 
+Das `Entpacken` (Dekonstruieren) eines von einer Methode zurückgegebenen Tupels, funktioniert wie folgt. Dazu werden für jeden Wert im Tupel seperate Variablen deklariert. 
 ```cs
 (int max, int min) = Range(numbers);
 Console.WriteLine(max);
 Console.WriteLine(min);
 ```
-Die Funktion *Entpacken* kann auch mittels Deconstruct-Methode in einer Klasse implementiert werden:
+Die Funktion `Entpacken` kann auch mittels `Deconstruct`-Methode in einer Klasse implementiert werden:
 ```cs
 public class Point
 {
@@ -40,7 +40,7 @@ Die Klasse mit den Punkten X und Y kann nun wie folgt verwendet werden:
 var p = new Point(3.14, 2.71);
 (double X, double Y) = p;
 ```
-Wenn Sie einen Tupel initialisieren, sind die Variablen, die für die rechte Seite der Zuweisung verwendet werden, oft dieselben, wie die Namen, die Sie den Tupelelementen geben möchten. Die Namen von Tupelelementen können von den Variablen abgeleitet werden, die zum Initialisieren der Tupel verwendet werden:
+Wenn Sie einen Tupel initialisieren, sind die Variablen, die für die rechte Seite der Zuweisung verwendet werden, oft dieselben, wie die Namen, die Sie den Tupelelementen geben möchten. Die Namen von den Tupelelementen können von den Variablen der Zuweisung abgeleitet werden:
 ```cs
 int count = 5;
 string label = "Colors used in the map";
@@ -48,8 +48,8 @@ var pair = (count, label); // element names are "count" and "label"
 ```
 
 ## C# 7.0-7.3 - Discards
-Beim Dekonstruieren eines Tupels oder dem Aufrufen einer Methode mit out-Parametern sind Sie gezwungen, eine Variable zu definieren, deren Wert Sie unter umständen nicht interessiert und die Sie nicht zu verwenden beabsichtigen. C# verfügt jetzt über Unterstützung für "Wegwerfvariablen" (discards). Eine "Wegwerfvariable" ist eine lesegeschützte Variable mit dem Namen _ (dem Unterstrichzeichen).
-<br>Sie können der "Wegwerfvariable" alle Werte zuweisen, die Sie verwerfen möchten. Abgesehen von der Zuweisungsanweisung kann die "Wegwerfvariable" nicht im Code verwendet werden.
+Beim Dekonstruieren eines Tupels oder dem Aufrufen einer Methode mit out-Parametern ist man gezwungen eine Variable zu definieren. Möglicherweise ist der Wert nicht interessant und man beabsichtigt die Variable nicht weiter zu verwenden. C# verfügt jetzt über eine Unterstützung für "Wegwerfvariablen" (`Discards`). Eine "Wegwerfvariable" ist eine lesegeschützte Variable mit dem Namen `_` (dem Unterstrichzeichen).
+<br>Abgesehen von der Zuweisungsanweisung kann die "Wegwerfvariable" nicht im Code verwendet werden.
 
 *Discards* können in folgenden Szenarien eingesetzt werden:
 * Beim Dekonstruieren von Tupeln oder benutzerdefinierten Typen.
@@ -101,7 +101,7 @@ public class Example
 
 ## C# 7.0-7.3 - Pattern Matching
 Pattern Matching bietet mehrere Möglichkeiten um den Code lesbarer zu machen. Damit können Variablen nach Typ, Werten oder Werten mit Eigenschaften geprüft werden.
-<br>Pattern Matching unterstützt `is`-Ausdrücke und `switch`-Ausdrücke. Beide ermöglichen das Überprüfen eines Objekts auf dessen Eigenschaften um zu bestimmen ob das Objekt dem gesuchten Muster entspricht. Das `when`-Schlüsselwort kann verwendet werden, um zusätzliche Regeln für das Muster anzugeben.
+<br>Pattern Matching unterstützt `is`-Ausdrücke und `switch`-Ausdrücke. Beide ermöglichen das Überprüfen eines Objekts auf dessen Eigenschaften, um zu bestimmen ob das Objekt dem gesuchten Muster entspricht. Das `when`-Schlüsselwort kann verwendet werden, um zusätzliche Regeln für das Muster anzugeben.
 
 Der folgende Code überprüft, ob es sich bei der Variable um einen `int`-Wert handelt und fügt sie, wenn dies der Fall ist, der aktuellen Summe hinzu:
 ```cs
@@ -109,9 +109,9 @@ if (input is int count)
     sum += count;
 ````
 
-Der aktuelle `switch`-Vergleichsausdruck verfügt über mehrere neue Konstrukte:
+Der aktuelle `switch`-Ausdruck verfügt über mehrere neue Konstrukte:
 * Der `switch` Ausdruck ist nicht mehr beschränkt auf ganzzahlige Typen, Enum, string oder Nullable-Typ. Es kann nun jeder Typ verwendet werden.
-* Man kann den Typ wie schon beim `is`-Ausdruck einer neuen Variable zuweisen
+* Man kann den Wert, wie schon beim `is`-Ausdruck, einer neuen Variable zuweisen
 * Wenn man zusätzliche Prüfungen an die Bedingung anfügen möchte, kann man dies mit der `when`-Klausel tun.  
 
 Im folgenden Code werden diese Funktionen veranschaulicht:
@@ -143,17 +143,17 @@ public static int SumPositiveNumbers(IEnumerable<object> sequence)
     return sum;
 }
 ```
-* case 0: ist das bereits bekannte Konstanten-Muster.
-* case IEnumerable<int> childSequence: ist ein Typ-Muster.
-* case int n when n > 0: ist ein Typ-Muster mit einer zusätzlichen `when`-Bedingung.
-* case null: ist das NULL-Muster.
-* default: ist bereits bekannt.
+* `case 0`: ist das bereits bekannte Konstanten-Muster.
+* `case IEnumerable<int> childSequence`: ist ein Typ-Muster.
+* `case int n when n > 0`: ist ein Typ-Muster mit einer zusätzlichen `when`-Bedingung.
+* `case null`: ist das NULL-Muster.
+* `default`: ist der bereits bekannte default-Zweig.
 
 
 ## C# 7.0-7.3 - Local Functions
-Man kann nun Funktionen in Funktionen verschachteln, und damit den Aufrufbereich und die Sichtbarkeit beschränken.
+Man kann nun Funktionen in Funktionen verschachteln, und dadurch den Aufrufbereich und die Sichtbarkeit beschränken.
 
-Zwei häufige Anwendungsfälle für lokale Funktionen sind öffentliche Interatormethoden und öffentliche asynchorne Methoden. Beide Methoden haben die Problematik, dass Fehler, die in der Methoden aufgetretenen sind, sich erst zu einem späteren Zeitpunkt auswirken können. Daher sind beim Aufruf der Methode besonders genaue Parameterüberprüfungen nötig, damit es bei der Ausführung der eigentlichen Funktion zu keinen unerwarteten Problemen kommen kann.
+Zwei häufige Anwendungsfälle für lokale Funktionen sind öffentliche Interatormethoden und öffentliche asynchorne Methoden. Beide Methoden haben die Problematik, dass Fehler, die in der Methoden aufgetretenen sind, sich erst zu einem späteren Zeitpunkt auswirken können. Daher sind beim Aufruf der Methode besonders genaue Parameterüberprüfungen nötig.
 Im folgenden Beispiel wird gezeigt, wie man die Parameter-Validierung mithilfe einer lokalen Funktion von der `Interator`-Implementierung trennen kann:
 ```cs
 public static IEnumerable<char> AlphabetSubset3(char start, char end)
@@ -175,7 +175,7 @@ public static IEnumerable<char> AlphabetSubset3(char start, char end)
     }
 }
 ```
-Das gleiche Verfahren kann für `async`-Methoden eingesetzt werden, um sicherzustellen, dass mögliche Fehler mittels Argumentüberprüfung abgefangen werden, bevor der asynchrone Aufruf beginnt:
+Das gleiche Verfahren kann für `Async`-Methoden eingesetzt werden, um sicherzustellen, dass mögliche Fehler mittels Argumentüberprüfung abgefangen werden, bevor der asynchrone Aufruf beginnt:
 ```cs
 public Task<string> PerformLongRunningWork(string address, int index, string name)
 {
