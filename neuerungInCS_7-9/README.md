@@ -1,7 +1,9 @@
 # Neuerungen in C# 7.0-7.3 , C# 8.0, C# 9.0
+[Zur Übersicht](../README.md)
 
 ## C# 7.0-7.3 - Tuples
-C# bietet umfangreiche Syntax für Klassen und Strukturen, die verwendet wird, um die Entwurfsabsicht zu erläutern. Manchmal erfordert diese umfangreiche Syntax zusätzliche Arbeit mit minimalem Nutzen. Eine schon bekannte Möglichkeit um komplexe Datentypen an Methoden zu übergeben sind die *DTO*s(data transfer objects). Jedoch sind manchmal sehr einfache Strukturen z.B. mit nur 2 Datenelementen zu übergeben. Dafür wurden die __C# Tupel__ entworfen.
+C# bietet umfangreiche Syntax für Klassen und Strukturen, um die Entwurfsabsicht zu erläutern. Manchmal erfordert diese umfangreiche Syntax zusätzliche Arbeit mit minimalem Nutzen. 
+<br>Eine schon bekannte Möglichkeit um komplexe Datentypen an Methoden zu übergeben sind die `DTOs`(data transfer objects). Häufig werden nur sehr einfache Strukturen z.B. mit nur 2 Datenelementen benötigt. Dafür wurden die `C# Tupel` entworfen.
 
 Man kann ein Tupel erstellen, indem Sie jedem Member einen Wert zuweisen und ihnen optional auch semantische Namen geben:
 ```cs
@@ -49,11 +51,11 @@ var pair = (count, label); // element names are "count" and "label"
 Beim Dekonstruieren eines Tupels oder dem Aufrufen einer Methode mit out-Parametern sind Sie gezwungen, eine Variable zu definieren, deren Wert Sie unter umständen nicht interessiert und die Sie nicht zu verwenden beabsichtigen. C# verfügt jetzt über Unterstützung für "Wegwerfvariablen" (discards). Eine "Wegwerfvariable" ist eine lesegeschützte Variable mit dem Namen _ (dem Unterstrichzeichen).
 <br>Sie können der "Wegwerfvariable" alle Werte zuweisen, die Sie verwerfen möchten. Abgesehen von der Zuweisungsanweisung kann die "Wegwerfvariable" nicht im Code verwendet werden.
 
-*Discards* können bei folgenden Beispielen eingesetzt werden:
+*Discards* können in folgenden Szenarien eingesetzt werden:
 * Beim Dekonstruieren von Tupeln oder benutzerdefinierten Typen.
 * Beim Aufrufen von Methoden mit out-Parametern.
 * In einem Musterabgleichsvorgang mit den Anweisungen is und switch.
-* Wenn man den Wert einer Zuweisung explizit als *Wegwurf* kennzeichnen möchten.
+* Wenn man den Wert einer Zuweisung explizit als "Wegwurf" kennzeichnen möchten.
 
 Das folgende Beispiel definiert eine QueryCityDataForYears-Methode, die ein 6-Tupel zurückgibt, das die Einwohneranzahl für eine Stadt für zwei verschiedene Jahre enthält. Der Methodenaufruf im Beispiel wertet nur die zwei Einwohnerzahlen aus. Die restlichen 4 zurückgegebenen Werte werden als Discard verworfen.
 
@@ -98,12 +100,102 @@ public class Example
 
 
 ## C# 7.0-7.3 - Pattern Matching
+Pattern Matching bietet mehrere Möglichkeiten um den Code lesbarer zu machen. Damit können Variablen nach Typ, Werten oder Werten mit Eigenschaften geprüft werden.
+<br>Pattern Matching unterstützt `is`-Ausdrücke und `switch`-Ausdrücke. Beide ermöglichen das Überprüfen eines Objekts auf dessen Eigenschaften um zu bestimmen ob das Objekt dem gesuchten Muster entspricht. Das `when`-Schlüsselwort kann verwendet werden, um zusätzliche Regeln für das Muster anzugeben.
 
+Der folgende Code überprüft, ob es sich bei der Variable um einen `int`-Wert handelt und fügt sie, wenn dies der Fall ist, der aktuellen Summe hinzu:
+```cs
+if (input is int count)
+    sum += count;
+````
+
+Der aktuelle `switch`-Vergleichsausdruck verfügt über mehrere neue Konstrukte:
+* Der `switch` Ausdruck ist nicht mehr beschränkt auf ganzzahlige Typen, Enum, string oder Nullable-Typ. Es kann nun jeder Typ verwendet werden.
+* Man kann den Typ wie schon beim `is`-Ausdruck einer neuen Variable zuweisen
+* Wenn man zusätzliche Prüfungen an die Bedingung anfügen möchte, kann man dies mit der `when`-Klausel tun.  
+
+Im folgenden Code werden diese Funktionen veranschaulicht:
+```cs
+public static int SumPositiveNumbers(IEnumerable<object> sequence)
+{
+    int sum = 0;
+    foreach (var i in sequence)
+    {
+        switch (i)
+        {
+            case 0:
+                break;
+            case IEnumerable<int> childSequence:
+            {
+                foreach(var item in childSequence)
+                    sum += (item > 0) ? item : 0;
+                break;
+            }
+            case int n when n > 0:
+                sum += n;
+                break;
+            case null:
+                throw new NullReferenceException("Null found in sequence");
+            default:
+                throw new InvalidOperationException("Unrecognized type");
+        }
+    }
+    return sum;
+}
+```
+* case 0: ist das bereits bekannte Konstanten-Muster.
+* case IEnumerable<int> childSequence: ist ein Typ-Muster.
+* case int n when n > 0: ist ein Typ-Muster mit einer zusätzlichen `when`-Bedingung.
+* case null: ist das NULL-Muster.
+* default: ist bereits bekannt.
 
 
 ## C# 7.0-7.3 - Local Functions
+Man kann nun Funktionen in Funktionen verschachteln, und damit den Aufrufbereich und die Sichtbarkeit beschränken.
 
-___
+Zwei häufige Anwendungsfälle für lokale Funktionen sind öffentliche Interatormethoden und öffentliche asynchorne Methoden. Beide Methoden haben die Problematik, dass Fehler, die in der Methoden aufgetretenen sind, sich erst zu einem späteren Zeitpunkt auswirken können. Daher sind beim Aufruf der Methode besonders genaue Parameterüberprüfungen nötig, damit es bei der Ausführung der eigentlichen Funktion zu keinen unerwarteten Problemen kommen kann.
+Im folgenden Beispiel wird gezeigt, wie man die Parameter-Validierung mithilfe einer lokalen Funktion von der `Interator`-Implementierung trennen kann:
+```cs
+public static IEnumerable<char> AlphabetSubset3(char start, char end)
+{
+    if (start < 'a' || start > 'z')
+        throw new ArgumentOutOfRangeException(paramName: nameof(start), message: "start must be a letter");
+    if (end < 'a' || end > 'z')
+        throw new ArgumentOutOfRangeException(paramName: nameof(end), message: "end must be a letter");
+
+    if (end <= start)
+        throw new ArgumentException($"{nameof(end)} must be greater than {nameof(start)}");
+
+    return alphabetSubsetImplementation();
+
+    IEnumerable<char> alphabetSubsetImplementation()
+    {
+        for (var c = start; c < end; c++)
+            yield return c;
+    }
+}
+```
+Das gleiche Verfahren kann für `async`-Methoden eingesetzt werden, um sicherzustellen, dass mögliche Fehler mittels Argumentüberprüfung abgefangen werden, bevor der asynchrone Aufruf beginnt:
+```cs
+public Task<string> PerformLongRunningWork(string address, int index, string name)
+{
+    if (string.IsNullOrWhiteSpace(address))
+        throw new ArgumentException(message: "An address is required", paramName: nameof(address));
+    if (index < 0)
+        throw new ArgumentOutOfRangeException(paramName: nameof(index), message: "The index must be non-negative");
+    if (string.IsNullOrWhiteSpace(name))
+        throw new ArgumentException(message: "You must supply a name", paramName: nameof(name));
+
+    return longRunningWorkImplementation();
+
+    async Task<string> longRunningWorkImplementation()
+    {
+        var interimResult = await FirstWork(address);
+        var secondResult = await SecondStep(index, name);
+        return $"The results are {interimResult} and {secondResult}. Enjoy.";
+    }
+}
+```
 ___
 ## C# 8.0 - readonly Member
 
@@ -112,7 +204,6 @@ ___
 
 
 ## C# 8.0 - Asynchronous Streams
-___
 ___
 ## C# 9.0 - Records
 
