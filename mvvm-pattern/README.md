@@ -5,9 +5,9 @@ Das MVVM-Pattern (Model View ViewModel Muster) wurde erstmals 2005 von Microsoft
 
 MVVM ist ein Entwurfsmuster und eine Variante des MVC-Musters (Model-View-Controller). Das MVVM-Muster dient zur Trennung der Logik von der grafischen Benutzeroberfläche und findet Einsatz in WPF, JavaFX, HTML5 und Xamarin.Forms. 
 
-MVVM kann man entweder selbst implementieren oder man greift auf MVVM-Frameworks zurück, wie etwa Prism oder MVVM-Light.
-
 ![alt text](mvvm.png)
+
+MVVM kann man entweder selbst implementieren oder man greift auf MVVM-Frameworks zurück, wie etwa Prism oder MVVM-Light.
 
 ## Verwendung
 MVVM enthält folgende drei Komponenten:
@@ -25,7 +25,7 @@ MVVM kann auch für die Entwicklung mobiler Apps verwendet werden. Für Android 
 ## Genauere Betrachtung
 ### Das Model
 
-Das Model stellt eine Abbildung der Daten dar, welche für die visuelle Anwendung benötigt werden. Es enthält jene Daten, welche dem Benutzer zur Verfügung gestellt und von ihm manipuliert werden. 
+Das Model stellt eine Abbildung der Daten dar, welche für die visuelle Anwendung benötigt werden. Es enthält jene Daten, welche dem Benutzer zur Verfügung gestellt und von ihm manipuliert werden und die Geschäftslogik. 
 
 Das Model stellt folgende Funktionalitäten bereit:
 
@@ -148,12 +148,12 @@ public class CompanyModel : ModelBase
 }
 ```
 
-Wie man dem Beispiel entnehmen kann, wird in jedem Property die Methode RaisePropertyChanged (oft auch OnPropertyChanged genannt) aufgerufen. Diese Methode wird bei jeder Änderung an dem jeweiligen Property aufgerufen und sendet eine Benachrichtigung aus, dass das Property geändert wurde.
+Wie man dem Beispiel entnehmen kann, wird im Setter eines jeden Propertys die Methode OnPropertyChanged aufgerufen. Diese Methode wird bei jeder Änderung an dem jeweiligen Property aufgerufen und sendet eine Benachrichtigung aus, dass das Property geändert wurde.
 
 ### Die View 
 
 Die View stellt, wie schon erwähnt, die grafische Benutzeroberfläche dar und enthält alle Elemente (Buttons, Listen, Grids, Inputfelder), welche für die konkrete Anwendung benötigt werden. 
-Bei der Implementierung des MVVM-Patterns soll darauf geachtet werden, dass im Code-Behind der View so wenig Logik wie möglich verwendet wird. Optimal wäre, wenn garkein Code im Code-Behind geschrieben wird, dies lässt sich aber nicht immer so umsetzen. Befindet sich Code im Code-Behind, darf sich dieser Code nur auf die View beziehen und keine zusätzlichen Abhängigkeiten mit sich bringen. 
+Bei der Implementierung des MVVM-Patterns sollte darauf geachtet werden, dass im Code-Behind der View so wenig Logik wie möglich verwendet wird. Optimal wäre, wenn garkein Code im Code-Behind geschrieben wird, dies lässt sich aber nicht immer so umsetzen. Befindet sich Code im Code-Behind, darf sich dieser Code nur auf die View beziehen und keine zusätzlichen Abhängigkeiten mit sich bringen. 
 
 Beispiel für eine View:
 
@@ -224,20 +224,60 @@ public class ViewModelBase : INotifyPropertyChanged
 Beispiel für eine konkrete Implementierung:
 
 ```c#
-public class CompanyViewModel : ViewModelBase
-{
-    private CompanyModel model;
-
-    public CompanyModel Company
+public class MainViewModel : ViewModelBase
     {
-        get => _model;
-        set
+        private ObservableCollection<TeamTableRowDto> _teamTableRowDtos;
+        public ObservableCollection<TeamTableRowDto> TeamTableRowDtos 
         {
-            _model = value;
-            OnPropertyChanged();
+            get => _teamTableRowDtos;
+            set
+            {
+                _teamTableRowDtos = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public MainViewModel(IWindowController windowController) : base(windowController)
+        {
+            LoadCommands();
+        }
+
+        public ICommand CmdNewGame { get; set; }
+
+        /// <summary>
+        /// Erstellt die notwendigen Commands.
+        /// </summary>
+        private void LoadCommands()
+        {
+            CmdNewGame = new RelayCommand(
+                execute: async _ =>
+                {
+                    Controller.ShowWindow(await NewGameViewModel.CreateAsync(Controller), true);
+                    await LoadDataAsync();
+                },
+                canExecute: _ => true);
+        }
+
+        /// <summary>
+        /// Asynchrones Laden von Daten für das ViewModel.
+        /// Wird in CreateAsync(..) aufgerufen.
+        /// </summary>
+        /// <returns></returns>
+        private async Task LoadDataAsync()
+        {
+            using(UnitOfWork uow = new UnitOfWork())
+            {
+                TeamTableRowDtos = new ObservableCollection<TeamTableRowDto>(await uow.Teams.GetTeamTableRowDtosAsync());
+            }
+        }
+
+        public static async Task<MainViewModel> CreateAsync(IWindowController windowController)
+        {
+            var viewModel = new MainViewModel(windowController);
+            await viewModel.LoadDataAsync();
+            return viewModel;
         }
     }
-}
 ```
 
 #### Commands
@@ -253,10 +293,10 @@ public interface ICommand
 }
 ```
 
-CanExecute wird beim Laden des Fensters (WPF) oder der Seite (Xamarin.Forms) aufgerufen. Diese Methode ermittelt, ob alle Bedingungen erfüllt sind, damit das Commando ausgeführt werden kann. An Hand eines Buttons könnte dies zum Beispiel dazu führen, dass der Button solange disabled (ausgegraut) ist, bis eine bestimmte Bedingung (Kein Eingabefeld darf leer sein) erfüllt ist.
-Die Execute Methode ist dann die Methode, welche aufgerufen wird, sobald der Button geklickt wurde. Damit lässt sich zum Beispiel ein neues Fenster öffnen oder Daten über eine UnitOfWork/API in eine Datenbank persistieren.
+CanExecute wird beim Laden des Fensters (WPF) oder der Seite (Xamarin.Forms) aufgerufen. Diese Methode ermittelt, ob alle Bedingungen erfüllt sind, damit das Command ausgeführt werden kann. An Hand eines Buttons könnte dies zum Beispiel dazu führen, dass der Button solange disabled (ausgegraut) ist, bis eine bestimmte Bedingung (Kein Eingabefeld darf leer sein) erfüllt ist.
+Die Execute Methode ist dann die Methode, welche aufgerufen wird, sobald der Button geklickt wurde. Damit lässt sich zum Beispiel ein neues Fenster öffnen oder Daten über eine UnitOfWork/API in eine Datenbank persistieren/laden.
 
-Für die Verwendung von Commands eignet es sich, wenn man ein RelayCommand implementiert. RelayCommands enthalten Actions und Predicates. Das sind die jeweiligen Methoden welche das Command ausführt und die Bedingung, wann das Command ausgeführt werden kann. Anstatt eine neue Klasse für jedes Command zu erstellen, welche dann das ICommand Interface implementiert, braucht man nur eine RelayCommand Klasse implementieren.
+Für die Verwendung von Commands eignet es sich, wenn man ein RelayCommand implementiert. RelayCommands enthalten Actions und Predicates. Das sind die jeweiligen Methoden welche das Command ausführt und die Bedingung, wann das Command ausgeführt werden kann. Anstatt eine neue Klasse für jedes Command zu erstellen, welche dann das ICommand Interface implementiert, braucht man nur eine RelayCommand Klasse implementieren und im Konsturktor die jeweiligen Methoden mitgeben.
 
 ```c#
 public class RelayCommand : ICommand
@@ -282,6 +322,8 @@ public class RelayCommand : ICommand
         public void Execute(object parameter) => _execute(parameter);
     }
 ```
+
+In der Praxis:
 
 ```c#
 CmdSaveGame = new RelayCommand(
@@ -331,7 +373,7 @@ Prism ist ein mächtiges opensource MVVM-Framework welches ursprünglich von Mic
 
 ### INotifyPropertyChanged-Implementierung
 
-Wenn man INotifyPropertyChanged in einem größeren Projekt immer und immer wieder implementieren muss, ist dies nicht nur zeitaufwändig sondern auch fehleranfällig. Prism bietet hierfür eine BindableBase Klasse, von der andere Klassen ableiten können. Diese BindableBase bietet eine Methode, welche die Implementierung von INotifyPropertyChanged um einiges beschleunigt und sicherer gegenüber Fehlern macht.
+Wenn man INotifyPropertyChanged in einem größeren Projekt immer und immer wieder implementieren muss, ist dies nicht nur zeitaufwändig sondern auch fehleranfällig. Prism bietet hierfür eine BindableBase Klasse, von der andere Klassen ableiten können. Diese BindableBase bietet die Methode `SetProperty<T>(ref T storage, T value)`, welche die Implementierung von INotifyPropertyChanged um einiges beschleunigt und sicherer gegenüber Fehlern macht.
 
 ```c#
 public abstract class BindableBase : INotifyPropertyChanged
@@ -373,6 +415,8 @@ Beispielverwendung:
             set => SetProperty(ref _activities, value);
         }
 ```
+
+Wie man sieht, kann man nun auch beim Setter eine Lambda-Expression verwenden und man erhält einen schönen Einzeiler, anstatt 3-4 Zeilen des immer gleichen Codes von `_field = value; OnPropertyChanged(nameof(_field))`.
 
 ### Commands
 
@@ -419,7 +463,7 @@ Ein erheblicher Vorteil vom NavigationService von Prism, speziell im Zusammenhan
 
 ### ViewModelLocator
 
-Eine weitere tolle Eigenschaft an Prism ist der sogenannte ViewModelLocator. Der ViewModelLocator bindet den DataContext einer View automatisch anhand der Namensgebungskonventionen an das jeweilige ViewModel. Wichtig hierfür ist, dass die Views und ViewModels in der selben Assembly sind, dass die Views in einem .Views Unternordner und die ViewModels in einem .ViewModels Unterordner sind und dass der Name der beiden (bis auf die Endung ViewModel) ident sind. Es ist jedoch auch möglich, diese Regeln zu umgehen und eigene Regeln aufzustellen.
+Eine weitere tolle Eigenschaft an Prism ist der sogenannte ViewModelLocator. Der ViewModelLocator bindet den DataContext einer View automatisch anhand der Namensgebungskonventionen an das jeweilige ViewModel. Wichtig hierfür ist, dass die Views und ViewModels in der selben Assembly sind, dass die Views in einem .Views Unterordner und die ViewModels in einem .ViewModels Unterordner sind und dass der Name der beiden (bis auf die Endung ViewModel) ident sind. Es ist jedoch auch möglich, diese Regeln zu überschreiben und eigene Regeln aufzustellen.
 
 ```c#
 protected override void ConfigureViewModelLocator()
