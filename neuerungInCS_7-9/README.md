@@ -210,12 +210,9 @@ ___
 ## C# 9.0 - Init only setters
 
 ## C# 9.0 - New features for partial methods
+___
 
-
-
-
-
-
+Weiterführende Informationen zu diesem Thema finden Sie auf der [Microsoft-Webseite](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-9)
 
 [Zur Übersicht](../README.md)
 
