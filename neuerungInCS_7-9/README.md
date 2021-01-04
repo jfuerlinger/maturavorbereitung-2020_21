@@ -417,6 +417,29 @@ Die Änderung nach der Initialisierung führt jedoch zu einem Fehler:
 now.TemperatureInCelsius = 18;
 ```
 ## C# 9.0 - New features for partial methods
+In den vorangegangenen Versionen gab es folgende Einschränkungen für die `extend partial methods`:
+* Sie müssen den `void` Returntype haben
+* Sie können keinen `out` Parameter haben
+* Der Zugriffsmodifier musste immer `private` sein
+
+Diese Einschränkungen mussten für den neuen [C# code generator](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-9?WT.mc_id=DOP-MVP-5003880#support-for-code-generators) entfernt werden.
+
+Folgendes Beispiel kombiniert alle pre-C#9.0 Einschränkungen und zeigt wie es nun sinnvoll eingesetzt werden kann:
+```cs
+partial class Parser
+{
+    internal partial bool TryParse(string s, out int i);
+}
+
+partial class Parser
+{
+    internal partial bool TryParse(string s, out int i)
+    {
+        i = 0;
+        return true;
+    }
+}
+```
 ___
 
 Weiterführende Informationen zu diesem Thema finden Sie auf der [Microsoft-Webseite](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-9)
