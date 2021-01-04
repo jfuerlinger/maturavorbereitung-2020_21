@@ -418,9 +418,9 @@ now.TemperatureInCelsius = 18;
 ```
 ## C# 9.0 - New features for partial methods
 In den vorangegangenen Versionen gab es folgende Einschränkungen für die `extend partial methods`:
-* Sie müssen den `void` Returntype haben
+* Der Returntype muss vom Typ `void` sein
 * Sie können keinen `out` Parameter haben
-* Der Zugriffsmodifier musste immer `private` sein
+* Der Zugriffsmodifier muss `private` sein
 
 Diese Einschränkungen mussten für den neuen [C# code generator](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-9?WT.mc_id=DOP-MVP-5003880#support-for-code-generators) entfernt werden.
 
