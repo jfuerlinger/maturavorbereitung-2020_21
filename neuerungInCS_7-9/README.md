@@ -391,7 +391,31 @@ public record Person // No constructor so no deconstructor
 }
 ```
 ## C# 9.0 - Init only setters
+__Init only setters__ unterstützen eine konsistente Schreibweise für das Initialisieren von Properties in einem Objekt. Es kann nun die `init` Zugriffsberechtigung anstelle der `set` Berechtigung vergeben werden. Damit kann das Property nur mehr in einem bestimmten Zeitfenster gesetzt werden. Das Zeitfenster endet mit Abschluss der Konstruktionsphase des Objekts. Diese beinhaltet die Konstruktoraufrufe, den Objektinitialisierer und die `with` Operation.
 
+Beispiel:
+```cs
+public struct WeatherObservation
+{
+    public DateTime RecordedAt { get; init; }
+    public double TemperatureInCelsius { get; init; }
+    public double PressureInMillibars { get; init; }
+}
+```
+Aufrufer können den Wert mit der Objektinitialisierung noch verändern:
+```cs
+var now = new WeatherObservation 
+{ 
+    RecordedAt = DateTime.Now, 
+    TemperatureInCelsius = 20, 
+    PressureInMillibars = 998.0 
+}
+```
+Die Änderung nach der Initialisierung führt jedoch zu einem Fehler:
+```cs
+// Error! CS8852.
+now.TemperatureInCelsius = 18;
+```
 ## C# 9.0 - New features for partial methods
 ___
 
