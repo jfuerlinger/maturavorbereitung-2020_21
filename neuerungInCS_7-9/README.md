@@ -266,13 +266,130 @@ await foreach (var number in GenerateSequence())
 {
     Console.WriteLine(number);
 }
-```  
-
-
-
+``` 
 ___
 ## C# 9.0 - Records
+### Anforderung
+Man benötigt das Targetframework `.NET5` und den C#9.0 Compiler. Der C#9.0 Compiler ist ab `Visual Studio 2019 version 16.8` verfügbar.
+Im Projektfile muss das Targetframework auf .NET5 eingestellt werden:
+```cs
+<Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+</Project>
+```
+### Eigenschaften
+ Record types sind `Reference Types` (wie Klassen) mit erweiterter Funktionalität. Sie sind in ihrer Standardeinstellung `readonly`. Durch die angesprochende Funktionserweiterung haben sie, bezogen auf die Vergleichsfunktion, ein ähnliches Verhalten wie `Value Types`.
+
+Records werden mit dem Schlüsselwort `record` deklariert. Der folgende Record beinhaltet 2 Properties die automatisch dem Konstruktor entnommmen werden. Die Properties sind `public` und `readonly`.
+```cs
+// a Record is a "class" with additional functions
+// Immutable - The values cannot be changes
+public record Person(string FirstName, string LastName);
+```
+Das entspricht folgender Klassendefinition. Die Properties können nur beim Erstellen der Klasse gesetzt werden. Daher `init` an der Stelle `set`. Verglichen mit der Schreibweise des `Records` ist die Definition der Klasse wesentlich länger:
+```cs
+public class Person
+{
+    public string FirstName { get; init; }
+    public string LastName { get; init; }
+
+    public Person(string firstName, string lastName)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+    }
+}
+```
+Analog zu den Klasse können `Records` durch Properties und Methoden erweitert werden. Die Sichtbarkeit der Properties z.B. internal kann auch eingeschränkt werden:
+```cs
+public record Person(string FirstName, string LastName)
+{
+    internal string FirstName { get; init; } = FirstName;
+    public string FullName { get => $"{ FirstName } { LastName }"; }
+
+    public string SayHello()
+    {
+        return $"Hello, my name is { FirstName }";
+    }
+}
+``` 
+Der `Record type` stellt automatisch noch weitere Funktionen zur Verfügung:
+* Überladung der Operatoren `==` und `!=`. Es werden die Werte der Properties verglichen. Nicht die Adresse, wie bei den `Reference Types` üblich!
+* Die Methode `Equals` vergleicht die Werte der Properties. 
+* Überladung der Methode `GetHashCode()`. Der Hashcode wird nur anhand der Werte generiert. Die Speicheradresse wird nicht (wie bei Klassen) miteinbezogen. 2 Records mit dem selben Inhalt liefern den gleichen Hashcode.
+* Records beinhalten eine `copy` und `clone` Funktionalität
+* Die `ToString` Methode liefert die Properties mit Namen und Werte in `{}` Klammern
+* Die Methode `PrintMembers` liefert die Properties mit Namen und Werte ohne Klammern
+* Der Compiler erstellt automatisch die `Destruct` Methode
+
+Ein Beispiel für den Vergleich. `Person` ist vom Typ `Record`:
+```cs
+var person1 = new Person("Bill", "Wagner");
+var person2 = new Person("Bill", "Wagner");
+
+Console.WriteLine(person1 == person2); // true
+```
+Das Kopieren funktioniert mit Hilfe des `with` Ausdrucks. In dem nachfolgenden Beispiel wird der Nachname von dem Original übernommen und der Vorname durch Paul ersetzt.
+```cs
+Person brother = person with { FirstName = "Paul" };
+```
+
+Lässt man die {} Klammern leer entsteht eine 1:1 Kopie:
+```cs
+Person clone = person with { };
+```
+Man kann auch Records voneinander ableiten. Eine Mischung von Klassen und Records ist nicht möglich!
+```cs
+public record Pet(string Name)
+{
+    public void ShredTheFurniture() =>
+        Console.WriteLine("Shredding furniture");
+}
+
+public record Dog(string Name) : Pet(Name)
+{
+    public void WagTail() =>
+        Console.WriteLine("It's tail wagging time");
+
+    public override string ToString()
+    {
+        StringBuilder s = new();
+        base.PrintMembers(s);
+        return $"{s.ToString()} is a dog";
+    }
+}
+```
+Mithilfe der `Destruct` Methode werden alle `public` Properties getrennt nach aussen übergeben:
+```cs
+var person = new Person("Bill", "Wagner");
+
+var (first, last) = person;
+Console.WriteLine(first);
+Console.WriteLine(last);
+```
+### Vorteile
+* Vereinfachte Schreibweise
+* Thread-Safe => `readonly`
+* Sicher bei Übergabe an Methoden => `readonly`
+### Verwendung
+* Empfang von Daten die sich nicht ändern (z.B. WetterService)
+* API Aufrufe
+* Verwaltung von Prozessdaten
+* Verwaltung von ReadOnly Daten
+### Don´ts 
+Records sollen immer als readonly verwendet werden. Das nachfolgende Beispiel funktioniert, ist allerdings ein schlechter Programmierstil:
+```cs
+public record Person // No constructor so no deconstructor
+{
+    public string FirstName { get; set; } // The set makes this record mutable (BAD!)
+    public string LastName { get; set; } // The set makes this record mutable (BAD!)
+}
+```
 ## C# 9.0 - Init only setters
 
 ## C# 9.0 - New features for partial methods
