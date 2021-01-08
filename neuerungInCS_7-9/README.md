@@ -243,7 +243,7 @@ Die neue `Nullable` Notation kann für das gesamte Projekt in der CSPROJ-Datei f
 ```
 Oder abschnittsweise im Code als Anweisung durch `#nullable enable` aktiviert bzw. `#nullable disable` deaktiviert werden.
 
-### Merkmale:
+### Merkmale
 Mit der gleichen Syntax wie für die `Valuetypes` kann nun auch ein `Referencetype` als `Nullable` deklariert werden. Es wird ein `?` am Variablentyp angehängt.
 Z.B.:
 ```cs
@@ -263,7 +263,7 @@ warning CS8618: Non-nullable property 'NonNullableProperty' must contain a non-n
 warning CS8600: Converting null literal or possible null value to non-nullable type
 ```
 #### `Nullable-Referencetype`
-Dieser Datentyp darf null sein. Damit überprüft der Compiler ob vor der Dereferenzierung auf `!= Null` überprüft wurde. Eine `Null` Zuweisung ist bei diesem Typ erlaubt.
+Dieser Datentyp darf null sein. Der Compiler prüft daher, ob vor der Dereferenzierung auf `!= Null` geprüft wird. Eine `Null` Zuweisung ist bei diesem Typ erlaubt.
 Fehlt im Code die Not-Null-Überprüfung, gibt der Compiler folgende Warnung aus:
 ```
 warning CS8602: Dereference of a possibly null reference
