@@ -241,10 +241,10 @@ Die neue `Nullable` Notation kann für das gesamte Projekt in der CSPROJ-Datei f
 ```xml
 <Nullable>enable</Nullable>
 ```
-oder abschnittsweise im Code als Anweisung durch `#nullable enable` aktiviert bzw. `#nullable disable` deaktiviert werden.
+Oder abschnittsweise im Code als Anweisung durch `#nullable enable` aktiviert bzw. `#nullable disable` deaktiviert werden.
 
 ### Merkmale:
-Mit der gleichen Syntax wie für die `Valuetypes` kann ein `Referencetype` nun auch als `Nullable` deklariert werden. Es wird ein `?` am Variablentyp angehängt.
+Mit der gleichen Syntax wie für die `Valuetypes` kann nun auch ein `Referencetype` als `Nullable` deklariert werden. Es wird ein `?` am Variablentyp angehängt.
 Z.B.:
 ```cs
 string? name;
@@ -293,7 +293,7 @@ await foreach (var number in GenerateSequence())
 }
 ```
 Anwendungsgebiete:
-* Zyklische HTTP-calls mit Verarbeitung der Ergebnisse
+* Zyklische HTTP-calls mit Verarbeitung der Empfangsdaten.
     ```cs
     await foreach(var someValue from someAsyncIterator(5))
     {
@@ -308,7 +308,7 @@ Anwendungsgebiete:
             yield return response;
         }
     }
-```
+    ```
 ___
 ## C# 9.0 - Records
 ### Anforderung
