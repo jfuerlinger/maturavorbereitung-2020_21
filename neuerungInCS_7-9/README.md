@@ -236,11 +236,37 @@ public readonly void Translate(int xOffset, int yOffset)
 }
 ```
 ## C# 8.0 - Nullable Reference Types
-Alle Wertedatentypen (z.B. int, double, char) sind nicht nullable. Wertedatentypen müssen vor ihrer ersten Verwendung initialisiert werden. Der Compiler generiert ansonsten eine Warnung, wenn die Variable nicht bei der Deklaration oder im Programm eine Wertezuweisung erhält.
-Für den Anwendungsfall das die Variable auch `null` sein kann, muss dem Datentypen ein `?` angefügt werden.
-Beispiel:
+### Aktivierung
+Die neue `Nullable` Notation kann für das gesamte Projekt in der CSPROJ-Datei freigegeben werden:
+```xml
+<Nullable>enable</Nullable>
+```
+oder abschnittsweise im Code als Anweisung durch `#nullable enable` aktiviert bzw. `#nullable disable` deaktiviert werden.
+
+### Merkmale:
+Mit der gleichen Syntax wie für die `Valuetypes` kann ein `Referencetype` nun auch als `Nullable` deklariert werden. Es wird ein `?` am Variablentyp angehängt.
+Z.B.:
 ```cs
-double? actualSpeed;
+string? name;
+```
+
+Der Compiler führt innerhalb der `nullable` Notation, je nach Referencetyp, unterschiedliche Überprüfungen durch. Es werden Warnungen bei der Kompilierung ausgegeben. Das Programm kann trotz Warnungen ausgeführt werden. Zur Laufzeit sind `Nullable-Referencetypes` und `Non-Nullable-Referencetypes` gleichwertig.  
+
+#### `Non-Nullable-Referencetype`
+Für diesen Variablentyp erwingt der Compiler Regeln, damit das Dereferenzieren ohne vorherige `NULL` Überprüfung sicher ist:
+1. Die Variable muss mit einem Wert ungleich `NULL` initialisiet werden
+2. Der Variable kann nie der Wert `NULL` zugewiesen werden.
+
+Werden die Regeln missachtet, werden folgende Warnungen ausgegeben:
+```
+warning CS8618: Non-nullable property 'NonNullableProperty' must contain a non-null value when exiting constructor. Consider declaring the property as nullable.
+warning CS8600: Converting null literal or possible null value to non-nullable type
+```
+#### `Nullable-Referencetype`
+Dieser Datentyp darf null sein. Damit überprüft der Compiler ob vor der Dereferenzierung auf `!= Null` überprüft wurde. Eine `Null` Zuweisung ist bei diesem Typ erlaubt.
+Fehlt im Code die Not-Null-Überprüfung, gibt der Compiler folgende Warnung aus:
+```
+warning CS8602: Dereference of a possibly null reference
 ```
 ## C# 8.0 - Asynchronous Streams
 Eine Methode die einen asynchronen Stream zurückliefert hat 3 Eigenschaften:
