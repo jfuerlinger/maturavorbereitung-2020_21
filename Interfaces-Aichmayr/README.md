@@ -32,7 +32,7 @@ public interface ICopy
   void Copy();
 }
 ***
-
+---
 ## Interfaceimplementierung
 
 Bei der Vererbung wird von Ableitung gesprochen, analog hat sich bei den Schnittstellen der Begriff Implementierung geprägt. Eine Schnittstelle ist wie ein Vertrag, den eine Klasse unterschreibt, sobald sie eine bestimmte Schnittstelle implementiert. 
@@ -41,6 +41,13 @@ Bei der Vererbung wird von Ableitung gesprochen, analog hat sich bei den Schnitt
 ### Das hat Konsequenzen: 
 Eine Klasse, die eine Schnittstelle implementiert, muss ausnahmslos jedes Mitglied der Schnittstelle übernehmen. 
 Eine zu implementierende Schnittstelle wird, getrennt durch einen Doppelpunkt, hinter dem Klassenbezeichner angegeben. In der Klasse werden alle Member, die aus der Schnittstelle stammen, mit den entsprechenden Anweisungen codiert.
+
+
+Grundsätzlich können Sie jeden beliebigen Code in die Schnittstellenmethoden schreiben. Das ist aber nicht Sinn und Zweck. Stattdessen sollten Sie sich streng daran halten, was die Dokumentation beschreibt. Das bedeutet im Umkehrschluss aber auch, dass eine Schnittstelle ohne Dokumentation wertlos ist. Nur die Dokumentation gibt Auskunft darüber, was eine Methode leisten soll und wie ihre Rückgabewerte zu interpretieren sind.
+
+Eine Klasse ist nicht nur auf die Implementierung einer Schnittstelle beschränkt, es dürfen – im Gegensatz zur Vererbung – auch mehrere sein, die durch ein Komma voneinander getrennt werden.
+
+[logo]: ./Vererbung.png "Logo Title Text 2"
 
 ## Ziele
 
