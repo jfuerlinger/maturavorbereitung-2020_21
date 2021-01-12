@@ -1,6 +1,6 @@
 # Interfaces
 
-## Inhaltsverzeichnis:
+### Inhaltsverzeichnis:
 
 - Definition
 - Ziele
@@ -12,3 +12,34 @@
 - Beispiele aus dem .Net-Framework
 - Vor- & Nachteile
 - Referenzen
+
+
+### Definition
+
+### Ziele
+
+
+### Einsatzgebiete
+
+
+### Vertrag
+
+
+
+### Namenkonvention
+
+
+### Technische Details
+
+
+
+### Contract-First Design
+
+
+### Beispiele aus dem .Net-Framework
+
+
+### Vor- & Nachteile
+
+
+### Referenzen
