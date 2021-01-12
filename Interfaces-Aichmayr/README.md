@@ -9,6 +9,7 @@
 - Schnittstellendefinition
 - Schnittstellenimplementierung
 - Contract-First-Design
+- Schnittstellen als Ersatz exakter Typangaben
 - Ziele
 - Einsatzgebiete
 - Vertrag
@@ -37,14 +38,14 @@ Bei mehrere Klassen ein gemeinsame Verhalten vorweisen sollen, kann man dies üb
 
 
 - Andere Klassen, die nicht von `Employee` erben, aber auch `GetSalary()` implementieren, könnn nicht verwendet werden.
-- Jede Klasse kann in ´C#´ nur eine Basisklasse haben (Mehrfachvererbung nicht möglich!)
+- Jede Klasse kann in `C#` nur eine Basisklasse haben (Mehrfachvererbung nicht möglich!)
 
 Um Verhalten, Eigenschaft, Indexer und Ereignisse unviversell zu machen, muss ein Interface definiert werden. 
 
 
 ## Merkmale von Interfaces
 
-- Die Namenskonvention bei Interfaces (C#) ist I + Klassenname IF: IPerson, Class: Person
+- Die Namenskonvention bei Interfaces `C#` ist I + Klassenname IF: IPerson, Class: Person
     - So wird sichergestellt, dass sofort erkannt wird, dass es sich um ein Interface handelt.
 
 - Eine Schnittstelle kann nicht direkt instanziert werden
@@ -61,6 +62,15 @@ Um Verhalten, Eigenschaft, Indexer und Ereignisse unviversell zu machen, muss ei
 
 - Klassen und Strukturen können mehrere Interfaces implementieren ("Mehrfachvererbung" in C#)
 
+## Ziele
+
+- Interfaces trennen den Entwurf von der Implementierung
+
+- Interfaces legen Funktionalität fest, ohne auf die Implementierung einzugehen
+  
+- Beim Implementieren der Klasse ist die spatere Verwendung nicht von Bedeutung, sondern nur die bereitzustellende Funktionälitat
+  
+- Ein Anwender (eine andere Klasse) interessiert sich nicht für die Implementierungsdetails, sondern für die Funktionalität
 
 ## Schnittstellendefinition
 
@@ -79,15 +89,13 @@ public interface ICopy
 }
 ```
 
-
 ## Schnittstellenimplementierung
 
 Eine Schnittstelle ist wie ein Vertrag, den eine Klasse unterschreibt, sobald sie eine bestimmte Schnittstelle implementiert. 
 
-
 ### Das hat Konsequenzen: 
 Eine Klasse, die eine Schnittstelle implementiert, muss ausnahmslos jedes Mitglied der Schnittstelle übernehmen. 
-Eine zu implementierende Schnittstelle wird, getrennt durch einen Doppelpunkt, hinter dem Klassenbezeichner angegeben. In der Klasse werden alle Member, die aus der Schnittstelle stammen, mit den entsprechenden Anweisungen codiert.
+Eine zu implementierende Schnittstelle wird, getrennt durch einen Doppelpunkt, hinter dem Klassenbezeichner angegeben. In der Klasse werden alle `Member`, die aus der Schnittstelle stammen, mit den entsprechenden Anweisungen codiert.
 
 ```
 class Document : ICopy {
@@ -113,26 +121,36 @@ class Document : ICopy, IDisposable {
 }
 ```
 
-
 ## Contract-First-Design
+
+Beim `Contract-First-Design` werden zuerst die Funkionalitäten des Interfaces definiert und danach erst die Funktionalitäten in der Klasse implementiert.
+
 
 - Konzept, um qualitativ hochwertige Implementierung zu erstellen
 - Erlaubt Verwendung unterschiedlicher Implementierungen
 - Klassenname und Vererbungshierarchie der konkreten Implementierung ist egal
 
 
-## Ziele
+Dadurch wird sichergestellt, dass alle Klassen die selben Funktionalitäten aufweisen, den selben Vertrag "unterschreiben".
+--> Polymorphie
 
-- Interfaces trennen den Entwurf von der Implementierung
 
-- Interfaces legen Funktionalität fest, ohne auf die Implementierung einzugehen
-  
-- Beim Implementieren der Klasse ist die spatere Verwendung nicht von Bedeutung, sondern nur die
-  bereitzustellende Funktionälitat
-  
-- Ein Anwender (eine andere Klasse) interessiert sich nicht
-  für die Implementierungsdetails, sondern für die Funktionalität
+## Schnittstellen als Ersatz exakter Typangaben
 
+### Bsp.:
+
+```
+   public DoSomething(IAny parameter){
+       parameter.Action();
+   }
+```
+
+Der Parameter ist vom Typ der Schnittstelle `IAny`. 
+
+
+Der Parameter verlangt, dass das ihm übergebene Argument ein Objekt ist, das die Schnittstelle `IAny` implementiert – egal, ob das Objekt vom Typ DemoClass, Circle, Auto oder Person ist.
+
+Wie schon erwehnt kann eine Schnittstelle wie eine Basisklasse betrachtet werden. Dadurch, dass ein Parameter vom Typ einer Schnittstelle definiert ist, wird uns vorgeschrieben, dass die Member der Schnittstelle von der Klasse implementiert sind. Im Fall von IComparer handelt es sich um die Methode Compare, die zwei Objekte des angegebenen Arrays miteinander vergleicht. Welche weiteren Member sich noch in der Klassendefinition befinden, interessiert in diesem Zusammenhang nicht.
 
 ## Einsatzgebiete
 
