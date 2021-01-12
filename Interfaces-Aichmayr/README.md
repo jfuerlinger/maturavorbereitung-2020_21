@@ -42,6 +42,7 @@ Bei der Vererbung wird von Ableitung gesprochen, analog hat sich bei den Schnitt
 Eine Klasse, die eine Schnittstelle implementiert, muss ausnahmslos jedes Mitglied der Schnittstelle übernehmen. 
 Eine zu implementierende Schnittstelle wird, getrennt durch einen Doppelpunkt, hinter dem Klassenbezeichner angegeben. In der Klasse werden alle Member, die aus der Schnittstelle stammen, mit den entsprechenden Anweisungen codiert.
 
+```
 class Document : ICopy {
   public void Copy() {
     Console.WriteLine("Das Dokument wird kopiert.");
@@ -52,14 +53,17 @@ class Document : ICopy {
   }
   [...] 
 }
+```
 
 Grundsätzlich können Sie jeden beliebigen Code in die Schnittstellenmethoden schreiben. Das ist aber nicht Sinn und Zweck. Stattdessen sollten Sie sich streng daran halten, was die Dokumentation beschreibt. Das bedeutet im Umkehrschluss aber auch, dass eine Schnittstelle ohne Dokumentation wertlos ist. Nur die Dokumentation gibt Auskunft darüber, was eine Methode leisten soll und wie ihre Rückgabewerte zu interpretieren sind.
 
 Eine Klasse ist nicht nur auf die Implementierung einer Schnittstelle beschränkt, es dürfen – im Gegensatz zur Vererbung – auch mehrere sein, die durch ein Komma voneinander getrennt werden.
 
-`class Document : ICopy, IDisposable {
+```
+class Document : ICopy, IDisposable {
   [...]
-}`
+}
+```
 
 ## Ziele
 
