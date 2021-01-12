@@ -6,12 +6,11 @@
 - Merkmale von Interfaces
 - Schnittstellendefinition
 - Schnittstellenimplementierung
+- Contract-First-Design
 - Ziele
 - Einsatzgebiete
 - Vertrag
-- Namenskonvention
 - Technische Details
-- Contract-First Design
 - Beispiele aus dem .Net-Framework
 - Vor- & Nachteile
 - IEnumerable & IEnumeration
@@ -21,7 +20,11 @@
 
 Schnittstellen sind wie eine Vertragsvereinbarung. Sobald eine Klasse eine Schnittstelle implementiert, hat der auf ein Objekt dieser Klasse zugreifende Code die Garantie, dass die Klasse die Member der Schnittstelle aufweist. Mit anderen Worten: Eine Schnittstelle legt einen Vertragsrahmen fest, den die implementierende Klasse erfüllen muss.
 
+
 ## Merkmale von Interfaces
+
+- Die Namenskonvention bei Interfaces (C#) ist I + Klassenname IF: IPerson, Class: Person
+    - So wird sichergestellt, dass sofort erkannt wird, dass es sich um ein Interface handelt.
 
 - Eine Schnittstelle kann nicht direkt instanziert werden
 
@@ -85,6 +88,14 @@ class Document : ICopy, IDisposable {
 }
 ```
 
+## Contract-First-Design
+
+- Konzept, um qualitativ hochwertige Implementierung zu erstellen
+- Erlaubt Verwendung unterschiedlicher Implementierungen
+- Klassenname und Vererbungshierarchie der konkreten Implementierung ist egal
+
+
+
 ## Ziele
 
 - Interfaces trennen den Entwurf von der Implementierung
@@ -103,19 +114,62 @@ class Document : ICopy, IDisposable {
 
 
 
-### Namenkonvention
 
 
-### Technische Details
+
+## Technische Details
 
 
-### Contract-First Design
 
 
-### Beispiele aus dem .Net-Framework
+
+## Beispiele aus dem .Net-Framework
+
+```
+using System;
+namespace Übung 1
+{
+  public class EinfacheSchnittstellen
+  {
+    static void Main(string[] args)
+    {
+      Mathe m = new Mathe();
+      DruckeVersionsInfo(m);
+      Console.ReadLine();
+    }
+    private static void DruckeVersionsInfo(IVersionsInfo vi)
+    {
+      Console.WriteLine(vi.GetType().ToString());
+      Console.WriteLine(vi.GetAutor());
+      Console.WriteLine(vi.GetVersion());
+    }
+  }
 
 
-### Vor- & Nachteile
+  public interface IVersionsInfo
+  {
+    string GetAutor();
+    string GetVersion();
+  }
 
 
-### Referenzen
+  public class Mathe: IVersionsInfo
+  {
+    private static string version = "0.0.97.123";
+    private static string autor = "Dirk Frischalowski";
+    public string GetAutor()
+    {
+      return autor;
+    }
+    public string GetVersion()
+    {
+      return version;
+    }
+  }
+}
+```
+
+## Vor- & Nachteile
+
+
+## Referenzen
