@@ -6,24 +6,22 @@
 - Definition
 - Warum Interfaces?
 - Merkmale von Interfaces
+- Vertrag
 - Schnittstellendefinition
 - Schnittstellenimplementierung
 - Contract-First-Design
 - Schnittstellen als Ersatz exakter Typangaben
 - Ziele
 - Einsatzgebiete
-- Vertrag
 - Technische Details
 - Beispiele aus dem .Net-Framework
 - Vor- & Nachteile
 - IEnumerable & IEnumeration
 - Referenzen
 
-
 ## Definition
 
 Schnittstellen sind wie eine Vertragsvereinbarung. Sobald eine Klasse eine Schnittstelle implementiert, hat der auf ein Objekt dieser Klasse zugreifende Code die Garantie, dass die Klasse die Member der Schnittstelle aufweist. Mit anderen Worten: Eine Schnittstelle legt einen Vertragsrahmen fest, den die implementierende Klasse erfüllen muss.
-
 
 ## Warum Interfaces?
 
@@ -41,7 +39,6 @@ Bei mehrere Klassen ein gemeinsame Verhalten vorweisen sollen, kann man dies üb
 - Jede Klasse kann in `C#` nur eine Basisklasse haben (Mehrfachvererbung nicht möglich!)
 
 Um Verhalten, Eigenschaft, Indexer und Ereignisse unviversell zu machen, muss ein Interface definiert werden. 
-
 
 ## Merkmale von Interfaces
 
@@ -61,6 +58,17 @@ Um Verhalten, Eigenschaft, Indexer und Ereignisse unviversell zu machen, muss ei
 - Schnittstellen können Ereignisse, Indexer, Methoden und Eigenschaften enthalten
 
 - Klassen und Strukturen können mehrere Interfaces implementieren ("Mehrfachvererbung" in C#)
+
+## Vertrag
+
+- Vertrag wird in `C#` über Interface beschrieben
+
+- Vertrag erweitern statt Vertrag ändern --> Führt zu neuem Vertrag
+
+### Das heißt:
+
+- Änderungen im Vertrag
+    - Alle "Nutzer" des Vertrages müssen geändert werden
 
 ## Ziele
 
@@ -150,22 +158,9 @@ Der Parameter ist vom Typ der Schnittstelle `IAny`.
 
 Der Parameter verlangt, dass das ihm übergebene Argument ein Objekt ist, das die Schnittstelle `IAny` implementiert – egal, ob das Objekt vom Typ DemoClass, Circle, Auto oder Person ist.
 
-Wie schon erwehnt kann eine Schnittstelle wie eine Basisklasse betrachtet werden. Dadurch, dass ein Parameter vom Typ einer Schnittstelle definiert ist, wird uns vorgeschrieben, dass die Member der Schnittstelle von der Klasse implementiert sind. Im Fall von IComparer handelt es sich um die Methode Compare, die zwei Objekte des angegebenen Arrays miteinander vergleicht. Welche weiteren Member sich noch in der Klassendefinition befinden, interessiert in diesem Zusammenhang nicht.
-
 ## Einsatzgebiete
 
-
-
-
-
-
-
-
 ## Technische Details
-
-
-
-
 
 ## Beispiele aus dem .Net-Framework
 
@@ -213,8 +208,6 @@ namespace Übung 1
 }
 ```
 
-
 ## Vor- & Nachteile
-
 
 ## Referenzen
