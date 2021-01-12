@@ -1,8 +1,10 @@
 # Interfaces
 
+
 ## Inhaltsverzeichnis:
 
 - Definition
+- Warum Interfaces?
 - Merkmale von Interfaces
 - Schnittstellendefinition
 - Schnittstellenimplementierung
@@ -16,9 +18,28 @@
 - IEnumerable & IEnumeration
 - Referenzen
 
+
 ## Definition
 
 Schnittstellen sind wie eine Vertragsvereinbarung. Sobald eine Klasse eine Schnittstelle implementiert, hat der auf ein Objekt dieser Klasse zugreifende Code die Garantie, dass die Klasse die Member der Schnittstelle aufweist. Mit anderen Worten: Eine Schnittstelle legt einen Vertragsrahmen fest, den die implementierende Klasse erfüllen muss.
+
+
+## Warum Interfaces?
+
+Bei mehrere Klassen ein gemeinsame Verhalten vorweisen sollen, kann man dies über die Vererbung erreichen.
+
+### Das heißt:
+
+- Klassen haben eine gemeinsame Basisklasse
+- Alle abgeleiteten Klassen müssen Verhalten ausweisen
+    - Bsp.: Eine abstrakte Methode `GetSalary()` wird in einer übergeordneten (abstrakten) Klasse `Employee` definiert.
+            Alle abgeleiteten Klassen müssen `GetSalary()` implementieren.
+
+
+- Andere Klassen, die nicht von `Employee` erben, aber auch `GetSalary()` implementieren, könnn nicht verwendet werden.
+- Jede Klasse kann in ´C#´ nur eine Basisklasse haben (Mehrfachvererbung nicht möglich!)
+
+Um Verhalten, Eigenschaft, Indexer und Ereignisse unviversell zu machen, muss ein Interface definiert werden. 
 
 
 ## Merkmale von Interfaces
@@ -36,17 +57,19 @@ Schnittstellen sind wie eine Vertragsvereinbarung. Sobald eine Klasse eine Schni
 
 - Member sind immer öffentlich und können keine Zugriffmodifizerer enthalten
 
-- Schnittstellen können Ereignisse (Event), Indexer, Methoden und Eigenschaften (Property) enthalten
+- Schnittstellen können Ereignisse, Indexer, Methoden und Eigenschaften enthalten
 
 - Klassen und Strukturen können mehrere Interfaces implementieren ("Mehrfachvererbung" in C#)
+
 
 ## Schnittstellendefinition
 
 Interfaces können:
+- Indexer
+- Ereignisse
 - Methoden
-- Eigenschaften (Properties)
-vorschreiben. Schnittstellen enthalten selbst keine Codeimplementierung, sondern nur abstrakte Definitionen. Schauen wir uns dazu eine einfache, fiktive Schnittstelle an:
-
+- Eigenschaften
+vorschreiben. Schnittstellen enthalten selbst keine Codeimplementierung, sondern nur abstrakte Definitionen.
 
 ```
 public interface ICopy 
@@ -56,9 +79,11 @@ public interface ICopy
 }
 ```
 
+
 ## Schnittstellenimplementierung
 
-Bei der Vererbung wird von Ableitung gesprochen, analog hat sich bei den Schnittstellen der Begriff Implementierung geprägt. Eine Schnittstelle ist wie ein Vertrag, den eine Klasse unterschreibt, sobald sie eine bestimmte Schnittstelle implementiert. 
+Eine Schnittstelle ist wie ein Vertrag, den eine Klasse unterschreibt, sobald sie eine bestimmte Schnittstelle implementiert. 
+
 
 ### Das hat Konsequenzen: 
 Eine Klasse, die eine Schnittstelle implementiert, muss ausnahmslos jedes Mitglied der Schnittstelle übernehmen. 
@@ -77,7 +102,7 @@ class Document : ICopy {
 }
 ```
 
-Grundsätzlich können Sie jeden beliebigen Code in die Schnittstellenmethoden schreiben. Das ist aber nicht Sinn und Zweck. Stattdessen sollten Sie sich streng daran halten, was die Dokumentation beschreibt. Das bedeutet im Umkehrschluss aber auch, 
+Grundsätzlich kann man jeden beliebigen Code in die Schnittstellenmethoden schreiben. Das ist aber nicht Sinn und Zweck. Stattdessen sollten Sie sich streng daran halten, was die Dokumentation beschreibt. Das bedeutet im Umkehrschluss aber auch, 
 dass eine Schnittstelle ohne Dokumentation wertlos ist. Nur die Dokumentation gibt Auskunft darüber, was eine Methode leisten soll und wie ihre Rückgabewerte zu interpretieren sind.
 
 Eine Klasse ist nicht nur auf die Implementierung einer Schnittstelle beschränkt, es dürfen – im Gegensatz zur Vererbung – auch mehrere sein, die durch ein Komma voneinander getrennt werden.
@@ -88,12 +113,12 @@ class Document : ICopy, IDisposable {
 }
 ```
 
+
 ## Contract-First-Design
 
 - Konzept, um qualitativ hochwertige Implementierung zu erstellen
 - Erlaubt Verwendung unterschiedlicher Implementierungen
 - Klassenname und Vererbungshierarchie der konkreten Implementierung ist egal
-
 
 
 ## Ziele
@@ -107,6 +132,7 @@ class Document : ICopy, IDisposable {
   
 - Ein Anwender (eine andere Klasse) interessiert sich nicht
   für die Implementierungsdetails, sondern für die Funktionalität
+
 
 ## Einsatzgebiete
 
@@ -168,6 +194,7 @@ namespace Übung 1
   }
 }
 ```
+
 
 ## Vor- & Nachteile
 
