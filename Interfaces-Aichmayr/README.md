@@ -26,11 +26,11 @@ Interfaces können:
 vorschreiben. Schnittstellen enthalten selbst keine Codeimplementierung, sondern nur abstrakte Definitionen. Schauen wir uns dazu eine einfache, fiktive Schnittstelle an:
 
 ***
-public interface ICopy 
+`public interface ICopy 
 {
   string Caption {get; set;};
   void Copy();
-}
+}`
 ***
 ---
 ## Interfaceimplementierung
@@ -47,7 +47,7 @@ Grundsätzlich können Sie jeden beliebigen Code in die Schnittstellenmethoden s
 
 Eine Klasse ist nicht nur auf die Implementierung einer Schnittstelle beschränkt, es dürfen – im Gegensatz zur Vererbung – auch mehrere sein, die durch ein Komma voneinander getrennt werden.
 
-[logo]: ./Vererbung.png "Logo Title Text 2"
+
 
 ## Ziele
 
