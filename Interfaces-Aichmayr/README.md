@@ -26,11 +26,11 @@ Interfaces können:
 vorschreiben. Schnittstellen enthalten selbst keine Codeimplementierung, sondern nur abstrakte Definitionen. Schauen wir uns dazu eine einfache, fiktive Schnittstelle an:
 
 
-`public interface ICopy </br>
-{</br>
-  string Caption {get; set;};</br>
-  void Copy();</br>
-}`</br>
+```public interface ICopy 
+{
+  string Caption {get; set;};
+  void Copy();
+}```
 
 ## Interfaceimplementierung
 
