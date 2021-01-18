@@ -19,13 +19,13 @@ Man versucht folgende vier "Hauptziele" zu erreichen:
  * Box'ing und Unbox'ing nicht durchführen zu müssen
  * C# bzw. andere OO-Programiersprachen haben viele 'Templates'
 
- #### Vorteile gegenüber der verwendung der allgemein Objekt-Klasse
+ #### Vorteile gegenüber der verwendung der allgemein Objekt-Klasse:
  * Es entsteht ein klarer Performancegewinn
  * Der Sourcecode ist wiederverwendbar
 
 ### Generische Klassen 
 'T'oder 'E' werden im Allgemein als die generische Typevariablen verwendent.
-Bei der Folgende Zeile wird gezeigt, wie eine generische Klasse aufgebaut ist.
+Bei der folgende Zeile wird gezeigt, wie eine generische Klasse aufgebaut ist:
 ~~~cs
 access_modifer class ident <T,K> // T, K generic datatType
 ~~~
@@ -46,20 +46,20 @@ LinkedList<string> myList = new LinkedList<string>();
 ~~~
 ## Constraints in C#
 Das "Keyword", ***where*** bietet Beschränkungen für einen Typ-Parameter.
-Es kann auch eine Basisklasse oder ein Interface verwendet werden als Einschränkung.
+Es können auch ein oder mehrere Basisklassen oder ein Interfaces verwendet werden als Einschränkung.
 ### Beispiel:
 ~~~cs
 public class MyGenericClass<T> where T : IComparable<T> { }
 ~~~
-Hier muss die die Klasse MyGenericClass als Einschränkung das IComarableInterface implementieren. Also ein 'Vertrag' schreibt vor dass der Typ T 'vergleichbar' sein muss gemäß dem Interface.
+Hier muss die die Klasse MyGenericClass als Einschränkung das IComarableInterface implementieren. Also ein 'Vertrag' schreibt vor, dass der Typ T 'vergleichbar' sein muss gemäß dem Interface.
 ### Einen Default Wert verwenden
 Das "Keyword" ***default*** 
 Wenn T ein Referenztyp ist dann ist defaut(T) *null*;
 Für Werttypen wie zum Beispiel int, float,  hier werden alle Bits werden auf *0* gesetzt.
 
 ## Was sind Collections?
-Collections sind aufzählbare Datenstrukturen die  ausgewertet werden können indem man Indexe oder Schlüssel (Keys) verwendet.Datenstrukturen welche nahe in Relation stehen können effizienter gehandhabt werden in einer Collection.
-Anstelle für jede Datenstruktur bzw. Datentyp seperaten Code zu schreiben kann man den gleichen Code wiedervewenden um alle Elemente einer Colletion zu verarbeiten.
+Collections sind aufzählbare Datenstrukturen die ausgewertet werden können indem man Indexe oder Schlüssel (Keys) verwendet. Datenstrukturen welche nahe in Relation stehen können effizienter gehandhabt werden als jene in einer Collection.
+Anstelle für jede Datenstruktur bzw. Datentyp seperaten Code zu schreiben kann man den gleichen Code wiedervewenden um alle Elemente einer Collection zu verarbeiten.
 
 ### Einsatz von Generics in Collections
 --------------------------------
@@ -70,7 +70,6 @@ Anstelle für jede Datenstruktur bzw. Datentyp seperaten Code zu schreiben kann 
 | IEnumerator(T)  | Unterstützt eine einfache Iteration <br> über eine generische Collection |
 |  IDictionary(TKey, TValue) | Repräsentiert eine generische Collection <br> eines  Key/Value pair |
 IComparer(T)|Definert eine Methode die <br> zwei Objekte vergleicht|
----------
 
 ## Arten von generischen Collections als Datenstruktur
 *  List \<T>
@@ -100,8 +99,9 @@ public static void Main(string[] args)
     }
 }
 ```
-List \<T> hat auch eine `Sort` Methode welche die Werte entweder spezifiziert mittels einem angegebenen IComparer bzw. IComparable oder ansonsten mittels einem default comparer sortiert.
-Die Klasse als Parameter muss das ICompareable\<T> interface impementieren.
+List \<T> hat auch eine `Sort` Methode welche die Werte entweder spezifiziert mittels einem angegebenen IComparer bzw. IComparable verwendet wird <br>
+oder ansonsten mittels einem default comparer sortiert.
+Falls mann die Sort Methode spezifiziert verwenden möcht, muss man bei der Klasse das ICompareable\<T> Interface impementieren.
 ####  Beispiel:
 ~~~cs
     class Pupil_Class : IComarable<Pupil_Class>
@@ -110,11 +110,11 @@ Die Klasse als Parameter muss das ICompareable\<T> interface impementieren.
     }
 ~~~
 #### IComparable Inteface
-Die Klasse muss das ``CompareTo()` interface implementieren.
+Die Klasse muss die Methode ``CompareTo()` implementieren.
 Das heißt es wird  ein Objekt vom gleichen Typ als Parameter übergeben.
-*   Es wird eine negative Ganzzahl zurückgegeben wenn das Objekt kleiner ist als das andere
+* Es wird eine negative Ganzzahl zurückgegeben wenn das Objekt kleiner ist als das andere
 * Es wird wenn das Objekt gleich ist als das andere
-*   Es wird eine positive Ganzzahl zurückgegeben wenn dieses Objekt größer ist als das andere
+* Es wird eine positive Ganzzahl zurückgegeben wenn dieses Objekt größer ist als das andere
 #### Beispiel:
 ~~~cs
 
