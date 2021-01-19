@@ -32,6 +32,7 @@ Das Model stellt folgende Funktionalitäten bereit:
 * Validierungen
 * Benachrichtigungen bei Änderungen
 * Verarbeitung bestimmter Regeln
+* Zugriff auf Datenbank
 
 Für die Validierung und die Benachrichtigung bei Änderungen, muss das Model die Interfaces INotifyPropertyChanged und IDataErrorInfo implementieren. 
 
@@ -42,7 +43,7 @@ public class ModelBase : INotifyPropertyChanged, IDataErrorInfo
 {
     protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
     {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArg(propertyName));
     }
 
     public event PropertyChangedEventHandler PropertyChanged;
@@ -214,7 +215,7 @@ public class ViewModelBase : INotifyPropertyChanged
 {
     protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
     {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArg(propertyName));
     }
 
     public event PropertyChangedEventHandler PropertyChanged;
