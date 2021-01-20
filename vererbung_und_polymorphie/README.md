@@ -50,6 +50,36 @@ Polymorphie (Vielgestaltigkeit) ist auch ein Konzept der objektorientierten Prog
 
 </br>
 
+### Statisches & dynamisches Binden:
+</br>
+
+Statisches Binden (static binding) bedeutet, dass bereits der Compiler eine auszuführende Methode festlegt. Bei der dynamischen Bindung hingegen steht die Methode erst zur Programmausführung fest, da nur eine Schnittstelle zu Instanzen der unterschiedlichen Klassen besteht. Beim Polymorphismus ist man auf die dynamische Bindung angewiesen.
+
+</br>
+
+### Überladen vs. Überschreiben von Methoden:
+</br>
+
+Das Überladen ist das bewusste implementieren von Polymorphien. Methoden können zum Beispiel mit einem, zwei und auch mehreren Parametern erstellte werden. Auch der Datentyp kann erweitert werden. 
+
+```csharp
+    public int Plus(int number1, int number2)
+    {
+        return number1 + number2;
+    }
+
+    public int Plus(int number1, int number2, int number3)
+    {
+        return number1 + number2 + number3;
+    }
+```
+
+Beim Überschreiben bleiben Datentyp und Anzahl der Parameter der unterschiedlichen Methoden gleich. Erst zur Laufzeit wird ausgehend vom dynamischen Typ entschieden, welche Methode aufgerufen wird.
+
+![](./pictures/überschreiben.png)
+
+</br>
+
 ## Schlüsselwörter
 </br>
 
@@ -57,7 +87,7 @@ Polymorphie (Vielgestaltigkeit) ist auch ein Konzept der objektorientierten Prog
 
 Wenn beim Konstruktor das Schlüsselwort `base` verwendet wird, wird der übergeordnete Konstruktor aufgerufen.
 
-```ruby
+```csharp
 
 public Worker (string name, string department)
     : base(name, department)
@@ -72,12 +102,12 @@ Mit `sealed` wird in der Basisklasse eine Methode daran gehindert, dass sie weit
 
 </br>
 
-`virtual` / `override` :
+Deltaprogrammierung `virtual` / `override` :
 
-Methoden in der Basisklasse die mit `virtual` versehen sind, kann man in der abgeleiteten Klasse verwenden und mit `override` überschreiben. Das Verhalten wird hier mitverwenden und / oder angepasst:
+Methoden in der Basisklasse die mit `virtual` versehen sind, kann man in der abgeleiteten Klasse verwenden und mit `override` überschreiben. Das Verhalten wird hier mitverwendet und / oder angepasst:
 
 
-```ruby
+```csharp
 
 public class A                        
 {
@@ -96,21 +126,29 @@ public class B : A
 {
     public override void Method()
     {
-        return base.Method() + "und ein Motorad";
+        // 1. Die Basismethode wird hier ergänzt
+        return base.Method() + "und ein Motorad.";
+        
+        // oder
+
+        // 2. Die Basismethode wird zu 100 % überschrieben
+        return string.Format("Es ist ein Fahrrad.");
     }
 }
 
-#Output
-Ein Auto und ein Motorrad
+# 1. Output
+Ein Auto und ein Motorrad.
 
+# 2. Output
+Es ist ein Fahrrad.
 ```
 </br>
 
 `abstract` / `override` :
 
-Ist eine Basisklasse mit `abstract` versehen, kann keine Instanz davon erstellt werden. Ist eine Methode mit `abstract` gekennzeichnet, muss in der Subklasse dies implementiert und mit der Methode mit `override` überschrieben werden.
+Ist eine Basisklasse mit `abstract` versehen, kann keine Instanz davon erstellt werden und Methoden mit `abstract` müssen in der Subklasse implementiert und mit dem Schlüsselwort `override` überschrieben werden.
 
-```ruby
+```csharp
 
 public abstract class A
 {
@@ -130,6 +168,14 @@ Hello World
 
 ```
 
+
+Wenn mehrere Klassen die selben Merkmale aufweisen, kann man diese Merkmale herausheben und in einer Basisklasse zusammenführen. Als Superklasse entsteht ein Überbegriff den es in der realen Welt nicht gibt aber von dem reale Dinge / Objekte abgeleitet werden (Generalisierung).
+
+Beispiel für eine abstrakte Klasse:
+
+![](./pictures/abstractKlasse.png)
+
+In diesem Beispiel sieht man auch den klaren Vorteil der abstrakten Klasse. Es wird Codeverdoppelung vermieden in dem man die Basisklasse mit den benötigten Eigenschaften zur Verfügung stellt. Darüber hinaus kann auch in den Fällen Start und Landung jeweils eine spezielle Methode in den Subklassen implementiert werden, da jedes Luftfahrzeug ihr eigenes Start- und Landeverhalten hat. Auch konkrete Methoden können hier weitervererbt werden.
 </br>
 
 [Zur Übersicht](../README.md)
