@@ -346,20 +346,10 @@ Enumerable und IEnumerator sind zwei Schnittstellen, die zum Implementieren der 
 Jede Klasse, die die IEnumerable-Schnittstelle implementiert, kann aufgelistet werden. Das heißt, man kann eine `foreach-Schleife `verwenden, um die Klasse zu durchlaufen.
 
 - ### IEnumerable
-  IEnumerable ist eine Schnittstelle, die eine einzelne Methode `GetEnumerator()` definiert, die eine IEnumerator-Schnittstelle     zurückgibt.
-  Dies funktioniert für den schreibgeschützten Zugriff auf eine Collection, die implementiert, dass IEnumerable mit einer           `foreach-Schleife ` verwendet werden kann.
+Um die Schnittstelle `IEnumerable` verwenden zu können, wird die Schnittstelle `IEnumerator` & (`IDispose`) benötigt.
 
-- ### IEnumerator 
-
-IEnumerator verfügt über zwei Methoden: 
-- MoveNext
-  - Gibt `true` zurück, um anzuzeigen, dass wir das Ende der Collection nicht erreicht haben und gibt `false` zurück,  wenn wir den   letzten Index der Collection erreicht haben.
-- Reset
-  - Setzt den Zeiger der Collection zurück.
-
-Ein Property:
-- Current
-  - GIbt das aktuelle Element zurückzugeben.
+IEnumerable ist eine Schnittstelle, die eine einzelne Methode `GetEnumerator()` definiert, die eine IEnumerator-Schnittstelle     zurückgibt.
+Dies funktioniert für den schreibgeschützten Zugriff auf eine Collection, die implementiert, dass IEnumerable mit einer           `foreach-Schleife ` verwendet werden kann.
 
 ```
 class Items : IEnumerable
@@ -383,6 +373,19 @@ class Items : IEnumerable
     }
 }
 ```
+
+- ### IEnumerator 
+
+`IEnumerator` verfügt über zwei Methoden: 
+- MoveNext
+  - Gibt `true` zurück, um anzuzeigen, dass das Ende der Collection nicht erreicht haben und gibt `false` zurück,  wenn wir den   letzten Index der Collection erreicht haben.
+- Reset
+  - Setzt den Zeiger der Collection zurück.
+
+Ein Property:
+- Current
+  - GIbt das aktuelle Element zurückzugeben.
+
 
 ```
 class ItemEnumerator : IEnumerator
@@ -408,7 +411,7 @@ class ItemEnumerator : IEnumerator
     }
 }
 ```
-
+### Verwendung
 ```
 class Program
 {
@@ -427,7 +430,7 @@ class Program
     }
 }
 ```
-
+Eine Collection wie z.B. (List, Dictionary, Array usw.) können die `foreach-Schleife` verwenden, da sie selbst den Vertrag `IEnumerable` unterzeichnet haben.
 
 
 ## Vor- & Nachteile
