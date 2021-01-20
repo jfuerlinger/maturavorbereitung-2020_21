@@ -25,7 +25,7 @@ Schnittstellen sind wie eine Vertragsvereinbarung. Sobald eine Klasse eine Schni
 
 ## Warum Interfaces?
 
-Bei mehrere Klassen ein gemeinsame Verhalten vorweisen sollen, kann man dies über die Vererbung erreichen.
+Wenn mehrere Klassen ein gemeinsames Verhalten vorweisen sollen, kann man dies über die Vererbung erreichen.
 
 ### Das heißt:
 
@@ -39,6 +39,12 @@ Bei mehrere Klassen ein gemeinsame Verhalten vorweisen sollen, kann man dies üb
 - Jede Klasse kann in `C#` nur eine Basisklasse haben (Mehrfachvererbung nicht möglich!)
 
 Um Verhalten, Eigenschaft, Indexer und Ereignisse unviversell zu machen, muss ein Interface definiert werden. 
+
+Schnittstellen unterstützen das Konzept des Information Hiding und sollten möglichst stabil sein. Schnittstellen erlauben es mehreren Teams unabhängig von einander zu arbeiten. Sie erlauben eine Trennung von
+
+### Spezifikation und
+### Implementierung
+
 
 ## Merkmale von Interfaces
 
@@ -161,6 +167,15 @@ Der Parameter verlangt, dass das ihm übergebene Argument ein Objekt ist, das di
 ## Einsatzgebiete
 
 ## Technische Details
+
+| Tables          |             Abstract Class              | Interface |
+| --------------- |:------------------------------------------------                          -:| -----:|
+| Prüfung         | Prüfung zur Komplierzeit        | $1600 |
+| Implementierung | Können implementierungen enthalten      |   $12 |
+| Vererbung       | Eine Klasse kann nur von einer Abstrakten Klasse erben      |    $1 |
+| Access Modifier | Abstrakte Klassenmember können Zugriffsmodifier enthalten      |    $1 |
+| Erlaubte Member | Fields, Properties, Construcotrs, Destructors, Methods, Events, Indexers      |    $1 |
+
 
 ## Beispiele aus dem .Net-Framework
 
