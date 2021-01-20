@@ -398,7 +398,7 @@ class ItemEnumerator : IEnumerator
         ItemList = List;
     }
 
-    public object Current => return ItemList[index++];  
+    public object Current => ItemList[index++];  
 
     public bool MoveNext()
     {
@@ -411,7 +411,7 @@ class ItemEnumerator : IEnumerator
     }
 }
 ```
-### Verwendung
+- ### Verwendung
 ```
 class Program
 {
@@ -430,6 +430,8 @@ class Program
     }
 }
 ```
+
+- ### Merke:
 Eine Collection wie z.B. (List, Dictionary, Array usw.) können die `foreach-Schleife` verwenden, da sie selbst den Vertrag `IEnumerable` unterzeichnet haben.
 
 
