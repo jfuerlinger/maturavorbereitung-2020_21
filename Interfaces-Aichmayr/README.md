@@ -168,8 +168,8 @@ Der Parameter verlangt, dass das ihm übergebene Argument ein Objekt ist, das di
 
 ## Technische Details
 
-| Tables          |             Abstract Class              | Interface |
-| --------------- |:------------------------------------------------                          -:| -----:|
+Tables | Abstract Class | Interface 
+--- | --- | ---
 | Prüfung         | Prüfung zur Komplierzeit        | $1600 |
 | Implementierung | Können implementierungen enthalten      |   $12 |
 | Vererbung       | Eine Klasse kann nur von einer Abstrakten Klasse erben      |    $1 |
