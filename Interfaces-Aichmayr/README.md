@@ -170,11 +170,11 @@ Der Parameter verlangt, dass das ihm übergebene Argument ein Objekt ist, das di
 
 Tables | Abstract Class | Interface 
 --- | --- | ---
-| Prüfung         | Prüfung zur Komplierzeit        | $1600 |
-| Implementierung | Können implementierungen enthalten      |   $12 |
-| Vererbung       | Eine Klasse kann nur von einer Abstrakten Klasse erben      |    $1 |
-| Access Modifier | Abstrakte Klassenmember können Zugriffsmodifier enthalten      |    $1 |
-| Erlaubte Member | Fields, Properties, Construcotrs, Destructors, Methods, Events, Indexers      |    $1 |
+Prüfung | Prüfung zur Komplierzeit | Prüfung zur Komplierzeit
+Implementierung | Können implementierungen enthalten | Enthalten keine implementierungen (lediglich deklarationen)
+Vererbung       | Eine Klasse kann nur von einer Abstrakten Klasse erben | Eine Klasse kann jedoch eine beliebige Anzahl an Interface implementieren
+Access Modifier | Abstrakte Klassenmember können Zugriffsmodifier enthalten | Alle Interface Member sind automatisch public
+Erlaubte Member | Fields, Properties, Construcotrs, Destructors, Methods, Events, Indexers | Properties, Methods, Events, Indexers
 
 
 ## Beispiele aus dem .Net-Framework
