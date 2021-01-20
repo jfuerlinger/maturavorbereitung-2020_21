@@ -267,6 +267,18 @@ namespace Übung 2
     {
       return "Hello, I'm a dog and my name is " + this.Name;
     }
+
+    public int CompareTo(object obj)
+    {
+      if(obj is IAnimal)
+      {
+        return this.Name.CompareTo((obj as IAnimal).Name);
+      }
+      else
+      {
+        return 0;
+      }
+    }
   }
 
     public class Cat : IAnimal, IComparable
@@ -279,10 +291,144 @@ namespace Übung 2
     {
       return "Hello, I'm a cat and my name is " + this.Name;
     }
+
+     public int CompareTo(object obj)
+    {
+      if(obj is IAnimal)
+      {
+        return this.Name.CompareTo((obj as IAnimal).Name);
+      }
+      else
+      {
+        return 0;
+      }
+    }
   }
 }
 
 ```
+
+## ICompareable & IComparer
+- IComparable 
+  - Die Rolle von IComparable besteht darin, eine Methode zum Vergleichen von zwei Objekten eines bestimmten Typs bereitzustellen.    Es ist erforderlich, wenn eine beliebige Sortierfunktion für das Objekt vorgesehen ist.
+
+```
+int IComparable.CompareTo(object obj)
+{
+   car c=(car)obj;
+   return String.Compare(this.make,c.make);
+}
+```
+- IComparer 
+  - Die Rolle von IComparer besteht darin, zusätzliche Vergleichs Mechanismen bereitzustellen. Beispielsweise kann die                Reihenfolge der Klasse für mehrere Felder oder Eigenschaften, aufsteigende und absteigende Reihenfolge auf demselben Feld oder    beides bereitstellen.
+
+```
+private class sortYearAscendingHelper : IComparer
+{
+   int IComparer.Compare(object a, object b)
+   {
+      car c1=(car)a;
+      car c2=(car)b;
+      if (c1.year > c2.year)
+         return 1;
+      if (c1.year < c2.year)
+         return -1;
+      else
+         return 0;
+   }
+}
+```
+
+## IEnumerable & IEnumerator
+
+Enumerable und IEnumerator sind zwei Schnittstellen, die zum Implementieren der Iteration in .NET verwendet werden. In `C#` implementieren alle Collections  wie Listen, Dictionaries usw. die IEnumerable-Schnittstelle. Damit sie iteriert werden können.
+
+Jede Klasse, die die IEnumerable-Schnittstelle implementiert, kann aufgelistet werden. Das heißt, man kann eine `foreach-Schleife `verwenden, um die Klasse zu durchlaufen.
+
+- ### IEnumerable
+  IEnumerable ist eine Schnittstelle, die eine einzelne Methode `GetEnumerator()` definiert, die eine IEnumerator-Schnittstelle     zurückgibt.
+  Dies funktioniert für den schreibgeschützten Zugriff auf eine Collection, die implementiert, dass IEnumerable mit einer           `foreach-Schleife ` verwendet werden kann.
+
+- ### IEnumerator 
+
+IEnumerator verfügt über zwei Methoden: 
+- MoveNext
+  - Gibt `true` zurück, um anzuzeigen, dass wir das Ende der Collection nicht erreicht haben und gibt `false` zurück,  wenn wir den   letzten Index der Collection erreicht haben.
+- Reset
+  - Setzt den Zeiger der Collection zurück.
+
+Ein Property:
+- Current
+  - GIbt das aktuelle Element zurückzugeben.
+
+```
+class Items : IEnumerable
+{
+    private string[] ItemList = new string[10];
+    int pointer = 0;
+
+    public void AddItem(string item)
+    {
+        ItemList[pointer++] = item;
+    }
+
+    public void RemoveItem(int index)
+    {
+        ItemList[index] = "";
+    }
+
+    public IEnumerator GetEnumerator()
+    {
+        return new ItemEnumerator();
+    }
+}
+```
+
+```
+class ItemEnumerator : IEnumerator
+{  
+    int index=0;
+    string[] ItemList;
+
+    public ItemEnumerator(ref string[] List)
+    {
+        ItemList = List;
+    }
+
+    public object Current => return ItemList[index++];  
+
+    public bool MoveNext()
+    {
+        return index >= ItemList.Length ? false: true;
+    }
+
+    public void Reset()
+    {
+        index = 0;
+    }
+}
+```
+
+```
+class Program
+{
+    static void Main(string[] args)
+    {
+        Items i = new Items();
+        i.AddItem("Item 1");
+        i.AddItem("Item 2");
+        i.AddItem("Item 3");
+
+        foreach (var items in i)
+        {
+            Console.WriteLine(items);
+        }
+        Console.ReadKey();
+    }
+}
+```
+
+
 
 ## Vor- & Nachteile
 
