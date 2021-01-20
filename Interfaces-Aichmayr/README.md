@@ -42,8 +42,8 @@ Um Verhalten, Eigenschaft, Indexer und Ereignisse unviversell zu machen, muss ei
 
 Schnittstellen unterstützen das Konzept des Information Hiding und sollten möglichst stabil sein. Schnittstellen erlauben es mehreren Teams unabhängig von einander zu arbeiten. Sie erlauben eine Trennung von
 
-### Spezifikation und
-### Implementierung
+- ### Spezifikation und
+- ### Implementierung
 
 
 ## Merkmale von Interfaces
@@ -168,17 +168,20 @@ Der Parameter verlangt, dass das ihm übergebene Argument ein Objekt ist, das di
 
 ## Technische Details
 
-Tables | Abstract Class | Interface 
---- | --- | ---
-Prüfung | Prüfung zur Komplierzeit | Prüfung zur Komplierzeit
-Implementierung | Können implementierungen enthalten | Enthalten keine implementierungen (lediglich deklarationen)
-Vererbung       | Eine Klasse kann nur von einer Abstrakten Klasse erben | Eine Klasse kann jedoch eine beliebige Anzahl an Interface implementieren
-Access Modifier | Abstrakte Klassenmember können Zugriffsmodifier enthalten | Alle Interface Member sind automatisch public
-Erlaubte Member | Fields, Properties, Construcotrs, Destructors, Methods, Events, Indexers | Properties, Methods, Events, Indexers
+### Was sind die Unterschiede zwischen abstract und interface?
+
+| Tables          | Abstract Class                                                           | Interface                                                                 |
+| --------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| Prüfung         | Prüfung zur Komplierzeit                                                 | Prüfung zur Komplierzeit                                                  |
+| Implementierung | Können implementierungen enthalten                                       | Enthalten keine implementierungen (lediglich deklarationen)               |
+| Vererbung       | Eine Klasse kann nur von einer Abstrakten Klasse erben                   | Eine Klasse kann jedoch eine beliebige Anzahl an Interface implementieren |
+| Access Modifier | Abstrakte Klassenmember können Zugriffsmodifier enthalten                | Alle Interface Member sind automatisch public                             |
+| Erlaubte Member | Fields, Properties, Construcotrs, Destructors, Methods, Events, Indexers | Properties, Methods, Events, Indexers                                     |
 
 
 ## Beispiele aus dem .Net-Framework
 
+### Beispiel 1:
 ```
 using System;
 namespace Übung 1
@@ -221,6 +224,64 @@ namespace Übung 1
     }
   }
 }
+```
+
+
+### Beispiel 2:
+```
+using System;
+namespace Übung 2
+{
+  public class Liste mit Interface
+  {
+    static void Main(string[] args)
+    {
+            List<IAnimal> animals = new List<IAnimal>();
+            animals.Add(new Dog("Fido"));
+            animals.Add(new Cat("Bob"));
+            animals.Sort();
+
+            foreach(var animal in animals)
+                Console.WriteLine(animal.Describe());
+            Console.ReadKey();
+    }
+  }
+
+  public interface IAnimal{
+        string Describe();
+
+        string Name
+        {
+            get;
+            set;
+        }
+  }
+
+  public class Dog : IAnimal, IComparable
+  {
+    public Dog(string name){
+      Name = name;
+    }
+
+    public string Describe()
+    {
+      return "Hello, I'm a dog and my name is " + this.Name;
+    }
+  }
+
+    public class Cat : IAnimal, IComparable
+  {
+    public Cat(string name){
+      Name = name;
+    }
+
+    public string Describe()
+    {
+      return "Hello, I'm a cat and my name is " + this.Name;
+    }
+  }
+}
+
 ```
 
 ## Vor- & Nachteile
