@@ -1,6 +1,10 @@
+[Zur Übersicht](../README.md)
+
 # MVVM-Pattern
 
 ## Was ist MVVM?
+
+<h2>Was ist MVVM?</h2>
 Das MVVM-Pattern (Model View ViewModel Muster) wurde erstmals 2005 von Microsoft entwickelt und veröffentlicht und sollte ursprünglich nur in WPF-Anwendungen eingesetzt werden. Inzwischen wird es, ähnlich wie MVC, in anderen Bereichen ebenfalls eingesetzt.
 
 MVVM ist ein Entwurfsmuster und eine Variante des MVC-Musters (Model-View-Controller). Das MVVM-Muster dient zur Trennung der Logik von der grafischen Benutzeroberfläche und findet Einsatz in WPF, JavaFX, HTML5 und Xamarin.Forms. 
@@ -498,5 +502,6 @@ Auch wenn dies nur ein ganz kleiner Ausschnitt aus der Toolbox von Prism war, so
 
 * Ein Nachteil des DataBindings ist ein erhöhter Rechenaufwand, da hierbei ein sogenannter bi-direktionaler (twoway) Beobachter eingesetzt wird. Nachdem das MVVM-Muster ohne DataBinding nicht auskommt, kann man dies auch als Nachteil am MVVM sehen.
 * Ein weiterer Nachteil ist, dass bei kleineren Anwendungen die Implementierung des MVVM-Patterns die Komplexität der Anwendung unnötig erhöht.
+* Die Verwendung von Datenbindung kann zu einem erhöhten Rechenaufwand führen, da hierbei ein sogenannter bi-direktionaler (twoway) Beobachter eingesetzt wird.
 
 [Zur Übersicht](../README.md)
