@@ -48,6 +48,84 @@ Speziell die Mehrfachvererbung kann zur Folge haben, das unerwartete Nebeneffekt
 
 Polymorphie (Vielgestaltigkeit) ist auch ein Konzept der objektorientierten Programmierung wobei die Schlüsselwörter `virtual` und `abstract` die Basis dafür bilden. Unter Polymorphie versteht man, dass unterschiedliche Methoden gleichen Namens existieren.
 
+Beispiel zu Polymorphie:
+
+```csharp
+public abstract class Luftfahrzeug
+{
+    public abstract void Start();
+        
+    public virtual string Abheben()
+    {
+        return " hebt ab.";
+    }
+}
+
+class Passagiermaschine : Luftfahrzeug
+{
+    public override void Start()
+    {
+        Console.WriteLine("Die Passagiermaschine begibt sich auf die Startfläche.");
+    }
+
+    public override string Abheben()
+    {
+        return "Die Passagiermaschine" + base.Abheben();
+    }
+}
+
+public class Zeppelin : Luftfahrzeug
+{
+    public override void Start()
+    {
+        Console.WriteLine("Der Zeppelin löst die Leinen.");
+    }
+
+    public override string Abheben()
+    {
+        return "Der Zeppelin" + base.Abheben();
+    }
+}
+
+public class Luftballon : Luftfahrzeug
+{
+    public override void Start()
+    {
+        Console.WriteLine("Der Luftballon füllt sich mit Helium.");
+    }
+
+    public override string Abheben()
+    {
+        return string.Format("Der Luftballon ist kein Luftfahrzeug und hebt trotzdem ab!");
+    }
+}
+
+static void Main(string[] args)
+{
+    var luftfahrzeug = new Luftfahrzeug();
+    var zeppelin = new Zeppelin();
+    var flugzeug = new Passagiermaschine();
+    var ballon = new Luftballon();
+
+    zeppelin.Start();
+    Console.WriteLine(zeppelin.Abheben());
+
+    flugzeug.Start();
+    Console.WriteLine(flugzeug.Abheben());
+
+    ballon.Start();
+    Console.WriteLine(ballon.Abheben());
+}
+
+#Error -> Luftfahrzeug
+CS0144	Cannot create an instance of the abstract type or interface 'Luftfahrzeug'
+```
+![](./pictures/output_console.png)
+
+
+
+![](./pictures/polymorphie.png)
+
 </br>
 
 ### Statisches & dynamisches Binden:
