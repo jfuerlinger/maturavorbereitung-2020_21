@@ -9,7 +9,7 @@ Die objektorientierte Programmierung stützt sich auf 3 Grundpfeiler:
 * Vererbung
 * Polymorphie
 
-Die Vererbung (Inheritance) ist somit ein wichtiges Konzept in der objektorientierten Programmierung. Mit Hilfe von einer selbst definierten Klasse kann das Verhalten in weiteren Klassen wiederverwendet, geändert oder auch erweitert werden. Die Klasse, die ihr Verhalten weiterreicht, wird Basisklasse genannt und Klassen, die das Verhalten annehmen, werden abgeleitete Klassen. Gängige Bezeichnungen für die Basisklasse sind unter anderem Ober-, Super- oder auch Elternklasse und die abgeleitete Klasse wird des Öfteren unter dem Namen Unter-, Sub- oder auch Kinderklasse erwähnt. Zwischen der Basis- und auch der Subklasse herrscht bei der Vererbung eine dauerhafte Beziehung. Mit Hilfe der Vererbung kann man den Programmieraufwand reduzieren und die Programmstruktur übersichtlicher gestalten. Neben der definierten Basisklasse erben auch alle anderen Klassen immer direkt oder indirekt von `object`.
+Die Vererbung (Inheritance) ist somit ein wichtiges Konzept in der objektorientierten Programmierung. Mit Hilfe von einer selbst definierten Klasse kann das Verhalten in weiteren Klassen wiederverwendet, geändert oder auch erweitert werden. Die Klasse, die ihr Verhalten weiterreicht, wird Basisklasse genannt und Klassen, die das Verhalten annehmen, werden abgeleitete Klassen genannt. Gängige Bezeichnungen für die Basisklasse sind unter anderem Ober-, Super- oder auch Elternklasse und die abgeleitete Klasse wird des Öfteren unter dem Namen Unter-, Sub- oder auch Kinderklasse erwähnt. Zwischen der Basis- und auch der Subklasse herrscht bei der Vererbung eine dauerhafte Beziehung. Mit Hilfe der Vererbung kann man den Programmieraufwand reduzieren und die Programmstruktur übersichtlicher gestalten. Neben der definierten Basisklasse erben auch alle anderen Klassen immer direkt oder indirekt von `object`.
 
 </br>
 
@@ -173,8 +173,9 @@ public Worker (string name, string department)
 }
 
 ```
+</br>
 
-`sealed`:
+`sealed` :
 
 Mit `sealed` wird in der Basisklasse eine Methode daran gehindert, dass sie weiter vererbt wird.
 
@@ -191,7 +192,7 @@ public class A
 {
     public virtual string Method()
     {
-        return "Ein Auto";
+        return "Ein Auto ";
     }
 }
 
