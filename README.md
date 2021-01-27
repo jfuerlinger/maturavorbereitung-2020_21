@@ -1,58 +1,440 @@
-# Maturavorbereitung 2020/21
-
-## Allgemeines
-
-Als Vorbereitung zur Matura werden die wichtigsten Themen aus dem Unterricht nochmals von den Schülern zusammengefasst. Diese Zusammenfassung dient dann als Fragenkatalog zur Programmier-Matura.
-
-## Ablauf
-
-1. Jeder Schüler sucht sich ein Thema aus (**Frist: 22.12.2021, 21:25 Uhr**), welches selbstständig bearbeitet werden muss! Info per MS Teams an Josef Fürlinger (inkl. Name des GitHub-Accounts des Schülers).
-
-2. Zur Ausarbeitung wird durch den Schüler ein eigener Branch mit der Namenskonvention "topic/thema-name" erstellt.
-
-3. Die Ausarbeitung erfolgt per Markdown in einem eigenen Sub-Folder (siehe dazu die Vorlage -> `./collections-und-generics/README.md`) im jeweiligen `topic`-Branch des Schülers. Zusätzlich bitte die eigene README.md-Datei (Subfolder) in der Themenliste unten verlinken!
-   Hinweise zur Verwendung von Markdown (Tabellen, Code-Fragmente, Bilder, etc.) finden Sie hier: [Markdown Cheat Sheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
-
-4. Wenn ein Teil der Ausarbeitung abgeschlossen ist - **jedoch spätestens zwei Wochen vor der Präsentation** - wird per Pullrequest durch den Schüler die Ausarbeitung in den `main`-Branch übernommen. Diese Änderungen werden durch die Lehrperson freigegeben oder gegebenfalls kommentiert umd mit weiteren Anweisungen versehen. Siehe dazu folgendes Tutorial: [GitHub Tutorial (Branches, Pullrequests, etc.)](https://guides.github.com/activities/hello-world).
-
-5. Die Ausarbeitung wird vor der Klasse präsentiert (**mind. 15 Minuten und max. 30 Minuten**) und anschließend in einer Diskussion verteidigt.
-
-6. Pro Woche werden ca. drei Themen präsentiert.
-
-## Themen
-
-| Thema                                                            | Beschreibung                                                                                                                                        |       Schüler        |   Datum    |
-|------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------:|:----------:|
-| [Collections und Generics](collections-und-generics/README.md)   | Generische Methoden und Klassen, Constraints in C#, Arten von Collections, Einsatz von Generics in Collections                                      |  Stefan Steininger   | 19.01.2021 |
-| [Exceptionhandling](exceptionhandling/README.md)                 | Ziele, Grundkonzepte des Exceptionhandlings, Definition eigener Exceptions, Verwendung von geschachtelten Exceptions                                |         TBD          | 19.01.2021 |
-| Muster "Singleton"                                               | Aufbau und Einsatzgebiete, Unterschied zu statischer Klasse                                                                                         |         TBD          | 19.01.2021 |
-| Muster "Iterator"                                                | Aufbau und Einsatzgebiete, Beteiligte Akteure, Best Practices                                                                                       |         TBD          | 26.01.2021 |
-| Referenz- und Wertetypen                                         | Grundlegende Unterschiede, Boxing/Unboxing in C#, Performance, Bedeutung der Referenzsemantik                                                       |         TBD          | 26.01.2021 |
-| [Vererbung und Polymorphie](vererbung_und_polymorphie/README.md) | Grundlagen der Vererbung, Ziele, Mehrfachvererbung, Probleme im Zusammenhang mit Vererbung, Polymorphie                                             |    Dominik Jonke     | 26.01.2021 |
-| [Neuerung in C# 7.0, 8.0 und 9.0](neuerungInCS_7-9/README.md)    | Tuples, Discards, Pattern Matching, Local Functions, readonly Members, Nullable Reference Types, Asynchronous Streams, etc.                         |  Michael Kienberger  | 02.02.2021 |
-| [Interfaces](Interfaces-Aichmayr/README.md)                      | Ziele und Einsatzgebiete von Interfaces, Contract-First-Design, Beispiele aus dem .NET-Framework                                                    |    Simon Aichmayr    | 02.02.2021 |
-| ASP.NET Core - Razor Pages                                       | Grundlegende Architektur, Routing, Details Page-Models, View (Razor, PartialView, _Layout …) und Model, dynamische Datentypen (ViewBag), Tag-Helper |  Lukas Feck-Melzer   | 02.02.2021 |
-| Repository- und UnitOfWork-Pattern                               | Einsatzgebiet, Vorteile, Dependency Injection, Singleton, Generische Repositories                                                                   |         TBD          | 16.02.2021 |
-| REST-Services mit Web-API                                        | Grundarchitektur im Zusammenhang mit ASP.NET Core, REST-Grundlagen, Entwickeln und Debuggen, Hosting                                                | Michael Gutenbrunner | 16.02.2021 |
-| LINQ                                                             | Zugrundeliegendes Muster, Verwendung, Operatoren, Materialisierungszeitpunkt                                                                        |     Kolev Zvonko     | 23.02.2021 |
-| EF CodeFirst - Überblick                                         | Architektur, Varianten, CodeFirst Grundlagen (Convention over Configuration, Annotationen, Relationen, Vererbung,  Concurrency, ...)                |      Oscar Yim       | 23.02.2021 |
-| EF CodeFirst - Validation                                        | Arten der Validierung, Auslösen und Verarbeiten von Validierungsfehlern, System.Annotation-Namespace, Benutzerdefinierte Validierungsattribute      |   Janine Höllhuber   | 23.02.2021 |
-| WPF Grundlagen                                                   | Ziele, Unterschiede zu WinForms, Überblick XAML, Markup-Extensions, Dependency-Property, Attached-Property, Eventhandling                           |     Stefan Mair      | 02.03.2021 |
-| WPF-Layouts und Controls                                         | Verschiedene Layouts, Beispiele, Best-Practices                                                                                                     |     Rene Lochner     | 02.03.2021 |
-| WPF-DataBinding                                                  | XAML-Expressions, Trigger, Binding per Code, Datenkonversation, Collection-Binding                                                                  |    Marcel Flieger    | 02.03.2021 |
-| MVVM-Pattern                                                     | Allgemeine Beschreibung, Ziele, Konkrete Umsetzung in WPF                                                                                           |   Nico Fahrngruber   | 02.03.2021 |
-| Events und Delegates                                             | Anwendungsgebiete bzw. Ziele, Unterschiede, Beispiele, Best Practices, etc.                                                                         |   Bernhard Grasch    | 09.03.2021 |
-| Muster "Observer"                                                | Aufbau und Einsatzgebiete, Beteiligte Akteure, Implementierungsvarianten (Interfaces, Delegates, Events)                                            |     Pero Djukic      | 09.03.2021 |
-| Continuous Integration & Continuous Delivery (Azure)             | Grundkonzept, Beispiele per Azure Devops, yaml-Syntax, Build-Pipelines, Release-Pipelines                                                           |         TBD          | 09.03.2021 |
-| ASP.NET Core - Authentication / Authorization                    | Grundlegende Architektur, Authentication vs. Authorization, vorgefertigte Building Blocks, Json Web Token, Microsoft Identitiy, Identity Server     |         TBD          | 09.03.2021 |
-| Reflection                                                       | Grundkonzepte, Einsatzmöglichkeiten, dynamisches Laden, Runtime Infos, etc.                                                                         |   Manuel Mairinger   | 16.03.2021 |
-| Serialisierung / Deserialisierung (JSON)                         | Einsatzgebiete und Verwendung, Unterschiede Json.NET und System.Text.Json                                                                           |         TBD          | 16.03.2021 |
-| Multithreading                                                   | Grundlagen, Ziele, Umsetzung mit Thread und Runnable, Erweiterte Konzepte (BackgroundWorker, AsyncTask, …), Neuerungen in .NET 4                    |         TBD          | 23.03.2021 |
-
-## Ressourcen
-
-* [Markdown Cheat Sheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
-* [GitHub Tutorial (Branches, Pullrequests, etc.)](https://guides.github.com/activities/hello-world)
+# Interfaces
 
 
-**TEST
+## Inhaltsverzeichnis:
+
+- Definition
+- Warum Interfaces?
+- Merkmale von Interfaces
+- Vertrag
+- Schnittstellendefinition
+- Schnittstellenimplementierung
+- Contract-First-Design
+- Schnittstellen als Ersatz exakter Typangaben
+- Ziele
+- Einsatzgebiete
+- Technische Details
+- Beispiele aus dem .Net-Framework
+- Vor- & Nachteile
+- IEnumerable & IEnumeration
+- Referenzen
+
+## Definition
+
+Schnittstellen sind wie eine Vertragsvereinbarung. Sobald eine Klasse eine Schnittstelle implementiert, hat der auf ein Objekt dieser Klasse zugreifende Code die Garantie, dass die Klasse die Member der Schnittstelle aufweist. Mit anderen Worten: Eine Schnittstelle legt einen Vertragsrahmen fest, den die implementierende Klasse erfüllen muss.
+
+## Warum Interfaces?
+
+Wenn mehrere Klassen ein gemeinsames Verhalten vorweisen sollen, kann man dies über die Vererbung erreichen.
+
+### Das heißt:
+
+- Klassen haben eine gemeinsame Basisklasse
+- Alle abgeleiteten Klassen müssen Verhalten ausweisen
+    - Bsp.: Eine abstrakte Methode `GetSalary()` wird in einer übergeordneten (abstrakten) Klasse `Employee` definiert.
+            Alle abgeleiteten Klassen müssen `GetSalary()` implementieren.
+
+
+- Andere Klassen, die nicht von `Employee` erben, aber auch `GetSalary()` implementieren, könnn nicht verwendet werden.
+- Jede Klasse kann in `C#` nur eine Basisklasse haben (Mehrfachvererbung nicht möglich!)
+
+Um Verhalten, Eigenschaft, Indexer und Ereignisse unviversell zu machen, muss ein Interface definiert werden. 
+
+Schnittstellen unterstützen das Konzept des Information Hiding und sollten möglichst stabil sein. Schnittstellen erlauben es mehreren Teams unabhängig von einander zu arbeiten. Sie erlauben eine Trennung von
+
+- ### Spezifikation und
+- ### Implementierung
+
+
+## Merkmale von Interfaces
+
+- Die Namenskonvention bei Interfaces `C#` ist I + Klassenname IF: IPerson, Class: Person
+    - So wird sichergestellt, dass sofort erkannt wird, dass es sich um ein Interface handelt.
+
+- Eine Schnittstelle kann nicht direkt instanziert werden
+
+- Eine Schnittstelle enhält keinen Implementierung von Methoden
+
+- Eine Schnittstelle enthält keinen Konstruktor
+
+- Eine Schnittstelle kann von einer oder mehreren Schnittstellen erben
+
+- Member sind immer öffentlich und können keine Zugriffmodifizerer enthalten
+
+- Schnittstellen können Ereignisse, Indexer, Methoden und Eigenschaften enthalten
+
+- Klassen und Strukturen können mehrere Interfaces implementieren ("Mehrfachvererbung" in C#)
+
+## Vertrag
+
+- Vertrag wird in `C#` über Interface beschrieben
+
+- Vertrag erweitern statt Vertrag ändern --> Führt zu neuem Vertrag
+
+### Das heißt:
+
+- Änderungen im Vertrag
+    - Alle "Nutzer" des Vertrages müssen geändert werden
+
+## Ziele
+
+- Interfaces trennen den Entwurf von der Implementierung
+
+- Interfaces legen Funktionalität fest, ohne auf die Implementierung einzugehen
+  
+- Beim Implementieren der Klasse ist die spatere Verwendung nicht von Bedeutung, sondern nur die bereitzustellende Funktionälitat
+  
+- Ein Anwender (eine andere Klasse) interessiert sich nicht für die Implementierungsdetails, sondern für die Funktionalität
+
+## Schnittstellendefinition
+
+Interfaces können:
+- Indexer
+- Ereignisse
+- Methoden
+- Eigenschaften
+vorschreiben. Schnittstellen enthalten selbst keine Codeimplementierung, sondern nur abstrakte Definitionen.
+
+```
+public interface ICopy 
+{
+  string Caption {get; set;};
+  void Copy();
+}
+```
+
+## Schnittstellenimplementierung
+
+Eine Schnittstelle ist wie ein Vertrag, den eine Klasse unterschreibt, sobald sie eine bestimmte Schnittstelle implementiert. 
+
+### Das hat Konsequenzen: 
+Eine Klasse, die eine Schnittstelle implementiert, muss ausnahmslos jedes Mitglied der Schnittstelle übernehmen. 
+Eine zu implementierende Schnittstelle wird, getrennt durch einen Doppelpunkt, hinter dem Klassenbezeichner angegeben. In der Klasse werden alle `Member`, die aus der Schnittstelle stammen, mit den entsprechenden Anweisungen codiert.
+
+```csharp
+class Document : ICopy {
+  public void Copy() {
+    Console.WriteLine("Das Dokument wird kopiert.");
+  }
+  public string Caption {
+    get{ [...] }
+    set{ [...] }
+  }
+  [...] 
+}
+```
+
+Grundsätzlich kann man jeden beliebigen Code in die Schnittstellenmethoden schreiben. Das ist aber nicht Sinn und Zweck. Stattdessen sollten Sie sich streng daran halten, was die Dokumentation beschreibt. Das bedeutet im Umkehrschluss aber auch, 
+dass eine Schnittstelle ohne Dokumentation wertlos ist. Nur die Dokumentation gibt Auskunft darüber, was eine Methode leisten soll und wie ihre Rückgabewerte zu interpretieren sind.
+
+Eine Klasse ist nicht nur auf die Implementierung einer Schnittstelle beschränkt, es dürfen – im Gegensatz zur Vererbung – auch mehrere sein, die durch ein Komma voneinander getrennt werden.
+
+```
+class Document : ICopy, IDisposable {
+  [...]
+}
+```
+
+## Contract-First-Design
+
+Beim `Contract-First-Design` werden zuerst die Funkionalitäten des Interfaces definiert und danach erst die Funktionalitäten in der Klasse implementiert.
+
+
+- Konzept, um qualitativ hochwertige Implementierung zu erstellen
+- Erlaubt Verwendung unterschiedlicher Implementierungen
+- Klassenname und Vererbungshierarchie der konkreten Implementierung ist egal
+
+
+Dadurch wird sichergestellt, dass alle Klassen die selben Funktionalitäten aufweisen, den selben Vertrag "unterschreiben".
+--> Polymorphie
+
+
+## Schnittstellen als Ersatz exakter Typangaben
+
+### Bsp.:
+
+```
+   public DoSomething(IAny parameter){
+       parameter.Action();
+   }
+```
+
+Der Parameter ist vom Typ der Schnittstelle `IAny`. 
+
+
+Der Parameter verlangt, dass das ihm übergebene Argument ein Objekt ist, das die Schnittstelle `IAny` implementiert – egal, ob das Objekt vom Typ DemoClass, Circle, Auto oder Person ist.
+
+## Einsatzgebiete
+
+## Technische Details
+
+### Was sind die Unterschiede zwischen abstract und interface?
+
+| Tables          | Abstract Class                                                           | Interface                                                                 |
+| --------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| Prüfung         | Prüfung zur Komplierzeit                                                 | Prüfung zur Komplierzeit                                                  |
+| Implementierung | Können implementierungen enthalten                                       | Enthalten keine implementierungen (lediglich deklarationen)               |
+| Vererbung       | Eine Klasse kann nur von einer Abstrakten Klasse erben                   | Eine Klasse kann jedoch eine beliebige Anzahl an Interface implementieren |
+| Access Modifier | Abstrakte Klassenmember können Zugriffsmodifier enthalten                | Alle Interface Member sind automatisch public                             |
+| Erlaubte Member | Fields, Properties, Construcotrs, Destructors, Methods, Events, Indexers | Properties, Methods, Events, Indexers                                     |
+
+
+## Beispiele aus dem .Net-Framework
+
+### Beispiel 1:
+```
+using System;
+namespace Übung 1
+{
+  public class EinfacheSchnittstellen
+  {
+    static void Main(string[] args)
+    {
+      Mathe m = new Mathe();
+      DruckeVersionsInfo(m);
+      Console.ReadLine();
+    }
+    private static void DruckeVersionsInfo(IVersionsInfo vi)
+    {
+      Console.WriteLine(vi.GetType().ToString());
+      Console.WriteLine(vi.GetAutor());
+      Console.WriteLine(vi.GetVersion());
+    }
+  }
+
+
+  public interface IVersionsInfo
+  {
+    string GetAutor();
+    string GetVersion();
+  }
+
+
+  public class Mathe: IVersionsInfo
+  {
+    private static string version = "0.0.97.123";
+    private static string autor = "Dirk Frischalowski";
+    public string GetAutor()
+    {
+      return autor;
+    }
+    public string GetVersion()
+    {
+      return version;
+    }
+  }
+}
+```
+
+
+### Beispiel 2:
+```
+using System;
+namespace Übung 2
+{
+  public class Liste mit Interface
+  {
+    static void Main(string[] args)
+    {
+            List<IAnimal> animals = new List<IAnimal>();
+            animals.Add(new Dog("Fido"));
+            animals.Add(new Cat("Bob"));
+            animals.Sort();
+
+            foreach(var animal in animals)
+                Console.WriteLine(animal.Describe());
+            Console.ReadKey();
+    }
+  }
+
+  public interface IAnimal{
+        string Describe();
+
+        string Name
+        {
+            get;
+            set;
+        }
+  }
+
+  public class Dog : IAnimal, IComparable
+  {
+    public Dog(string name){
+      Name = name;
+    }
+
+    public string Describe()
+    {
+      return "Hello, I'm a dog and my name is " + this.Name;
+    }
+
+    public int CompareTo(object obj)
+    {
+      if(obj is IAnimal)
+      {
+        return this.Name.CompareTo((obj as IAnimal).Name);
+      }
+      else
+      {
+        return 0;
+      }
+    }
+  }
+
+    public class Cat : IAnimal, IComparable
+  {
+    public Cat(string name){
+      Name = name;
+    }
+
+    public string Describe()
+    {
+      return "Hello, I'm a cat and my name is " + this.Name;
+    }
+
+     public int CompareTo(object obj)
+    {
+      if(obj is IAnimal)
+      {
+        return this.Name.CompareTo((obj as IAnimal).Name);
+      }
+      else
+      {
+        return 0;
+      }
+    }
+  }
+}
+
+```
+
+## ICompareable & IComparer
+- IComparable 
+  - Die Rolle von IComparable besteht darin, eine Methode zum Vergleichen von zwei Objekten eines bestimmten Typs bereitzustellen.    Es ist erforderlich, wenn eine beliebige Sortierfunktion für das Objekt vorgesehen ist.
+
+```
+int IComparable.CompareTo(object obj)
+{
+   car c=(car)obj;
+   return String.Compare(this.make,c.make);
+}
+```
+- IComparer 
+  - Die Rolle von IComparer besteht darin, zusätzliche Vergleichs Mechanismen bereitzustellen. Beispielsweise kann die                Reihenfolge der Klasse für mehrere Felder oder Eigenschaften, aufsteigende und absteigende Reihenfolge auf demselben Feld oder    beides bereitstellen.
+
+```
+private class sortYearAscendingHelper : IComparer
+{
+   int IComparer.Compare(object a, object b)
+   {
+      car c1=(car)a;
+      car c2=(car)b;
+      if (c1.year > c2.year)
+         return 1;
+      if (c1.year < c2.year)
+         return -1;
+      else
+         return 0;
+   }
+}
+```
+
+## IEnumerable & IEnumerator
+
+Enumerable und IEnumerator sind zwei Schnittstellen, die zum Implementieren der Iteration in .NET verwendet werden. In `C#` implementieren alle Collections  wie Listen, Dictionaries usw. die IEnumerable-Schnittstelle. Damit sie iteriert werden können.
+
+Jede Klasse, die die IEnumerable-Schnittstelle implementiert, kann aufgelistet werden. Das heißt, man kann eine `foreach-Schleife `verwenden, um die Klasse zu durchlaufen.
+
+- ### IEnumerable
+Um die Schnittstelle `IEnumerable` verwenden zu können, wird die Schnittstelle `IEnumerator` & (`IDispose`) benötigt.
+
+IEnumerable ist eine Schnittstelle, die eine einzelne Methode `GetEnumerator()` definiert, die eine IEnumerator-Schnittstelle     zurückgibt.
+Dies funktioniert für den schreibgeschützten Zugriff auf eine Collection, die implementiert, dass IEnumerable mit einer           `foreach-Schleife ` verwendet werden kann.
+
+```
+class Items : IEnumerable
+{
+    private string[] ItemList = new string[10];
+    int pointer = 0;
+
+    public void AddItem(string item)
+    {
+        ItemList[pointer++] = item;
+    }
+
+    public void RemoveItem(int index)
+    {
+        ItemList[index] = "";
+    }
+
+    public IEnumerator GetEnumerator()
+    {
+        return new ItemEnumerator();
+    }
+}
+```
+
+- ### IEnumerator 
+
+`IEnumerator` verfügt über zwei Methoden: 
+- MoveNext
+  - Gibt `true` zurück, um anzuzeigen, dass das Ende der Collection nicht erreicht haben und gibt `false` zurück,  wenn wir den   letzten Index der Collection erreicht haben.
+- Reset
+  - Setzt den Zeiger der Collection zurück.
+
+Ein Property:
+- Current
+  - GIbt das aktuelle Element zurückzugeben.
+
+
+```
+class ItemEnumerator : IEnumerator
+{  
+    int index=0;
+    string[] ItemList;
+
+    public ItemEnumerator(ref string[] List)
+    {
+        ItemList = List;
+    }
+
+    public object Current => ItemList[index++];  
+
+    public bool MoveNext()
+    {
+        return index >= ItemList.Length ? false: true;
+    }
+
+    public void Reset()
+    {
+        index = 0;
+    }
+}
+```
+- ### Verwendung
+```
+class Program
+{
+    static void Main(string[] args)
+    {
+        Items i = new Items();
+        i.AddItem("Item 1");
+        i.AddItem("Item 2");
+        i.AddItem("Item 3");
+
+        foreach (var items in i)
+        {
+            Console.WriteLine(items);
+        }
+        Console.ReadKey();
+    }
+}
+```
+
+- ### Merke:
+Eine Collection wie z.B. (List, Dictionary, Array usw.) können die `foreach-Schleife` verwenden, da sie selbst den Vertrag `IEnumerable` unterzeichnet haben.
+
+
+## Vor- & Nachteile
+
+## Referenzen
