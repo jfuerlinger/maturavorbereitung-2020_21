@@ -31,7 +31,7 @@ Die Razor Pages PageModel Klasse hat die Hauptaufgabe, den UI-Layer und die dahi
 - Es erlaubt eine größere Flexibilität im Bezug auf Arbeit in Teams
 - Es ermöglicht es, kleine, wiederverwendbare "Units of Code" auszukapseln und diese wo anders zu benutzen.
 ### Tag Helpers
-/todo 
+//todo 
 ### Routing
 //todo 
 ### Configuration
