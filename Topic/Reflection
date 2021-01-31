@@ -1,0 +1,112 @@
+Reflection
+
+
+Grundkonzepte, Einsatzmöglichkeiten, dynamisches Laden, Runtime Infos, etc.
+
+
+Grundkonzept
+Einsatzmöglichkeiten
+Reflektion in :NET
+Laufzeittypen in Reflection
+Assembly
+Assembly in CLR
+Reflection und generische Tyoen
+
+Reflection
+
+
+Grundkonzepte, Einsatzmöglichkeiten, dynamisches Laden, Runtime Infos, etc.
+
+
+
+1.Grundkonzept
+
+Reflection stellt Objekte (vom Typ Type) bereit, die Assemblies, Module und Typen beschreiben.
+Die Reflections können  verwenden werden um dynamisch eine Instanz eines Typs zu erstellen, den Typ an ein vorhandenes Objekt zu binden oder den Typ von einem vorhandenen Objekt abzurufen und seine Methoden aufzurufen oder auf seine Felder und Eigenschaften zuzugreifen
+Es ist auch Möglich mit der Reflection auf die Atributte in dem Code zu greifen. 
+
+
+
+2.Einsatzmöglichkeiten
+Zugriff auf die Metadaten des Programms
+Zum Untersuchen und Instanziieren von Typen in einer Assembly.
+Erstellung neuer Typen in der Laufzeit. Hier kann man die Klassen System.Reflection.Emit. Verwenden
+Late Binding: der Zugriff auf Methoden für Typen welche in der Laufzeit erstellt werden.
+
+
+
+Mit den Klassen im System.Reflection kann man zusammen mit System.Typ Informationen über geladene Assemblies und die darin definierten Typen zu erhalten, z. B. Klassen, Schnittstellen und Werttypen (d. h. Strukturen und Aufzählungen) erhalten.
+Man kann aber auch mit den Reflections   Typinstanzen zur Laufzeit zu erstellen und sie aufzurufen und auf sie zuzugreifen. 
+
+Der Common Language Runtime Loader verwaltet Anwendungsdomänen, die definierte Grenzen um Objekte darstellen, die den gleichen Anwendungsbereich haben. Diese Verwaltung umfasst das Laden jeder Assembly in die entsprechende Anwendungsdomäne und die Steuerung des Speicherlayouts der Typenhierarchie innerhalb jeder Assembly.
+
+Als Common Language Runtime bezeichnete Laufzeitumgebung bereit, die Code ausführt und Dienste zum Vereinfachen des Entwicklungsprozesses bereitstellt.Compiler und Tools machen die Funktionen der Common Language Runtime verfügbar und ermöglichen das Schreiben von Code, mit dem die Vorteile dieser verwalteten Ausführungsumgebung genutzt werden können.
+
+
+
+Reflektion in .NET
+
+Die Klassen im System.Reflection-Namespace ermöglichen Ihnen zusammen mit System.Type, Informationen zu geladenen Assemblys und den hierin definierten Typen wie Klassen, Schnittstellen und Werttypen (also Strukturen und Enumerationen) abzurufen. Mithilfe von Reflektion kann auch Typeninstanzen zur Laufzeit erstellt werde, diese aufrufen und darauf zugreifen. 
+Das Common Language Runtime-Ladeprogramm verwaltet Anwendungsdomänen, bei denen es sich um definierte Begrenzungen um Objekte im gleichen Anwendungsbereich handelt. Diese Verwaltung umfasst das Laden jeder Assembly in die geeignete Anwendungsdomäne und das Steuern des Speicherlayouts der Typenhierarchie in jeder Assembly.
+Assemblys enthalten Module, Module enthalten Typen, und Typen enthalten Member. Mit der Reflektion werden Objekte bereitgestellt, die Assemblys, Module und Typen kapseln.  Mithilfe von Reflektion kann dynamisch eine Instanz eines Typen erzeugt werden, Typen an ein vorhandenes Objekt gebunden werden und Typinformationen eines vorhandenen Objekts abfragen. Sie können anschließend die Methoden des Typs aufrufen oder auf dessen Felder oder Eigenschaften zugreifen. Typische Verwendungen von Reflektionen umfassen die folgenden:
+Verwendung von Assembly, um Assemblys zu definieren und zu laden, um Module zu laden, die im Assemblymanifest aufgeführt sind, und um einen Typ in seiner Assembly zu suchen und eine Instanz hiervon zu erstellen.
+Verwendung von Module, um Informationen zu ermitteln, wie die Assembly, die das Modul enthält, und die Klassen im Modul. Es können auch alle globalen Methoden oder andere spezifische, nicht globale Methoden abrufen, die im Modul definiert sind.
+Verwendung von ConstructorInfo, um Informationen wie den Namen, die Parameter, die Zugriffsmodifizierer (wie public oder private) und Details zur Implementierung (wie abstract oder virtual) für einen Konstruktor abzurufen. Mit der benutung des GetConstructors- oder die GetConstructor-Methode eines Type, kann ein bestimmter Konstruktor aufgerufen werden.
+Verwendung von MethodInfo, um Informationen wie den Namen, den Rückgabetyp, die Parameter, die Zugriffsmodifizierer (wie public oder private) und Details zur Implementierung (wie abstract oder virtual) für eine Methode abzurufen. Die  GetMethods- oder die GetMethod-Methode eines Type,  kanneine bestimmte Methode aufrufen.
+Verwendung von FieldInfo, um Informationen wie den Namen, die Zugriffsmodifizierer (wie public oder private) und Details zur Implementierung (wie static) für ein Feld abzurufen oder die Feldwerte abzurufen oder festzulegen.
+Verwendung von EventInfo, um Informationen wie den Namen, den Datentyp das Ereignishandlers, benutzerdefinierte Attribute, den Deklarationstyp und den reflektierten Typ eines Ereignisses abzurufen und um Ereignishandler hinzuzufügen oder zu entfernen.
+Verwendung von PropertyInfo, um Informationen wie den Namen, den Datentyp, den Deklarationstyp, den reflektierten Typ und die Status "Schreibgeschützt" oder "Beschreibbar" einer Eigenschaft abzurufen und um die Eigenschaftswert abzurufen oder festzulegen.
+Verwendung von ParameterInfo, um Informationen wie den Namen eines Parameters, den Datentyp, ob es sich um einen Eingabe- oder Ausgabeparameter handelt und die Position des Parameters in der Methodensignatur abzurufen.
+Verwendung von CustomAttributeData, um Informationen zu benutzerdefinierten Attributen abzurufen, wenn Sie im ausschließlich reflektionsbezogenen Kontext einer Anwendungsdomäne arbeiten. CustomAttributeData ermöglicht ea, Attribute zu überprüfen, ohne Instanzen hiervon erstellen zu müssen.
+Die Klassen des System.Reflection.Emit-Namespace stellen eine spezielle Form der Reflektion bereit, die es  ermöglicht, Typen zur Laufzeit zu erstellen.
+Reflektionen können auch zum Erstellen von Anwendungen verwendet werden, die als Typbrowser bezeichnet werden und es dem Benutzer ermöglichen, Typen auszuwählen und dann Informationen zu diesen Typen anzuzeigen.
+Dies ist eine weitere Verwendungsmöglichkeit von Reflektionen. Compiler für Sprachen wie JScript verwenden Reflektionen, um Symboltabellen zu erstellen. Die Klassen im System.Runtime.Serialization-Namespace verwenden Reflektionen, um auf Daten zuzugreifen und um festzustellen, welche Felder beibehalten werden. Die Klassen im System.Runtime.Remoting-Namespace verwenden Reflektionen indirekt über die Serialisierung.
+Laufzeittypen in Reflektion
+Reflektion stellt Klassen wie Type und MethodInfo bereit, um Typen, Member, Parameter und andere Codeentitäten darzustellen. Wenn Sie jedoch Reflektion verwenden, arbeiten Sie nicht direkt mit diesen Klassen, von denen die meisten abstrakt sind (MustInherit in Visual Basic). Stattdessen arbeiten Sie mit Typen, die von der CLR (Common Language Runtime) bereitgestellt werden.
+Wenn Sie beispielsweise den C#-Operator typeof (GetType in Visual Basic) verwenden, um ein Type-Objekt abzurufen, handelt es sich in Wirklichkeit um ein RuntimeType-Objekt. RuntimeType ist von Type abgeleitet und stellt Implementierungen aller abstrakten Methoden bereit.
+Diese Laufzeitklassen sind internal (Friend in Visual Basic). Sie werden nicht getrennt von den Basisklassen dokumentiert, da ihr Verhalten in der Dokumentation der Basisklasse beschrieben wird.
+
+
+
+Assembly zusammenfassung
+Die Assemblys bilden die Grundlage für .NET-basierte Anwendungen
+Assembly können statisch oder dynamisch sein
+ Eine Assembly ist eine Auflistung von Typen und Ressourcen, die so erstellt wurden, dass sie zusammenarbeiten und eine logische funktionelle Einheit bilden.
+
+Jede Assembly enthält eine Assemblymanifestdatei. Ähnlich wie ein Inhaltsverzeichnis enthält das Assemblymanifest Folgendes:
+Die Identität der Assembly (Name und Version).
+Eine Dateitabelle, die alle anderen Dateien beschreibt, aus denen die Assembly besteht, z. B. weitere Assemblys, die Sie erstellt haben, von denen Ihre EXE- oder DLL-Datei abhängig ist, oder sogar Bitmap- oder Infodateien.
+Eine Assemblyverweisliste, also eine Liste aller externen Abhängigkeiten, z. B. DLL-Dateien oder andere Dateien. Assemblyverweise enthalten Verweise auf globale und private Objekte. Globale Objekte stehen für alle weiteren Anwendungen zur Verfügung. In .NET Core werden globale Objekte an eine bestimmte .NET Core-Runtime gekoppelt. In .NET Framework befinden sich globale Objekte im globalen Assemblycache. System. IO. dll ist ein Beispiel für eine Assembly im globalen Assemblycache. Private Objekte müssen sich auf Verzeichnisebene oder unterhalb des Verzeichnisses befinden, in dem die App installiert ist.
+
+
+Assemblys bilden die Grundlage für die Bereitstellung, die Versionskontrolle, die Wiederverwendung, die Festlegung des Aktivierungsumfangs und die Sicherheitsberechtigungen für .NET-basierte Anwendungen. Eine Assembly ist eine Auflistung von Typen und Ressourcen, die so erstellt wurden, dass sie zusammenarbeiten und eine logische funktionelle Einheit bilden. Assemblys sind ausführbare Dateien ( .exe) oder Dynamic Link Library-Dateien ( .dll) und bilden die Bausteine von .NET-Anwendungen. Sie stellen der Common Language Runtime die Informationen zur Verfügung, die sie zum Erkennen der Typimplementierungen benötigt.
+In .NET Core und .NET Framework können   Assemblys entweder aus einer oder aus mehreren Quellcodedateien erstellt werden. In .NET Framework können Assemblys ein Modul oder mehrere Module umfassen. Dies macht es möglich, größere Projekte so zu planen, dass mehrere Entwickler an verschiedenen Quellcodedateien oder Modulen arbeiten, die anschließend in einer einzigen Assembly kombiniert werden.
+
+Assemblys verfügen über folgende Eigenschaften:
+Assemblys werden als EXE- oder DLL-Dateien implementiert.
+Für Bibliotheken, die auf .NET Framework ausgerichtet sind, können  Assemblys für mehrere Anwendungen freigeben werden, indem diese im globalen Assemblycache abgelegt werden. Den Assemblys sollen am besten  starke Namen gegeben werden, bevor  sie zum globalen Assemblycache hinzufügt werden sollen. 
+Assemblys werden nur in den Arbeitsspeicher geladen, wenn sie erforderlich sind. Wenn sie nicht verwendet werden, werden sie auch nicht geladen. Dies bedeutet, dass Assemblys eine effiziente Möglichkeit zur Verwaltung von Ressourcen in größeren Projekten sein können.
+Mithilfe der Reflektion können programmgesteuert Informationen zu einer Assembly abgerufen werden. 
+Man kann die Assemblys auch nur laden um sie zu untersuchen. Das geht indem  die MetadataLoadContext-Klasse in .NET Core und die Methode Assembly.ReflectionOnlyLoad oder Assembly.ReflectionOnlyLoadFrom in .NET Core und .NET Framework verwendet werden.
+
+Assemblys in der Common Language Runtime (CLR)
+Assemblys stellen der Common Language Runtime die Informationen zur Verfügung, die  zur Erkennen von Typimplementierungen benötigt werden. Für die Common Language Runtime sind Typen nur im Kontext einer Assembly vorhanden.
+Eine Assembly definiert die folgenden Informationen:
+Code, der von der Common Language Runtime ausgeführt wird. Wichtig ist das Assemblys nur über einen Einstiegspunkt (DllMain, WinMain oder Main) verfügt sein kann.
+Sicherheitsgrenze. Eine Assembly ist die Einheit, bei der Berechtigungen angefordert und erteilt werden. 
+Typgrenze. Die Identität jedes Typs enthält den Namen der Assembly, in der dieser sich befindet. Wenn der Typ MyType in den Gültigkeitsbereich einer Assembly geladen wird, ist dieser nicht derselbe wie der Typ MyType, der in den Gültigkeitsbereich einer anderen Assembly geladen wurde.
+Grenzen für Gültigkeitsbereiche. Das Assemblymanifest enthält Metadaten, die für das Auflösen von Typen und die Bereitstellung angeforderter Ressourcen verwendet werden. Das Manifest gibt die Typen und Ressourcen an, die außerhalb der Assembly verfügbar gemacht werden sollen, und listet andere Assemblys auf, von denen es abhängig ist. MSIL-Code (Microsoft Intermediate Language) in einer übertragbaren ausführbaren Datei (Portable Executable, PE) wird nur ausgeführt, wenn diesem ein Assemblymanifest zugeordnet wurde.
+Versionsgrenze. Die Assembly ist die kleinste versionierbare Einheit in der Common Language Runtime. Alle Typen und Ressourcen in derselben Assembly werden als eine Einheit versioniert. Das Assemblymanifest beschreibt die von Ihnen für abhängige Assemblys angegebenen Versionsabhängigkeiten. 
+Bereitstellungseinheit. Beim Starten einer Anwendung müssen nur die von der Anwendung zu Beginn aufgerufenen Assemblys vorhanden sein. Andere Assemblys, z. B. Assemblys mit Lokalisierungsressourcen oder Hilfsklassen, können bei Bedarf abgerufen werden. Dadurch ist die App beim ersten Herunterladen einfach und schlank. 
+
+
+
+Reflektion und generische Typen
+
+Aus Sicht der Reflexion besteht der Unterschied zwischen einem generischen und einem normalen Typ darin, dass ein generischer Typ mit einem Typparameterset (bei einer generischen Typdefinition) oder mit Typargumenten (bei einem konstruierten Typ) verknüpft ist. Auf dieselbe Art unterscheidet sich eine generische Methode von einer normalen Methode.
+Es gibt zwei wichtige Schlüssel für das Verständnis des Umgangs von Reflektion mit generischen Typen und Methoden:
+Die Typparameter der generischen Typdefinitionen und generischen Methodendefinitionen werden durch Instanzen der Type -Klasse dargestellt.
+
+Wenn eine Instanz des Type -Objekts einen generischen Typ darstellt, enthält es ein Array von Typen, das die Typparameter (bei generischen Typdefinitionen) oder die Typargumente (bei konstruierten Typen) darstellt. Gilt auch für eine Instanz der MethodInfo -Klasse, die eine generische Methode darstellt.
+Reflektion stellt Type- und MethodInfo-Methoden bereit, mit denen Sie auf das Array von Typparametern zugreifen und ermitteln können, ob eine Type-Instanz einen Typparameter oder einen tatsächlichen Typ darstellt.
+
