@@ -1,31 +1,41 @@
-# Interfaces
+# REST-API
 
 
 ## Inhaltsverzeichnis:
 
 - Definition
-- Warum Interfaces?
-- Merkmale von Interfaces
-- Vertrag
-- Schnittstellendefinition
-- Schnittstellenimplementierung
-- Contract-First-Design
-- Schnittstellen als Ersatz exakter Typangaben
-- Ziele
-- Einsatzgebiete
-- Technische Details
-- Beispiele aus dem .Net-Framework
-- Vor- & Nachteile
-- IEnumerable & IEnumeration
-- Referenzen
+- Prinzipien
+- Umsetzung
+- REST vs SOAP
+- Beispiele
 
 ## Definition
 
-Schnittstellen sind wie eine Vertragsvereinbarung. Sobald eine Klasse eine Schnittstelle implementiert, hat der auf ein Objekt dieser Klasse zugreifende Code die Garantie, dass die Klasse die Member der Schnittstelle aufweist. Mit anderen Worten: Eine Schnittstelle legt einen Vertragsrahmen fest, den die implementierende Klasse erfüllen muss.
+REST-API steht für „Representational State Transfer - Application Programming Interface“. REST-API ist eine standardisierte Schnittstelle zwischen zwei unabhängigen Systemen und dient zum Datenaustausch. Durch die Nutzungen von Client - Server Architekturen oder mobilen Geräten gibt es mittlerweile zahlreiche Programmierschnittstellen (APIs), deren Aufgabe darin besteht, Webdienste nutzbar zu machen. REST ist das meist verwendete API-Konzept und kann man auch als das Programmierparadigma des Internets bezeichnet werden. Eine REST-API nutzt HTTP-Anfragen, um mittels PUT-, GET-, POST- und DELETE- Requests auf Daten zuzugreifen.
 
-## Warum Interfaces?
+## REST-API Prinzipien?
 
-Wenn mehrere Klassen ein gemeinsames Verhalten vorweisen sollen, kann man dies über die Vererbung erreichen.
+Der Architektur-Stil verweist auf sechs Eigenschaften, die ein Dienst haben muss. Dabei ist nicht festgelegt, wie diese Prinzipien implementiert werden müssen.
+
+- Client Server
+  - Das Client-Server-Modell beschreibt eine Möglichkeit, Aufgaben und Dienstleistungen innerhalb eines Netzwerkes zu verteilen. Die Aufgaben werden von Programmen erledigt, die in Clients und Server unterteilt werden. Der Client kann auf Wunsch einen Dienst vom Server anfordern. Der Server, der sich auf demselben oder einem anderen Rechner im Netzwerk befindet, beantwortet die Anforderung. Üblicherweise arbeitet ein Server gleichzeitig für mehrere Clients.
+
+- Zustandslosigkeit
+  - Jede REST-Nachricht enthält alle Informationen, die für den Server bzw. Client notwendig sind, um die Nachricht zu verstehen. Weder der Server noch die Anwendung soll Zustandsinformationen zwischen zwei Nachrichten speichern. Man spricht daher von einem zustandslosen Protokoll. Jede Anfrage eines Clients an den Server ist insofern in sich geschlossen, als dass sie sämtliche Informationen über den Anwendungszustand beinhaltet, die vom Server für die Verarbeitung der Anfrage benötigt werden. 
+  Um dennoch Zustandsinformationen auf der Client-Seite zu speichern, werden von den meisten HTTP-Anwendungen Coockies oder gleichartige Techniken verwendet.
+
+- Caching
+  - HTTP Caching ist eine Technik im HTTP-Protokoll, um Ressourcen wie Dokumente, Bilder oder Dateien in einem Cache am Client zwischenzuspeichern, um unnötige Datenübertragungen, Serveranfragen zu vermeiden und Zugriffszeiten zu verringern.
+
+- Einheitliche Schnittstelle
+  - Dies ist das Hauptunterscheidungsmerkmal von allen weiteren Architekturstilen. Ziel ist die Einheitlichkeit der Schnittstelle und somit ihre einfache Nutzung.
+
+- Mehrschichtige Systeme
+  - Die Systeme sollen mehrschichtig aufgebaut sein. Dadurch reicht es, dem Anwender lediglich eine Schnittstelle anzubieten. Dahinterliegende Ebenen können verborgen bleiben und somit die Architektur insgesamt vereinfacht werden.
+
+- Code on Demand (optional)
+  - Unter Code on Demand ist zu verstehen, dass erst im Bedarfsfall an den Client Code zur lokalen Ausführung übertragen werden kann.
+  Ein Beispiel hierfür wäre die Übertragung von JavaScript-Code bei einer HTML-Repräsentation.
 
 ### Das heißt:
 
