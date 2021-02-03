@@ -1,19 +1,21 @@
 # REST-API
 
 
-## Inhaltsverzeichnis:
+# Inhaltsverzeichnis:
 
 - Definition
 - Prinzipien
-- Umsetzung
-- REST vs SOAP
-- Beispiele
+- Aufbau und Umsetzung
+- Vorteile einer REST - API
+- DEMO WLP Webshop
 
-## Definition
+# Definition
 
 REST-API steht für „Representational State Transfer - Application Programming Interface“. REST-API ist eine standardisierte Schnittstelle zwischen zwei unabhängigen Systemen und dient zum Datenaustausch. Durch die Nutzungen von Client - Server Architekturen oder mobilen Geräten gibt es mittlerweile zahlreiche Programmierschnittstellen (APIs), deren Aufgabe darin besteht, Webdienste nutzbar zu machen. REST ist das meist verwendete API-Konzept und kann man auch als das Programmierparadigma des Internets bezeichnet werden. Eine REST-API nutzt HTTP-Anfragen, um mittels PUT-, GET-, POST- und DELETE- Requests auf Daten zuzugreifen.
 
-## REST-API Prinzipien?
+Die Kernidee bei REST ist das Konzept der Ressource, wobei eine „Ressource“ als so genannter Medientyp abgebildet wird, sozusagen die Repräsentation der Ressource ist. Alles was in REST adressierbar ist, ist eine Ressource wie z. B. der Tweet eines Twitter-Nutzers.
+
+# REST-API Prinzipien?
 
 Der Architektur-Stil verweist auf sechs Eigenschaften, die ein Dienst haben muss. Dabei ist nicht festgelegt, wie diese Prinzipien implementiert werden müssen.
 
@@ -33,418 +35,270 @@ Der Architektur-Stil verweist auf sechs Eigenschaften, die ein Dienst haben muss
 - Mehrschichtige Systeme
   - Die Systeme sollen mehrschichtig aufgebaut sein. Dadurch reicht es, dem Anwender lediglich eine Schnittstelle anzubieten. Dahinterliegende Ebenen können verborgen bleiben und somit die Architektur insgesamt vereinfacht werden.
 
-- Code on Demand (optional)
-  - Unter Code on Demand ist zu verstehen, dass erst im Bedarfsfall an den Client Code zur lokalen Ausführung übertragen werden kann.
-  Ein Beispiel hierfür wäre die Übertragung von JavaScript-Code bei einer HTML-Repräsentation.
 
-### Das heißt:
+- Code on Demand
+Code on Demand, die vielleicht am wenigsten bekannte der sechs Beschränkungen und die einzige optionale Einschränkung, ermöglicht die Übertragung von Code oder Applets über die API zur Verwendung innerhalb der Anwendung. Im Wesentlichen schafft sie eine intelligente Anwendung, die nicht mehr nur von ihrer eigenen Code-Struktur abhängig ist.
 
-- Klassen haben eine gemeinsame Basisklasse
-- Alle abgeleiteten Klassen müssen Verhalten ausweisen
-    - Bsp.: Eine abstrakte Methode `GetSalary()` wird in einer übergeordneten (abstrakten) Klasse `Employee` definiert.
-            Alle abgeleiteten Klassen müssen `GetSalary()` implementieren.
+# Aufbau:
 
+  ![alt text](https://api.zestard.com/wp-content/uploads/2015/12/What-is-Rest-API-02-1.jpg "Logo Title Text 1")
 
-- Andere Klassen, die nicht von `Employee` erben, aber auch `GetSalary()` implementieren, könnn nicht verwendet werden.
-- Jede Klasse kann in `C#` nur eine Basisklasse haben (Mehrfachvererbung nicht möglich!)
+# 1. Ressourcen
 
-Um Verhalten, Eigenschaft, Indexer und Ereignisse unviversell zu machen, muss ein Interface definiert werden. 
+Eine Ressource kann jedes Objekt sein, über das die API Informationen anbieten kann. Im Fall einer Twitter-API kann eine Ressource beispielsweise ein Benutzer, ein Hashtag oder ein beliebiger Medientyp wie ein Bild sein. Jede Ressource verfügt über eine eindeutige Kennung, die ein Name oder eine Nummer sein kann.
+Die Ressource ist die Hauptabstraktion von Informationen in REST. Die Adressierbarkeit spielt dabei die Hautrolle.
+Jede Ressource muss sich mit Hilfe eines eindeutigen Unique Ressource Identifiers (kurz URI) identifizieren lassen. So lässt sich z. B. in REST eine Bestellung mit der Bestellnummer 12345 mithilfe der URI http://ws.meinedomain.tld/orders/12345 adressieren.
 
-Schnittstellen unterstützen das Konzept des Information Hiding und sollten möglichst stabil sein. Schnittstellen erlauben es mehreren Teams unabhängig von einander zu arbeiten. Sie erlauben eine Trennung von
+# 2. Eine definierte API Norm
 
-- ### Spezifikation und
-- ### Implementierung
+Die Normen der API muss selbst definiert werden.
+Das heißt, die Datentransferobjekte müssen in der Clientapplikation mit der Namensgebung der REST-API am Server übereinstimmen.
 
+BSP:
 
-## Merkmale von Interfaces
+DTO Clientapplikation Angular
 
-- Die Namenskonvention bei Interfaces `C#` ist I + Klassenname IF: IPerson, Class: Person
-    - So wird sichergestellt, dass sofort erkannt wird, dass es sich um ein Interface handelt.
-
-- Eine Schnittstelle kann nicht direkt instanziert werden
-
-- Eine Schnittstelle enhält keinen Implementierung von Methoden
-
-- Eine Schnittstelle enthält keinen Konstruktor
-
-- Eine Schnittstelle kann von einer oder mehreren Schnittstellen erben
-
-- Member sind immer öffentlich und können keine Zugriffmodifizerer enthalten
-
-- Schnittstellen können Ereignisse, Indexer, Methoden und Eigenschaften enthalten
-
-- Klassen und Strukturen können mehrere Interfaces implementieren ("Mehrfachvererbung" in C#)
-
-## Vertrag
-
-- Vertrag wird in `C#` über Interface beschrieben
-
-- Vertrag erweitern statt Vertrag ändern --> Führt zu neuem Vertrag
-
-### Das heißt:
-
-- Änderungen im Vertrag
-    - Alle "Nutzer" des Vertrages müssen geändert werden
-
-## Ziele
-
-- Interfaces trennen den Entwurf von der Implementierung
-
-- Interfaces legen Funktionalität fest, ohne auf die Implementierung einzugehen
-  
-- Beim Implementieren der Klasse ist die spatere Verwendung nicht von Bedeutung, sondern nur die bereitzustellende Funktionälitat
-  
-- Ein Anwender (eine andere Klasse) interessiert sich nicht für die Implementierungsdetails, sondern für die Funktionalität
-
-## Schnittstellendefinition
-
-Interfaces können:
-- Indexer
-- Ereignisse
-- Methoden
-- Eigenschaften
-vorschreiben. Schnittstellen enthalten selbst keine Codeimplementierung, sondern nur abstrakte Definitionen.
-
-```
-public interface ICopy 
+```typescript
+export class userDto
 {
-  string Caption {get; set;};
-  void Copy();
+  userName!: string;
+  firstName!: string;
+  lastName!: string;
 }
 ```
 
-## Schnittstellenimplementierung
-
-Eine Schnittstelle ist wie ein Vertrag, den eine Klasse unterschreibt, sobald sie eine bestimmte Schnittstelle implementiert. 
-
-### Das hat Konsequenzen: 
-Eine Klasse, die eine Schnittstelle implementiert, muss ausnahmslos jedes Mitglied der Schnittstelle übernehmen. 
-Eine zu implementierende Schnittstelle wird, getrennt durch einen Doppelpunkt, hinter dem Klassenbezeichner angegeben. In der Klasse werden alle `Member`, die aus der Schnittstelle stammen, mit den entsprechenden Anweisungen codiert.
+DTO API C#
 
 ```csharp
-class Document : ICopy {
-  public void Copy() {
-    Console.WriteLine("Das Dokument wird kopiert.");
-  }
-  public string Caption {
-    get{ [...] }
-    set{ [...] }
-  }
-  [...] 
-}
-```
-
-Grundsätzlich kann man jeden beliebigen Code in die Schnittstellenmethoden schreiben. Das ist aber nicht Sinn und Zweck. Stattdessen sollten Sie sich streng daran halten, was die Dokumentation beschreibt. Das bedeutet im Umkehrschluss aber auch, 
-dass eine Schnittstelle ohne Dokumentation wertlos ist. Nur die Dokumentation gibt Auskunft darüber, was eine Methode leisten soll und wie ihre Rückgabewerte zu interpretieren sind.
-
-Eine Klasse ist nicht nur auf die Implementierung einer Schnittstelle beschränkt, es dürfen – im Gegensatz zur Vererbung – auch mehrere sein, die durch ein Komma voneinander getrennt werden.
-
-```
-class Document : ICopy, IDisposable {
-  [...]
-}
-```
-
-## Contract-First-Design
-
-Beim `Contract-First-Design` werden zuerst die Funkionalitäten des Interfaces definiert und danach erst die Funktionalitäten in der Klasse implementiert.
-
-
-- Konzept, um qualitativ hochwertige Implementierung zu erstellen
-- Erlaubt Verwendung unterschiedlicher Implementierungen
-- Klassenname und Vererbungshierarchie der konkreten Implementierung ist egal
-
-
-Dadurch wird sichergestellt, dass alle Klassen die selben Funktionalitäten aufweisen, den selben Vertrag "unterschreiben".
---> Polymorphie
-
-
-## Schnittstellen als Ersatz exakter Typangaben
-
-### Bsp.:
-
-```
-   public DoSomething(IAny parameter){
-       parameter.Action();
-   }
-```
-
-Der Parameter ist vom Typ der Schnittstelle `IAny`. 
-
-
-Der Parameter verlangt, dass das ihm übergebene Argument ein Objekt ist, das die Schnittstelle `IAny` implementiert – egal, ob das Objekt vom Typ DemoClass, Circle, Auto oder Person ist.
-
-## Einsatzgebiete
-
-## Technische Details
-
-### Was sind die Unterschiede zwischen abstract und interface?
-
-| Tables          | Abstract Class                                                           | Interface                                                                 |
-| --------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
-| Prüfung         | Prüfung zur Komplierzeit                                                 | Prüfung zur Komplierzeit                                                  |
-| Implementierung | Können implementierungen enthalten                                       | Enthalten keine implementierungen (lediglich deklarationen)               |
-| Vererbung       | Eine Klasse kann nur von einer Abstrakten Klasse erben                   | Eine Klasse kann jedoch eine beliebige Anzahl an Interface implementieren |
-| Access Modifier | Abstrakte Klassenmember können Zugriffsmodifier enthalten                | Alle Interface Member sind automatisch public                             |
-| Erlaubte Member | Fields, Properties, Construcotrs, Destructors, Methods, Events, Indexers | Properties, Methods, Events, Indexers                                     |
-
-
-## Beispiele aus dem .Net-Framework
-
-### Beispiel 1:
-```
-using System;
-namespace Übung 1
+public class UserDto
 {
-  public class EinfacheSchnittstellen
-  {
-    static void Main(string[] args)
-    {
-      Mathe m = new Mathe();
-      DruckeVersionsInfo(m);
-      Console.ReadLine();
-    }
-    private static void DruckeVersionsInfo(IVersionsInfo vi)
-    {
-      Console.WriteLine(vi.GetType().ToString());
-      Console.WriteLine(vi.GetAutor());
-      Console.WriteLine(vi.GetVersion());
-    }
-  }
-
-
-  public interface IVersionsInfo
-  {
-    string GetAutor();
-    string GetVersion();
-  }
-
-
-  public class Mathe: IVersionsInfo
-  {
-    private static string version = "0.0.97.123";
-    private static string autor = "Dirk Frischalowski";
-    public string GetAutor()
-    {
-      return autor;
-    }
-    public string GetVersion()
-    {
-      return version;
-    }
-  }
+  public string UserName {get; set;}
+  public string FirstName {get; set;}
+  public string LastName {get; set;}
 }
 ```
 
+# 3. Client 
 
-### Beispiel 2:
+Die Browserapplikation generiert den Request and Webserver mit der entsprechenden HTTP-Methode.
+Die Requestdaten werden befinden sich im Header.
+   
+## GET 
+
+Ressource wird vom Server angefordert. Serverzustand wird nicht verändert.
+Folgendes Beispiel zeigt einen GET Request auf die URL: https://api.predic8.de/shop/products/1
+
+```csharp
+GET /shop/products/1 HTTP/1.1
+Host: api.predic8.de
+Content-Type: application/json
 ```
-using System;
-namespace Übung 2
+
+Der Response liefert das Produkt mit der ID 1 als JSON-Format.
+
+```csharp
+HTTP/1.1 200 Ok
+Content-Type: application/json
+
 {
-  public class Liste mit Interface
-  {
-    static void Main(string[] args)
-    {
-            List<IAnimal> animals = new List<IAnimal>();
-            animals.Add(new Dog("Fido"));
-            animals.Add(new Cat("Bob"));
-            animals.Sort();
-
-            foreach(var animal in animals)
-                Console.WriteLine(animal.Describe());
-            Console.ReadKey();
-    }
-  }
-
-  public interface IAnimal{
-        string Describe();
-
-        string Name
-        {
-            get;
-            set;
-        }
-  }
-
-  public class Dog : IAnimal, IComparable
-  {
-    public Dog(string name){
-      Name = name;
-    }
-
-    public string Describe()
-    {
-      return "Hello, I'm a dog and my name is " + this.Name;
-    }
-
-    public int CompareTo(object obj)
-    {
-      if(obj is IAnimal)
-      {
-        return this.Name.CompareTo((obj as IAnimal).Name);
-      }
-      else
-      {
-        return 0;
-      }
-    }
-  }
-
-    public class Cat : IAnimal, IComparable
-  {
-    public Cat(string name){
-      Name = name;
-    }
-
-    public string Describe()
-    {
-      return "Hello, I'm a cat and my name is " + this.Name;
-    }
-
-     public int CompareTo(object obj)
-    {
-      if(obj is IAnimal)
-      {
-        return this.Name.CompareTo((obj as IAnimal).Name);
-      }
-      else
-      {
-        return 0;
-      }
-    }
-  }
+  "id": 1,
+  "name": "Wildberries",
+  "price": 4.99,
+  "category_url": "/shop/categories/Fruits",
+  "vendor_url": "/shop/vendors/672"
 }
-
 ```
 
-## ICompareable & IComparer
-- IComparable 
-  - Die Rolle von IComparable besteht darin, eine Methode zum Vergleichen von zwei Objekten eines bestimmten Typs bereitzustellen.    Es ist erforderlich, wenn eine beliebige Sortierfunktion für das Objekt vorgesehen ist.
+## POST
 
-```
-int IComparable.CompareTo(object obj)
+Fügt eine neue Ressource hinzu. Kann auch für eine Operation verwendet werden, die von keiner anderen Methode abgedeckt wird.
+Das folgende Code Beispiel zeigt das HTTP Protokoll für den Aufruf. Die Daten für die neu anzulegende Ressource wird im Body der HTTP Anfrage übertragen.
+https://api.predic8.de/shop/products/
+
+```csharp
+POST /shop/products/ HTTP/1.1
+Host: api.predic8.de
+Content-Type: application/json
+
 {
-   car c=(car)obj;
-   return String.Compare(this.make,c.make);
+  "name": "Wildberries",
+  "price": 4.99,
+  "category_url": "/shop/categories/Fruits",
+  "vendor_url": "/shop/vendors/672"
 }
 ```
-- IComparer 
-  - Die Rolle von IComparer besteht darin, zusätzliche Vergleichs Mechanismen bereitzustellen. Beispielsweise kann die                Reihenfolge der Klasse für mehrere Felder oder Eigenschaften, aufsteigende und absteigende Reihenfolge auf demselben Feld oder    beides bereitstellen.
 
+Ein Status Code von 201 Created in der Antwort unten informiert den Client über die erfolgreiche Ausführung des Requestes:
+
+```csharp
+HTTP/1.1 201 Created
+Content-Type: application/json
+Location: https://api.predic8.de/shop/products/140
 ```
-private class sortYearAscendingHelper : IComparer
+
+## PUT 
+
+Die angegebene Ressource wird angelegt. Wenn die Ressource bereits existiert, wird sie geändert.
+Mit PUT wird für gewöhnlich eine Ressource mit der Represäntation im Request überschrieben.
+
+```csharp
+PUT /shop/products/11 HTTP/1.1
+Host: api.predic8.de
+Content-Type: application/json
+
 {
-   int IComparer.Compare(object a, object b)
-   {
-      car c1=(car)a;
-      car c2=(car)b;
-      if (c1.year > c2.year)
-         return 1;
-      if (c1.year < c2.year)
-         return -1;
-      else
-         return 0;
-   }
+  "name": "Red Grapes",
+  "price": 1.79,
+  "category_url": "/shop/categories/Fruits",
+  "vendor_url": "/shop/vendors/501"
 }
 ```
+Bei Erfolg antwortet der Server mit dem Status Code 200 OK.
 
-## IEnumerable & IEnumerator
-
-Enumerable und IEnumerator sind zwei Schnittstellen, die zum Implementieren der Iteration in .NET verwendet werden. In `C#` implementieren alle Collections  wie Listen, Dictionaries usw. die IEnumerable-Schnittstelle. Damit sie iteriert werden können.
-
-Jede Klasse, die die IEnumerable-Schnittstelle implementiert, kann aufgelistet werden. Das heißt, man kann eine `foreach-Schleife `verwenden, um die Klasse zu durchlaufen.
-
-- ### IEnumerable
-Um die Schnittstelle `IEnumerable` verwenden zu können, wird die Schnittstelle `IEnumerator` & (`IDispose`) benötigt.
-
-IEnumerable ist eine Schnittstelle, die eine einzelne Methode `GetEnumerator()` definiert, die eine IEnumerator-Schnittstelle     zurückgibt.
-Dies funktioniert für den schreibgeschützten Zugriff auf eine Collection, die implementiert, dass IEnumerable mit einer           `foreach-Schleife ` verwendet werden kann.
-
+```csharp
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
 ```
-class Items : IEnumerable
+
+## PATCH
+
+Nur ein Teil der Ressource wird geändert.
+Mit der HTTP Methode PATCH können einzelne Eigenschaften einer Ressource gezielt manipuliert werden. Im Beispiel unten enthält der Request einen neuen Wert für die Eigenschaft price.
+
+```csharp
+PATCH /shop/products/70 HTTP/1.1
+Host: api.predic8.de
+Content-Type: application/json
+
 {
-    private string[] ItemList = new string[10];
-    int pointer = 0;
-
-    public void AddItem(string item)
-    {
-        ItemList[pointer++] = item;
-    }
-
-    public void RemoveItem(int index)
-    {
-        ItemList[index] = "";
-    }
-
-    public IEnumerator GetEnumerator()
-    {
-        return new ItemEnumerator();
-    }
+  "price": 1.99
 }
 ```
 
-- ### IEnumerator 
+Der Body der Response enthält die Repräsentation der geänderten Ressource mit dem neuen Preis.
 
-`IEnumerator` verfügt über zwei Methoden: 
-- MoveNext
-  - Gibt `true` zurück, um anzuzeigen, dass das Ende der Collection nicht erreicht haben und gibt `false` zurück,  wenn wir den   letzten Index der Collection erreicht haben.
-- Reset
-  - Setzt den Zeiger der Collection zurück.
+```csharp
+HTTP/1.1 200 OK
+Cache-Control: no-cache
+Content-Type: application/json; charset=utf-8
 
-Ein Property:
-- Current
-  - GIbt das aktuelle Element zurückzugeben.
-
-
-```
-class ItemEnumerator : IEnumerator
-{  
-    int index=0;
-    string[] ItemList;
-
-    public ItemEnumerator(ref string[] List)
-    {
-        ItemList = List;
-    }
-
-    public object Current => ItemList[index++];  
-
-    public bool MoveNext()
-    {
-        return index >= ItemList.Length ? false: true;
-    }
-
-    public void Reset()
-    {
-        index = 0;
-    }
-}
-```
-- ### Verwendung
-```
-class Program
 {
-    static void Main(string[] args)
-    {
-        Items i = new Items();
-        i.AddItem("Item 1");
-        i.AddItem("Item 2");
-        i.AddItem("Item 3");
-
-        foreach (var items in i)
-        {
-            Console.WriteLine(items);
-        }
-        Console.ReadKey();
-    }
+  "name": "Pears",
+  "price": 1.99,
+  "photo_url": "/shop/products/70/photo",
+  "category_url": "/shop/categories/Fruits",
+  "vendor_url": "/shop/vendors/501"
 }
 ```
 
-- ### Merke:
-Eine Collection wie z.B. (List, Dictionary, Array usw.) können die `foreach-Schleife` verwenden, da sie selbst den Vertrag `IEnumerable` unterzeichnet haben.
+## DELETE 
 
+Mit der Delete Methode können Ressourcen wieder gelöscht werden.
 
-## Vor- & Nachteile
+```csharp
+DELETE /shop/products/142 HTTP/1.1
+Host: api.predic8.de
+```
 
-## Referenzen
+Das erfolgreiche Löschen teilt der Server mit einem Status Code 200 OK an den Client mit.
+
+```csharp
+HTTP/1.1 200 OK
+```
+
+## HEAD 
+
+Fordert Metadaten zu einer Ressource an.
+
+```csharp
+HEAD /shop/products/142 HTTP/1.1
+Accept: application/json
+Host: api.predic8.de
+```
+
+HEAD Response
+
+```csharp
+HTTP/1.1 200 OK
+Content-Length: 19
+Content-Type: application/json //--> METADATEN ZU PRODUKT MIT DER ID 142
+```
+
+## OPTIONS
+
+Prüft, welche Methoden auf einer Ressource zur Verfügung stehen.
+
+```csharp
+OPTIONS /shop/products HTTP/1.1
+Host: api.predic8.de
+```
+
+OPTIONS Response
+
+```csharp
+HTTP/1.1 200 OK
+Allow: GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS
+Access-Control-Allow-Origin: https://predic8.de
+Access-Control-Allow-Methods: GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS
+Access-Control-Allow-Headers: Content-Type
+```
+
+## CONNECT
+
+Dient dazu, die Anfrage durch einen TCP-Tunnel zu leiten. 
+Wird meist eingesetzt, um eine HTTPS-Verbindung über einen HTTP-Proxy herzustellen.
+
+## TRACE
+
+Gibt die Anfrage zurück, wie sie der Zielserver erhält. Dient dazu, um Änderungen der Anfrage durch Proxyserver zu ermitteln.
+
+# 4. REST - Server
+
+Der Webserver ist komplett unabhängig vom Client, empfängt die HTTP Requests und enthält die vom Client gewünschten Ressourcen.
+Nach erhalt der Anfrage wird diese vom Webserver verarbeitet, indem er die gewünschten Aktionen unter Sicherheitsanforderungen umsetzt.
+Der Server gewährt nur einen Repräsentationsstatus der Quelle und keinen vollständigen Zugriff auf den Client.
+
+Ein gutes Beispiel hierfür ist, wenn eine mobile App YouTube-Videos über eine eigene Oberfläche anzeigt. Es verwendet eine REST-API, um den Videoinhalt von YouTube aufzurufen, ohne ihn tatsächlich auf einem eigenen System zu hosten.
+
+# Vorteile einer REST API
+
+## Skalierbarkeit
+
+Die REST-API bietet eine hervorragende Skalierbarkeit. Da die Clients und Server voneinander getrennt sind, kann das Produkt vom Entwicklerteam problemlos skaliert werden.
+
+## Integrität
+
+Es ist möglich, REST in vorhandene Websites zu integrieren, ohne die Website-Infrastruktur umzugestalten. So können Entwickler schneller arbeiten, anstatt eine Website von Grund auf neu zu überarbeiten. Alternativ können sie lediglich zusätzliche Funktionen hinzufügen.
+
+## Flexibilität
+
+Entwickler können ohne Probleme auf andere Server migrieren oder Änderungen in der Datenbank vornehmen, vorausgesetzt, die Daten werden von jeder Anfrage korrekt gesendet. Die Trennung erhöht somit insgesamt die Flexibilität bei der Entwicklung.
+
+## Unabhängigkeit
+
+Dank der Trennung zwischen Client und Server können mit dem REST-Protokoll Entwicklungen in den verschiedenen Bereichen eines Projekts problemlos autonom durchgeführt werden. Darüber hinaus ist die REST-API an die betriebliche Syntax und Plattform anpassbar und bietet die Möglichkeit, zahlreiche Umgebungen während der Entwicklung zu testen.
+
+## Asynchrone Webservices
+
+Für bestimmte Webservices ist es wünschenswert, dass Anfrage und Antwort zeitlich entkoppelt sind. Da HTTP für diesen Fall keinerlei Mechanismen bietet, bleibt einzig die Option die Abarbeitungen der Anfragen als Serviceanbieter selbst zu verwalten und auf gezielte Anfrage der Nutzer weiterzuleiten.
+Dies kann mit einer REST - API reibungslos implementiert werden.
+
+# Nachteil einer REST API
+
+Keine Standardisierung der Schnittstelle.
+Namensgebung kommt von Entwickler.
+
+# LIVE DEMO easyWLP Webshop
+
+# FAZIT
+
+Die REST-Architektur liefert hervorragende Mittel zur Konzipierung und Umsetzung von Webservices verschiedenster Art. Dank der Tatsache, dass nahezu alle Geräte das Hypertext Transfer Protocol unterstützen, können sowohl Desktop- als auch mobile Clients mühelos und ohne zusätzliche Implementierungen mit dem REST-Interface arbeiten. Das Ergebnis sind Webservices, die durch ein hohes Maß an
+
+- Plattformunabhängigkeit,
+- Skalierbarkeit,
+- Performance,
+- Interoperabilität
+- und Flexibilität
+
+überzeugen. 
+Die Nutzung erfordert jedoch auch das entsprechende Know-how, wobei vor allem die Interaktion zwischen den einzelnen, zustandslosen Ressourcen sehr komplex und schwer zu bewerkstelligen ist.
