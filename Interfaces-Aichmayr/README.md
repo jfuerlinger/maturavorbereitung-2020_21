@@ -165,6 +165,8 @@ Der Parameter verlangt, dass das ihm übergebene Argument ein Objekt ist, das di
 
 ## Einsatzgebiete
 
+Interfaces werden bei eine Core Projekt, Persistence aber auch für Web Projekte verwendet.
+
 ## Technische Details
 
 ### Was sind die Unterschiede zwischen abstract und interface?
@@ -183,7 +185,7 @@ Der Parameter verlangt, dass das ihm übergebene Argument ein Objekt ist, das di
 ### Beispiel 1:
 ``` Csharp
 using System;
-namespace Übung 1
+namespace Uebung 1
 {
   public class EinfacheSchnittstellen
   {
@@ -229,7 +231,7 @@ namespace Übung 1
 ### Beispiel 2:
 ``` Csharp
 using System;
-namespace Übung 2
+namespace Uebung 2
 {
   public class Liste mit Interface
   {
