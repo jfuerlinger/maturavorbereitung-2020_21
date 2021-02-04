@@ -110,7 +110,7 @@ Eine Schnittstelle ist wie ein Vertrag, den eine Klasse unterschreibt, sobald si
 Eine Klasse, die eine Schnittstelle implementiert, muss ausnahmslos jedes Mitglied der Schnittstelle übernehmen. 
 Eine zu implementierende Schnittstelle wird, getrennt durch einen Doppelpunkt, hinter dem Klassenbezeichner angegeben. In der Klasse werden alle `Member`, die aus der Schnittstelle stammen, mit den entsprechenden Anweisungen codiert.
 
-```Csharp
+```csharp
 class Document : ICopy {
   public void Copy() {
     Console.WriteLine("Das Dokument wird kopiert.");
