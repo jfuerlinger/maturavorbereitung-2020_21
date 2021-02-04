@@ -15,9 +15,8 @@
 - Einsatzgebiete
 - Technische Details
 - Beispiele aus dem .Net-Framework
-- Vor- & Nachteile
 - IEnumerable & IEnumeration
-- Referenzen
+- Explizit vs Impliziet
 
 ## Definition
 
@@ -57,7 +56,7 @@ Schnittstellen unterstützen das Konzept des Information Hiding und sollten mög
 
 - Eine Schnittstelle enthält keinen Konstruktor
 
-- Eine Schnittstelle kann von einer oder mehreren Schnittstellen erben
+- Eine Schnittstelle kann von einer oder mehreren Schnittstellen erweitert werden
 
 - Member sind immer öffentlich und können keine Zugriffmodifizerer enthalten
 
@@ -95,7 +94,7 @@ Interfaces können:
 - Eigenschaften
 vorschreiben. Schnittstellen enthalten selbst keine Codeimplementierung, sondern nur abstrakte Definitionen.
 
-```
+``` Csharp
 public interface ICopy 
 {
   string Caption {get; set;};
@@ -111,7 +110,7 @@ Eine Schnittstelle ist wie ein Vertrag, den eine Klasse unterschreibt, sobald si
 Eine Klasse, die eine Schnittstelle implementiert, muss ausnahmslos jedes Mitglied der Schnittstelle übernehmen. 
 Eine zu implementierende Schnittstelle wird, getrennt durch einen Doppelpunkt, hinter dem Klassenbezeichner angegeben. In der Klasse werden alle `Member`, die aus der Schnittstelle stammen, mit den entsprechenden Anweisungen codiert.
 
-```
+```Csharp
 class Document : ICopy {
   public void Copy() {
     Console.WriteLine("Das Dokument wird kopiert.");
@@ -129,7 +128,7 @@ dass eine Schnittstelle ohne Dokumentation wertlos ist. Nur die Dokumentation gi
 
 Eine Klasse ist nicht nur auf die Implementierung einer Schnittstelle beschränkt, es dürfen – im Gegensatz zur Vererbung – auch mehrere sein, die durch ein Komma voneinander getrennt werden.
 
-```
+``` Csharp
 class Document : ICopy, IDisposable {
   [...]
 }
@@ -153,7 +152,7 @@ Dadurch wird sichergestellt, dass alle Klassen die selben Funktionalitäten aufw
 
 ### Bsp.:
 
-```
+``` Csharp
    public DoSomething(IAny parameter){
        parameter.Action();
    }
@@ -182,7 +181,7 @@ Der Parameter verlangt, dass das ihm übergebene Argument ein Objekt ist, das di
 ## Beispiele aus dem .Net-Framework
 
 ### Beispiel 1:
-```
+``` Csharp
 using System;
 namespace Übung 1
 {
@@ -228,7 +227,7 @@ namespace Übung 1
 
 
 ### Beispiel 2:
-```
+``` Csharp
 using System;
 namespace Übung 2
 {
@@ -312,17 +311,17 @@ namespace Übung 2
 - IComparable 
   - Die Rolle von IComparable besteht darin, eine Methode zum Vergleichen von zwei Objekten eines bestimmten Typs bereitzustellen.    Es ist erforderlich, wenn eine beliebige Sortierfunktion für das Objekt vorgesehen ist.
 
-```
+``` Csharp
 int IComparable.CompareTo(object obj)
 {
    car c=(car)obj;
    return String.Compare(this.make,c.make);
 }
-```
+``` 
 - IComparer 
   - Die Rolle von IComparer besteht darin, zusätzliche Vergleichs Mechanismen bereitzustellen. Beispielsweise kann die                Reihenfolge der Klasse für mehrere Felder oder Eigenschaften, aufsteigende und absteigende Reihenfolge auf demselben Feld oder    beides bereitstellen.
 
-```
+``` Csharp
 private class sortYearAscendingHelper : IComparer
 {
    int IComparer.Compare(object a, object b)
@@ -351,7 +350,7 @@ Um die Schnittstelle `IEnumerable` verwenden zu können, wird die Schnittstelle 
 IEnumerable ist eine Schnittstelle, die eine einzelne Methode `GetEnumerator()` definiert, die eine IEnumerator-Schnittstelle     zurückgibt.
 Dies funktioniert für den schreibgeschützten Zugriff auf eine Collection, die implementiert, dass IEnumerable mit einer           `foreach-Schleife ` verwendet werden kann.
 
-```
+``` Csharp
 class Items : IEnumerable
 {
     private string[] ItemList = new string[10];
@@ -387,7 +386,7 @@ Ein Property:
   - GIbt das aktuelle Element zurückzugeben.
 
 
-```
+``` Csharp
 class ItemEnumerator : IEnumerator
 {  
     int index=0;
@@ -412,7 +411,7 @@ class ItemEnumerator : IEnumerator
 }
 ```
 - ### Verwendung
-```
+``` Csharp
 class Program
 {
     static void Main(string[] args)
@@ -434,7 +433,76 @@ class Program
 - ### Merke:
 Eine Collection wie z.B. (List, Dictionary, Array usw.) können die `foreach-Schleife` verwenden, da sie selbst den Vertrag `IEnumerable` unterzeichnet haben.
 
+## Explizit vs Implizit
 
-## Vor- & Nachteile
+Wenn eine Klasse zwei Schnittstellen implementiert, die einen Member mit derselben Signatur enthalten, bewirkt die Implementierung dieses Members in der Klasse, dass beide Schnittstellen diesen Member als ihre Implementierung verwenden.
 
-## Referenzen
+
+``` csharp
+  public interface IControl
+  {
+      void Paint();
+  }
+  public interface ISurface
+  {
+      void Paint();
+  }
+  public class SampleClass : IControl, ISurface
+  {
+      // Both ISurface.Paint and IControl.Paint call this method.
+      public void Paint()
+      {
+          Console.WriteLine("Paint method in SampleClass");
+      }
+  }
+```
+### Aufruf:
+
+``` csharp
+  SampleClass sample = new SampleClass();
+  IControl control = sample;
+  ISurface surface = sample;
+
+  // The following lines all call the same method.
+  sample.Paint();
+  control.Paint();
+  surface.Paint();
+```
+
+Wenn zwei Schnittstellenmember nicht dieselbe Funktion durchführen, führt dies zu einer fehlerhaften Implementierung von einer oder beiden Schnittstellen. 
+
+### Lösung:
+
+``` csharp
+public class SampleClass : IControl, ISurface
+{
+    void IControl.Paint()
+    {
+        System.Console.WriteLine("IControl.Paint");
+    }
+    void ISurface.Paint()
+    {
+        System.Console.WriteLine("ISurface.Paint");
+    }
+}
+```
+
+#### Explizit:
+    
+  ``` Csharp
+  public void CopyTo(Array array, int index)
+  {
+    throw new NotImplementedException();
+  }
+  ```
+
+
+#### Implizit:
+
+``` csharp
+  void ICollection.CopyTo(Array array, int index)
+  {
+      throw new NotImplementedException();
+  }
+```
+
