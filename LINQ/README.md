@@ -303,7 +303,6 @@ static void Main(string[] args)
 }
 ```
 ![vs](https://github.com/jfuerlinger/maturavorbereitung-2020_21/blob/topic/LINQ-Kolev/LINQ/img/linq.png "groupBy results")  
-(C:\temp\maturavorbereitung-2020_21\LINQ\img\linq.png)  
 #### __Elementoperatoren__  
 Enthält die zurückgegebene Datenmenge keine Datensätze und wir versuchen mit First() auf den ersten Element zuzugreifen, kommt es zum „Kurzschluß“. Zum Beispiel wenn Name Max nicht vorhanden:  
 ```sh
@@ -424,6 +423,3 @@ Lerman, Julia: Programming Entity Framework. 1st Edition, O’Reilly Media, Inc.
 #### Internet Quellen
 https://docs.microsoft.com/de-de/dotnet/api/system.linq?view=net-5.0  
 http://dotnetpattern.com/linq-query-method-syntax  
-
-
-
