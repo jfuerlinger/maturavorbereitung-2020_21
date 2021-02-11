@@ -53,13 +53,11 @@ Beispiel zu Polymorphie:
 ```csharp
 public abstract class Luftfahrzeug
 {
-    string abheben = " hebt ab.";
-
     public abstract void Start();
         
     public virtual string Abheben()
     {
-        return $"{abheben}";
+        return "abheben";
     }
 }
 
@@ -74,13 +72,13 @@ class Passagiermaschine : Luftfahrzeug
 
     public override string Abheben()
     {
-        return $"{passagiermaschine}" + base.Abheben();
+        return $"{passagiermaschine} {base.Abheben()}";
     }
 }
 
 public class Zeppelin : Luftfahrzeug
 {
-    string zeppeling = "Der Zeppelin";
+    string zeppelin = "Der Zeppelin";
 
     public override void Start()
     {
@@ -89,7 +87,7 @@ public class Zeppelin : Luftfahrzeug
 
     public override string Abheben()
     {
-        return $"{zeppelin}" + base.Abheben();
+        return $"{zeppelin} {base.Abheben()}";
     }
 }
 
@@ -104,7 +102,7 @@ public class Luftballon : Luftfahrzeug
 
     public override string Abheben()
     {
-        return string.Format($"{ballon}");
+        return ballon;
     }
 }
 
@@ -202,7 +200,7 @@ public class A
 
     public virtual string Method()
     {
-        return $"{auto}";
+        return auto;
     }
 }
 
@@ -214,24 +212,27 @@ Ein Auto
 public class B : A
 {
     string motorrad = "und ein Motorrad";
-    string fahrrad = "Es ist ein Fahrrad.");
+    string fahrrad = "Es ist ein Fahrrad.";
 
-    public override void Method()
+    public override void Method1()
     {
         // 1. Die Basismethode wird hier ergänzt
-        return base.Method() + $"{motorrad}";
-        
-        // oder
+        return $"{base.Method()} {motorrad}";
+    }
 
+    // oder
+
+    public override void Method2()
+    {
         // 2. Die Basismethode wird zu 100 % überschrieben
-        return string.Format($"{fahrrad}");
+        return fahrrad;
     }
 }
 
-# 1. Output
+#Output Method1
 Ein Auto und ein Motorrad.
 
-# 2. Output
+#Output Method2
 Es ist ein Fahrrad.
 ```
 </br>
