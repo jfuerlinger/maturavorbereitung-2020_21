@@ -302,8 +302,8 @@ static void Main(string[] args)
                 });
 }
 ```
-![vs](LINQ\img\linq.png "groupBy results")  
-![vs](C:\temp\maturavorbereitung-2020_21\LINQ\img\linq.png)  
+![vs](https://github.com/jfuerlinger/maturavorbereitung-2020_21/blob/topic/LINQ-Kolev/LINQ/img/linq.png "groupBy results")  
+(C:\temp\maturavorbereitung-2020_21\LINQ\img\linq.png)  
 #### __Elementoperatoren__  
 Enthält die zurückgegebene Datenmenge keine Datensätze und wir versuchen mit First() auf den ersten Element zuzugreifen, kommt es zum „Kurzschluß“. Zum Beispiel wenn Name Max nicht vorhanden:  
 ```sh
