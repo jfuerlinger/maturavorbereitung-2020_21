@@ -174,7 +174,7 @@ Interfaces werden bei eine Core Projekt, Persistence aber auch für Web Projekte
 | Tables          | Abstract Class                                                           | Interface                                                                 |
 | --------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
 | Prüfung         | Prüfung zur Komplierzeit                                                 | Prüfung zur Komplierzeit                                                  |
-| Implementierung | Können implementierungen enthalten                                       | Enthalten keine implementierungen (lediglich deklarationen)               |
+| Implementierung | Können Implementierungen enthalten                                       | Enthalten keine Implementierungen (lediglich deklarationen)               |
 | Vererbung       | Eine Klasse kann nur von einer Abstrakten Klasse erben                   | Eine Klasse kann jedoch eine beliebige Anzahl an Interface implementieren |
 | Access Modifier | Abstrakte Klassenmember können Zugriffsmodifier enthalten                | Alle Interface Member sind automatisch public                             |
 | Erlaubte Member | Fields, Properties, Construcotrs, Destructors, Methods, Events, Indexers | Properties, Methods, Events, Indexers                                     |
