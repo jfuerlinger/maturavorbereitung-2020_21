@@ -142,6 +142,8 @@ Beim `Contract-First-Design` werden zuerst die Funkionalitäten des Interfaces d
 - Konzept, um qualitativ hochwertige Implementierung zu erstellen
 - Erlaubt Verwendung unterschiedlicher Implementierungen
 - Klassenname und Vererbungshierarchie der konkreten Implementierung ist egal
+- Erhöt die Testbarkeit, da einzelne Koponenten wie z.B. ein Repository leicht gefaked werden können.
+  - Statt Zugriff auf die DB nutzt die Fake-Implementierung des Repos nur ein internes Array für die Datenspeicherung.
 
 
 Dadurch wird sichergestellt, dass alle Klassen die selben Funktionalitäten aufweisen, den selben Vertrag "unterschreiben".
