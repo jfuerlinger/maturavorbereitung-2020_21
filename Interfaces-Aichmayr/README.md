@@ -81,9 +81,12 @@ Schnittstellen unterstützen das Konzept des Information Hiding und sollten mög
 
 - Interfaces legen Funktionalität fest, ohne auf die Implementierung einzugehen
   
-- Beim Implementieren der Klasse ist die spatere Verwendung nicht von Bedeutung, sondern nur die bereitzustellende Funktionälitat
+- Beim Implementieren der Klasse ist die spaetere Verwendung nicht von Bedeutung, sondern nur die bereitzustellende Funktionälitat
   
 - Ein Anwender (eine andere Klasse) interessiert sich nicht für die Implementierungsdetails, sondern für die Funktionalität
+
+- Mit einem Interface wird eine Typesicherheit erreicht
+  - Übergabeparameter (z.B. IAnimal animal)
 
 ## Schnittstellendefinition
 
