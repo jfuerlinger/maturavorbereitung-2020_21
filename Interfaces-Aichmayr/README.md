@@ -94,7 +94,7 @@ Interfaces können:
 - Eigenschaften
 vorschreiben. Schnittstellen enthalten selbst keine Codeimplementierung, sondern nur abstrakte Definitionen.
 
-``` Csharp
+``` C#
 public interface ICopy 
 {
   string Caption {get; set;};
@@ -110,7 +110,7 @@ Eine Schnittstelle ist wie ein Vertrag, den eine Klasse unterschreibt, sobald si
 Eine Klasse, die eine Schnittstelle implementiert, muss ausnahmslos jedes Mitglied der Schnittstelle übernehmen. 
 Eine zu implementierende Schnittstelle wird, getrennt durch einen Doppelpunkt, hinter dem Klassenbezeichner angegeben. In der Klasse werden alle `Member`, die aus der Schnittstelle stammen, mit den entsprechenden Anweisungen codiert.
 
-```csharp
+```C#
 class Document : ICopy {
   public void Copy() {
     Console.WriteLine("Das Dokument wird kopiert.");
@@ -128,7 +128,7 @@ dass eine Schnittstelle ohne Dokumentation wertlos ist. Nur die Dokumentation gi
 
 Eine Klasse ist nicht nur auf die Implementierung einer Schnittstelle beschränkt, es dürfen – im Gegensatz zur Vererbung – auch mehrere sein, die durch ein Komma voneinander getrennt werden.
 
-``` Csharp
+``` C#
 class Document : ICopy, IDisposable {
   [...]
 }
@@ -152,7 +152,7 @@ Dadurch wird sichergestellt, dass alle Klassen die selben Funktionalitäten aufw
 
 ### Bsp.:
 
-``` Csharp
+``` C#
    public DoSomething(IAny parameter){
        parameter.Action();
    }
@@ -183,7 +183,7 @@ Interfaces werden bei eine Core Projekt, Persistence aber auch für Web Projekte
 ## Beispiele aus dem .Net-Framework
 
 ### Beispiel 1:
-``` Csharp
+``` C#
 using System;
 namespace Uebung 1
 {
@@ -229,7 +229,7 @@ namespace Uebung 1
 
 
 ### Beispiel 2:
-``` Csharp
+``` C#
 using System;
 namespace Uebung 2
 {
@@ -313,7 +313,7 @@ namespace Uebung 2
 - IComparable 
   - Die Rolle von IComparable besteht darin, eine Methode zum Vergleichen von zwei Objekten eines bestimmten Typs bereitzustellen.    Es ist erforderlich, wenn eine beliebige Sortierfunktion für das Objekt vorgesehen ist.
 
-``` Csharp
+``` C#
 int IComparable.CompareTo(object obj)
 {
    car c=(car)obj;
@@ -323,7 +323,7 @@ int IComparable.CompareTo(object obj)
 - IComparer 
   - Die Rolle von IComparer besteht darin, zusätzliche Vergleichs Mechanismen bereitzustellen. Beispielsweise kann die                Reihenfolge der Klasse für mehrere Felder oder Eigenschaften, aufsteigende und absteigende Reihenfolge auf demselben Feld oder    beides bereitstellen.
 
-``` Csharp
+``` C#
 private class sortYearAscendingHelper : IComparer
 {
    int IComparer.Compare(object a, object b)
@@ -352,7 +352,7 @@ Um die Schnittstelle `IEnumerable` verwenden zu können, wird die Schnittstelle 
 IEnumerable ist eine Schnittstelle, die eine einzelne Methode `GetEnumerator()` definiert, die eine IEnumerator-Schnittstelle     zurückgibt.
 Dies funktioniert für den schreibgeschützten Zugriff auf eine Collection, die implementiert, dass IEnumerable mit einer           `foreach-Schleife ` verwendet werden kann.
 
-``` Csharp
+``` C#
 class Items : IEnumerable
 {
     private string[] ItemList = new string[10];
@@ -388,7 +388,7 @@ Ein Property:
   - GIbt das aktuelle Element zurückzugeben.
 
 
-``` Csharp
+``` C#
 class ItemEnumerator : IEnumerator
 {  
     int index=0;
@@ -413,7 +413,7 @@ class ItemEnumerator : IEnumerator
 }
 ```
 - ### Verwendung
-``` Csharp
+``` C#
 class Program
 {
     static void Main(string[] args)
@@ -440,7 +440,7 @@ Eine Collection wie z.B. (List, Dictionary, Array usw.) können die `foreach-Sch
 Wenn eine Klasse zwei Schnittstellen implementiert, die einen Member mit derselben Signatur enthalten, bewirkt die Implementierung dieses Members in der Klasse, dass beide Schnittstellen diesen Member als ihre Implementierung verwenden.
 
 
-``` csharp
+``` C#
   public interface IControl
   {
       void Paint();
@@ -460,7 +460,7 @@ Wenn eine Klasse zwei Schnittstellen implementiert, die einen Member mit derselb
 ```
 ### Aufruf:
 
-``` csharp
+``` C#
   SampleClass sample = new SampleClass();
   IControl control = sample;
   ISurface surface = sample;
@@ -475,7 +475,7 @@ Wenn zwei Schnittstellenmember nicht dieselbe Funktion durchführen, führt dies
 
 ### Lösung:
 
-``` csharp
+``` C#
 public class SampleClass : IControl, ISurface
 {
     void IControl.Paint()
@@ -491,7 +491,7 @@ public class SampleClass : IControl, ISurface
 
 #### Explizit:
     
-  ``` Csharp
+  ``` C#
   public void CopyTo(Array array, int index)
   {
     throw new NotImplementedException();
@@ -501,7 +501,7 @@ public class SampleClass : IControl, ISurface
 
 #### Implizit:
 
-``` csharp
+``` C#
   void ICollection.CopyTo(Array array, int index)
   {
       throw new NotImplementedException();
