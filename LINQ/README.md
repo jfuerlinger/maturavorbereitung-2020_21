@@ -25,10 +25,7 @@ Da IQueryable <T> von IEnumerable <T> abgeleitet ist, ist Verwendung von LINQ to
 * Erweiterungsmethoden
 * Lambda-Ausdrücke
 * Anonyme Typen
-* Objekt- und Collectioninitialisierer
-* Schnittstellen
-* Expression-Trees
-* Iteratoren
+* Objekt- und Collectioninitialisierer  
 ### Typinferenz
 Unter Typinferenz versteht man ein Sprachmerkmal welches es erlaubt, dass der Datentyp lokaler Variablen bei der Deklaration vom Compiler automatisch ermittelt wird, ohne dass explizit der Typ angegeben werden muss. Hier kommt ins Spiel der Schlüsselwort „var“.
 #### Beispiel:
