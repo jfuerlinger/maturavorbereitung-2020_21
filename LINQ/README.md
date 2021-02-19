@@ -41,7 +41,7 @@ kann man einfach schreiben
 ### Lambda-Ausdruck
 Ein Lambda-Ausdruck ist eine anonyme Funktion, von der ein einzelner Wert berechnet und zurückgegeben wird. Im Gegensatz zu benannten Funktionen kann ein Lambda-Ausdruck gleichzeitig definiert und ausgeführt werden. Der Rückgabetyp wird durch den Typ des rechtsstehenden Ausdrucks bestimmt. 
 #### Beispiel:
-```sh
+```csharp
 public Delegate double MPlyDelegate (double x, double y);   
 MPlyDelegate mply = (double x, double y) => x * y;
 string test = mply(5.5, 4.3).ToString();
@@ -60,7 +60,7 @@ zurückliefern.
 ### Objekt-Initialisierer
 Durch Objekt-Initialisierer wird es möglich, ähnlich wie bei der Initialisierung von Attributen, Felder und Eigenschaften einer Klasse (oder Struktur) auf Anfangswerte zu setzen.  
 #### Beispiel:
-```sh
+```csharp
 public class Customer 
 {   
    string Name; 
@@ -70,7 +70,7 @@ public class Customer
 ```
 
 Das Erzeugen und Initialisieren einer Instanz von Customer bedarf keines speziellen Konstruktors:  
-```sh
+```csharp
 var kunde = new Customer
 {
    Name = Max,
@@ -88,7 +88,7 @@ Der Ausdruck
 `new { Length = 100, Width = 50 }`  
 erzeugt ein Objekt der folgenden anonymen Klasse
 
-```sh
+```csharp
 class ??? 
 {
    public int Length { get; private set; }  
@@ -128,12 +128,12 @@ Da diese Erweiterungsmethoden in der Bibliotheksklasse _System.Linq.Enumerable_ 
 müssen wir den _Namensraum System.Linq_ importieren:  
 > using System.Linq;  
 #### Beispiel:  
-```sh
+```csharp
 var result = from s in students  
    where s.Field == “Computing”  
    select new { s.Name, s.Id };  
 ```
-```sh
+```csharp
 var result = students  
   .Where(s => s.Field == “Computing”)  
   .Select(s => new { s.Name, s.Id });  
@@ -163,7 +163,7 @@ Der Operator macht die Abfrageergebnisse über ein Objekt verfügbar, welches *I
 Bei einem Zugriff auf eine Datenbank, kann der Operator *Select*, die Menge der abgerufenen Daten reduzieren, wodurch die Last auf dem Datenbank Server verringert werden kann.  
 *__SelectMany__*  
 Der *SelectMany* LINQ-Operator wird in Abfrageausdrücken verwendet, die mehrere Ausgabeelements zurückliefern.  
-```sh
+```csharp
 internal class Student
 {
     public int ID { get; set; }
@@ -208,7 +208,7 @@ __ThenBy/ThenByDescending__
 Diese Operatoren verwendet man, wenn nacheinander nach mehreren Schlüsseln sortiert werden soll. Da
 ThenBy und ThenByDescending nicht auf den Typ IEnumerable(Of T), sondern nur auf den Typ IOrdered-Sequence(Of T) anwendbar sind, können diese Operatoren nur im Anschluss an OrderBy/OrderByDescending
 eingesetzt werden. 
-```sh 
+```csharp
 List<Student> students = new List<Student>();
 students.Add(new Student { Id = 1, Name = "Rudi", Rank = 1, Age = 39 });
 students.Add(new Student { Id = 2, Name = "Kurt", Rank = 1, Age = 32 });
@@ -233,7 +233,7 @@ Dieser Operator kommt dann zum Einsatz, wenn das Abfrageergebnis in gruppierter 
 *GroupBy* wählt die gewünschten Schlüssel-Elemente-Zuordnungen aus der abzufragenden Auflistung aus.  
 #### Beispiel:  
 Zuerst werden 2 Klassen definiert:
-```sh
+```csharp
 	public class Wagen
 	{
 		public int Length { get; set; }
@@ -245,7 +245,7 @@ Zuerst werden 2 Klassen definiert:
 		public List<Wagen> Wagens { get; set; }
 	}
 ```  
-```sh
+```csharp
 static void Main(string[] args)
 {
     List<Zug> zugs = new List<Zug>();
@@ -305,7 +305,7 @@ static void Main(string[] args)
 ![vs](https://github.com/jfuerlinger/maturavorbereitung-2020_21/blob/topic/LINQ-Kolev/LINQ/img/linq.png "groupBy results")  
 #### __Elementoperatoren__  
 Enthält die zurückgegebene Datenmenge keine Datensätze und wir versuchen mit First() auf den ersten Element zuzugreifen, kommt es zum „Kurzschluß“. Zum Beispiel wenn Name Max nicht vorhanden:  
-```sh
+```csharp
 var teachers = Teachers
    .Where(t => t.Name == “Max”)
    .Select(t)
@@ -342,7 +342,7 @@ Es kann wie folgt erzeugt werden:
 
 Wir können aber auch geschachtelte Elemente erzeugen, wobei jedes Element Attribute
 haben kann, die durch *XAttribute* repräsentiert werden, z.B.:  
-```sh
+```csharp
 XElement e = new XElement(“student”,
 new XAttribute(“id”, 91),
 new XElement(“name”, “Max”),
@@ -352,7 +352,7 @@ new XElement(“field”, “IT“),
 Wenn wir das erzeugte Element mittels  
 > Console.WriteLine(e); 
  ausgeben, erhalten wir:  
-```sh
+```csharp
 <student id=“91”>
   <name>Max</name>
   <field>IT</field>
