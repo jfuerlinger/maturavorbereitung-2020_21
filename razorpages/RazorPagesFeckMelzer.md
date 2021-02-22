@@ -34,7 +34,7 @@ Jede Seite (Page) unserer Website ist durch zwei Files repräsentiert
 Beispiel: 
 Wir erstellen eine Website für eine Bäckerei die Online Bestellungen verarbeiten soll. Wenn ein User die Website besucht, sieht er eine Seite die ein Menü und ein Formular zur Bestellung beinhaltet. Die Darstellung des Menüs und des Formulars wird in der view-page definiert. Wie das Menü beim Navigieren und das Formular beim Eingeben der Daten reagiert, wird im zugehörigen page-model definiert.
 
-![Auszug "Solution".Web Project Architecture](\images\architecture.PNG)
+![Auszug "Solution".Web Project Architecture](images/architecture.PNG)
 
 ## Routing
 Routing ist das System, das dafür zuständig ist, URL's den zugehörigen Razorpages zuzuordnen. Wie die meisten "pagecentric" Frameworks ist das Routingsystem in ASP.NET Razor Pages darauf aufgebaut URL's File-Paths zuzuorden, ausgehend vom Root Ordner. (Siehe "Pages" Ordner im Image oberhalb)
