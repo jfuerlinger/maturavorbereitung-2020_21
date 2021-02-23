@@ -1,19 +1,19 @@
 ﻿# *Razor Pages ASP.NET Core*
 
 ## What are Razor Pages?
-Razor Pages sind eine alternative zum klassischen [MVC](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc?view=aspnetcore-5.0) (Model View Controller) - Pattern wenn es darum geht, serverseitige, page-focused Web-Applikationen zu erstellen. In junger Vergangenheit haben sich Razorpages in dem Bereich als Standard etabliert.
+Razor Pages sind eine alternative zum klassischen MVC (Model View Controller) - Pattern wenn es darum geht, serverseitige, page-focused Web-Applikationen zu erstellen. In junger Vergangenheit haben sich Razorpages in dem Bereich als Standard etabliert.
 ## Why not MVC?
 Das Razor Pages Framework verzichtet auf viele unnötige Zeremonien die nötig sind, um eine Anwendung in MVC zu erstellen, ist simpler aufgebaut und somit auch besser wartbar und übersichtlicher.
 Komponenten im MVC Framework haben immernoch ihren Nutzen, zum Beispiel wenn man Controller für RESTful APIs braucht.
 ## How does it work?
 Alle Razor-Files enden mit *.cshtml*. Die meisten dieser Files enthalten eine Mischung aus client- und serversided code, wenn dieser verarbeitet wird, entsteht HTML-Code der an den Browser geschickt wird.
 Diese Pages werden normalerweise "content pages" genannt, die im folgenden genauer beschrieben werden.
-### [Content Pages](https://www.learnrazorpages.com/razor-pages)
+### Content Pages
 Damit sich ein File als Content-Page verhält, sind 3 Eigenschaften unverzichtbar:
  - Es darf nicht mit einem "leading-underscore" benannt sein: ~~*_razorpage.cshtml*~~
  - Das File hat die Endung *.cshtml*
  - Das erste Zeile des Files startet mit *@page* (ähnliches verhalten .xml header)
-### [Different types of Razor files](https://www.learnrazorpages.com/razor-pages/files/)
+### Different types of Razor files
 Andere Razor Files haben einen "leading underscore" im Namen, welcher häufig dafür benutzt wird um partial pages zu benennen. Die drei Folgenden Files haben aber bestimmte Funktionen innerhalb der Razor Pages Applikation.
  
  **_Layout.cshtml**
@@ -25,7 +25,7 @@ Beinhaltet Code, der nach jedem Code in sämtlichen content-pages im selben Ordn
 **_ViewImports.cshtml**
 Stellt Directives global zur Verfügung, in dem das _ViewImports.cshtml File im root-Folder der Anwendung platziert wird. Alle Razor-Pages im Projekt, die hierachisch darunterliegen haben auf den Inhalt Zugriff.
 
-**[Partial Pages](https://www.learnrazorpages.com/razor-pages/partial-pages)**
+**Partial Pages**
 Partial Pages oder Views sind Razor-Files die teile von HTML und server-side code beinhalten. Sie werden benutzt, um komplexe Sachverhalte aufzuteilen und vorallem um in Teams die Aufgabenteilung zu erleichtern. (Work units)
 __________
 ## Grundlegende Architektur
