@@ -15,12 +15,16 @@ Damit sich ein File als Content-Page verhält, sind 3 Eigenschaften unverzichtba
  - Das erste Zeile des Files startet mit *@page* (ähnliches verhalten .xml header)
 ### [Different types of Razor files](https://www.learnrazorpages.com/razor-pages/files/)
 Andere Razor Files haben einen "leading underscore" im Namen, welcher häufig dafür benutzt wird um partial pages zu benennen. Die drei Folgenden Files haben aber bestimmte Funktionen innerhalb der Razor Pages Applikation.
+ 
  **_Layout.cshtml**
 Das _Layout.cshtml File fungiert als Template für alle content-pages die es referenzieren.  Es beinhalten normalerweise header, footer, navigation und so weiter. Typischerweise beinhaltet das _Layout.cshtml im \<head> auch globalen Styling-Referenzén (CSS). Möchte man also den Style der Anwendung anpassen, so muss man oft nur im_Layout.cshtml Anpassungen vornehmen. 
+
 **_ViewStart.cshtml**
 Beinhaltet Code, der nach jedem Code in sämtlichen content-pages im selben Ordner oder in Subordnern ausgeführt wird. 
+
 **_ViewImports.cshtml**
 Stellt Directives global zur Verfügung, in dem das _ViewImports.cshtml File im root-Folder der Anwendung platziert wird. Alle Razor-Pages im Projekt, die hierachisch darunterliegen haben auf den Inhalt Zugriff.
+
 **[Partial Pages](https://www.learnrazorpages.com/razor-pages/partial-pages)**
 Partial Pages oder Views sind Razor-Files die teile von HTML und server-side code beinhalten. Sie werden benutzt, um komplexe Sachverhalte aufzuteilen und vorallem um in Teams die Aufgabenteilung zu erleichtern. (Work units)
 __________
