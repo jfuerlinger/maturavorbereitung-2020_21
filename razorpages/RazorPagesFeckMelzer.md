@@ -213,6 +213,7 @@ Aufgrund der Features und Funktionalität, ist die PageModel Klasse eine Kombina
 Das Page Controller Pattern ist ein eins-zu-eins mapping zwischen Pages und deren Controllern. Wie vorher schon erwähnt hat also eine Page immer einen Controller, und umgekehrt.
 ### View Models
 In RazorPages, das PageModel ist ebenso ein ViewModel. Deshalb wird bei RazorPages oft als MVVM Pattern beschrieben. (Model View ViewModel) 
+
 ![MVVM Pattern explained](images/MVVMPattern.png)
 
 ## Tag Helper
@@ -237,22 +238,173 @@ Tag Helper sind wiederverwendbare Komponenten um HTML in RazorPages automatisch 
 
 ### Anchor tag helper
 Der Anchor tag helper bezieht sich auf den AnchorTag in HTML (<a>) welcher genutzt wird um Links in HTML darzustellen.
+
+Er generiert Url's aufgrund des Page-Namens, die Url wird dann Großgeschrieben:
+~~~
+<a asp-page="page">Click</a>
+ wird zu
+<a href="/Page">Click</a>
+~~~
+Falls nicht gewünscht wird, dass die generierte Url großgeschrieben wird, kann das in den RouteOptions eingestellt werden:
+~~~
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddMvc();
+    services.Configure<RouteOptions>(options =>
+    {
+        options.LowercaseUrls = true;
+    });
+}
+~~~
 ### Cache tag helper
 Der Cache tag helper erlaubt es Regionen einer RazorPage im Speicher des Servers zu cachen. Diese Funktion wird hauptsächlich benutzt um die Performance der Website zu erhöhen.
+Er ist per default immer aktiviert, kann aber an bestimmten Tagen, im Beispiel Sonntags, deaktiviert werden:
+~~~
+<cache enabled="DateTime.Now.DayOfWeek != DayOfWeek.Sunday">@DateTime.Now</cache>
+~~~
+Falls keine Werte für das expires Attribut angegeben werden, cached er alles bis der memory gecleared wird. Man kann dieses expires attribut folgendermaßen setzen (In diesem Fall wird das Item 1 Stunde gespeichert) :
+~~~
+<cache expires-after="TimeSpan.FromHours(1)">@DateTimeNow</cache>
+~~~
 ### Environment tag helper
 Der Environment tag helper erlaubt es, verschiedene Inhalte abhängig von deren aktuellen Werten zu render und wird genutzt, um CSS oder JS Files zu inkludieren.
+Beispiel:
+~~~
+<environment names="Development">            
+    <link rel="stylesheet" href="~/css/style1.css" />
+    <link rel="stylesheet" href="~/css/style2.css" />
+</environment>
+<environment names="Staging, Test, Production">
+    <link rel="stylesheet" href="~/css/style.min.css" />
+</environment>
+~~~
 ### Form Action tag helper
 Der Form Action tag helper erlaubt es ein "formaction" attribut einem Element hinzuzufügen, und wird bei Buttons und Inputs verwendet.
+Der folgende Code leitet die form zu der Index-Action des HomeControllers weiter wenn der input oder button selected sind:
+~~~
+<form method="post">
+    <button asp-controller="Home" asp-action="Index">Click Me</button>
+    <input type="image" src="..." alt="Or Click Me" asp-controller="Home" asp-action="Index">
+</form>
+~~~
+Falls die Ziel-Url mehrere route-parameter enthält, können diese folgendermaßen dem all-route-data parameter übergeben werden: (gilt allgemein)
+~~~
+@{   
+    var d = new Dictionary<string, string>
+        {
+           { "key1", "value1" },
+           { "key2", "value2" }
+        };
+}
+<button asp-all-route-data="d">Submit</button>
+~~~
 ### Form Tag Helper
 Der Form Tag Helper rendert ein "action" Attribut innerhalb eines Form Elements.
+Beispiel:
+Generiert aus: 
+~~~
+<form asp-controller="Demo" asp-action="Register" method="post">
+    <!-- Input and Submit elements -->
+</form>
+~~~
+folgendes:
+~~~
+<form method="post" action="/Demo/Register">
+    <!-- Input and Submit elements -->
+    <input name="__RequestVerificationToken" type="hidden" value="<removed for brevity>">
+</form>
+~~~
+Submit to Route Beispiel:
+~~~
+public class HomeController : Controller
+{
+    [Route("/Home/Test", Name = "Custom")]
+    public string Test()
+    {
+        return "This is the test page";
+    }
+}
+~~~
 ### Image Tag Helper
 Der Image Tag Helper bezieht sich auf das <img> Element in HTML und erlaubt die Versionierung von Image-Files.
+Generiert aus: 
+~~~
+<img src="~/images/asplogo.png" asp-append-version="true">
+~~~
+folgendes:
+~~~
+<img src="/images/asplogo.png?v=Kl_dqr9NVtnMdsM2MUg4qthUnWZm5T1fCEimBPWDNgM">
+~~~
 ### Input Tag Helper
 Der Input Tag Helper generiert "name" und "id" Attribute basierend auf das PageModel Property dem er zugewiesen ist. Außerdem unterstützt dieser somit client-sided validation.
+Beispiel:
+Wir haben folgende Klasse:
+~~~
+public class Member
+{
+    public int PersonId { get; set; }
+    public string Name { get; set; }
+    [EmailAddress]
+    public string Email { get; set; }
+    [DataType(DataType.Password)]
+    public string Password { get; set; }
+    [DataType(DataType.PhoneNumber)]
+    public string Telephone { get; set; }
+    [Display(Name="Date of Birth")]
+    public DateTime DateOfBirth { get; set; }
+    public decimal Salary { get; set; }
+    [Url]
+    public string Website { get; set; }
+    [Display(Name="Send spam to me")]
+    public bool SendSpam { get; set; }
+    public int? NumberOfCats { get; set; }
+    public IFormFile Selfie { get; set; }
+}
+~~~
+Die wir als Property einem PageModel hinzufügen:
+~~~
+public class RegisterModel : PageModel
+{
+    [BindProperty]
+    public Member Member { get; set; }
+    public void OnGet()
+    {
+    }
+}
+~~~
+So werden dann die Properties des Models zu input tag helpers im Razor file die dann benutzt werden können:
+~~~
+<form method="post">
+    <input asp-for="Member.PersonId" /><br />
+    <input asp-for="Member.Name" /><br />
+    <input asp-for="Member.Email" /><br />
+    <input asp-for="Member.Password" /><br />
+    <input asp-for="Member.Telephone" /><br />
+    <input asp-for="Member.Website" /><br />
+    <input asp-for="Member.DateOfBirth" /><br />
+    <input asp-for="Member.Salary" /><br />
+    <input asp-for="Member.SendSpam" /><br />
+    <input asp-for="Member.NumberOfCats" /><br />
+    <input asp-for="Member.Selfies" /><br />
+    <button>Submit</button>
+</form>
+~~~
 ### Label Tag Helper
 Der Label Tag Helper generiert passende "for" Attribut Values basierend auf dem PageModel Property dem er zugewiesen ist. Er wird in Verbindung mit dem Input Tag Helper verwendet.
+Nehmen wir an das PageModel hat ein Property "Email" so wird:
+~~~
+<label asp-for="Email"></label>
+<label asp-for="Email">MailAdress</lagel>
+~~~
+zu folgendem gerendert:
+~~~
+<label for="Email">Email</label>
+<label for="MailAdress">MailAdress</label> (override) 
+~~~
+Zu beachten! Das </lagel> closing tag ist mandatory!
 ### Link Tag Helper
 Der Link Tag Helper wird benutzt um links dynamisch zu den CSS Files zu generieren, beziehungsweise um fallbacks zu generieren falls das Zielfile nicht erreichbar ist. (z.B.: wenn das Zielfile remote gelagert ist und aus irgendeinem Grund nicht verfügbar ist)
+(nur mit CDN Version von CSS verwendbar)
 ### Options Tag Helper
 Der Options Tag Helper wird in Verbindung mit dem Select Tag Helper verwendet und hat zwei Verwendungszwecke:
 ~~~
@@ -260,16 +412,139 @@ Der Options Tag Helper wird in Verbindung mit dem Select Tag Helper verwendet un
 
 2. Falls eine der Option Values, die manuell hinzugefügt wurden dem Select Tag Helper "for" Attribut gleichen, wird dieser als "selected" gesetzt.
 ~~~
+Das erste Beispiel zeigt eine default option die händisch zum select tag helper hinzugefügt wurde. Nehmen wir an wir haben ein simples PageModel mit einem Property "Items", welches eine Collection von SelectListItem darstellt, die zu einem select tag helper hinzugefügt werden soll. Die Optionen sind die Nummern 1 bis 3. Außerdem hat das PageModel ein Property "Number", welches das selektierte Item repräsentiert:
+~~~
+public class TaghelpersModel : PageModel
+{
+    public List<SelectListItem> Items => 
+        Enumerable.Range(1, 3).Select(x => new SelectListItem {
+            Value = x.ToString(),
+            Text = x.ToString()
+        }).ToList();
+    public int Number { get; set; }
+    public void OnGet()
+    {
+ 
+    }
+}
+~~~
+Weiters haben wir einen select Tag helper mit einem Option Tag Helper ohne Value:
+~~~
+<select asp-for="Number" asp-items="Model.Items">
+    <option value="">Pick one</option>
+</select>
+~~~
+Das resultiert in folgenden generierten HTML code:
+~~~
+<select data-val="true" data-val-required="The Number field is required." id="Number" name="Number">
+    <option value="">Pick one</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+</select>
+~~~
 ### Partial Tag Helper
 Der Partial Tag Helper wird benutzt um die Html.Partial und Html.RenderPartial Methoden zu ersetzen und Partial Pages einzubinden.
+Wird benutzt, um partiellen Content asynchron zu laden:
+Das folgende Beispiel sucht _MyPartial.cshtml in Pages, Pages/Shared und Views/Shared:
+~~~
+<partial name="_MyPartial" ... />
+~~~
 ### Script Tag Helper
 Die Aufgabe des Script Tag Helpers ist es, links dynamisch zu den Script Files und Fallbacks zu generieren.
 ### Select Tag Helper
 Die Aufgabe des Select Tag Helpers ist es, HTML "select" Elemente mit den generierten Optionen der SelectListItem Obejcts zu rendern, welche über den Options Tag Helper definiert wurden.
+
+#### Set Selected Item
+Das SelectListItem hat ein bool Property "Selected", welches benutzt wird um das selektierte Item zu setzen. Wird das gemacht, ist der Value des Propertys als selected gesetzt, vorausgesetzt es gibt ein Match in SelectListItem:
+~~~
+[BindProperty]
+public int Person Person { get; set; } = 3;
+public List<SelectListItem> People { get; set; }
+public void OnGet()
+{
+    People = new List<SelectListItem> {
+        new SelectListItem { Value = "1", Text = "Mike" },
+        new SelectListItem { Value = "2", Text = "Pete" },
+        new SelectListItem { Value = "3", Text = "Katy" },
+        new SelectListItem { Value = "4", Text = "Carl" }
+    };
+}
+~~~
+~~~
+<select asp-for="Person" asp-items="Model.People">
+    <option value="">Pick one</option>
+</select>
+~~~
+Das resultiert in folgenden generierten HTML code:
+~~~
+<select data-val="true" data-val-required="The Person field is required." id="Person" name="Person">
+    <option value="">Pick one</option>
+    <option value="1">Mike</option>
+    <option value="2">Pete</option>
+    <option selected="selected" value="3">Katy</option>
+    <option value="4">Carl</option>
+</select>
+~~~
+#### SelectList
+Man kann SelectList aus jeder Collection erstellen, allerdings müssen DataTextField und DataValueField korrekt gesetzt werden damit der select tag helper die Optionen richtig bindet:
+~~~
+public SelectList Options { get; set; }
+public void OnGet()
+{
+    Options = new SelectList(context.Authors, "AuthorId", "Name");
+}
+~~~
 ### Textarea Tag Helper
 Die Aufgabe des Textarea Tag Helpers ist es, "textarea" Elemente zu rendern um MultiLine Text aufnehmen zu könnnen.
+MainText Property:
+~~~
+[BindProperty, MaxLength(300)]
+public string MainText { get; set; }
+~~~
+wird folgendermaßen dem asp-for Attribut des tag helpers übergeben:
+~~~
+<textarea asp-for="MainText"></textarea>
+~~~
+und resultiert in folgenden generierten HTML code:
+~~~
+<textarea 
+    data-val="true" 
+    data-val-maxlength="The field MainText must be a string or array type with a maximum length of &#x27;300&#x27;." 
+    data-val-maxlength-max="300" 
+    id="MainText" 
+    name="MainText">
+~~~
 ### Validation Tag Helper
 Der Validation Tag Helper bezieht sich auf das "span" Element in HTML und wird benutzt, um Property-spezifische validation-error-messages zu rendern.
+Beispiel:
+~~~
+<span asp-validation-for="FirstName" class="myclass"></span>
+~~~
+wird zu folgendem generiertem HTML code:
+~~~
+<span class="myclass field-validation-valid" data-valmsg-for="FirstName" data-valmsg-replace="true"></span>
+~~~
 ### Validation Summary Tag Helper
 Der Validation Summary Tag Helper bezieht sich auf das "div" Element in HTML und wird benutzt, um eine Zusammenfassung von Form-validation errors zu rendern.
-
+Wird normalerweise "auf die Form draufgesetzt" um einzelne Items der Summary in einer ungeordneten Liste darzustellen:
+~~~
+<div class="validation-summary-errors" data-valmsg-summary="true">
+    <ul>
+        <li>The FirstName field is required.</li>
+        <li>The LastName field is required.</li>
+        <li>The DateOfBirth field is required.</li>
+    </ul>
+</div>
+~~~
+Man kann zusätzlichen Content vor der Summary List darstellen, indem man ihn zum Content des validation summary tag helpers hinzufügt:
+~~~
+<div asp-validation-summary="All">
+    <span>Please correct the following errors</span>
+</div>
+~~~
+Der zusätzliche Content ist immer sichtbar (per default), kann aber folgendermaßen "versteckt" werden:
+~~~
+.validation-summary-valid { display: none; }
+~~~
+Falls "None" als value für die "validation-summary" gesetzt wird, wird ein leeres <div> gerendert
