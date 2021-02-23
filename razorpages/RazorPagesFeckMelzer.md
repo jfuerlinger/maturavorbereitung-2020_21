@@ -213,6 +213,7 @@ Aufgrund der Features und Funktionalität, ist die PageModel Klasse eine Kombina
 Das Page Controller Pattern ist ein eins-zu-eins mapping zwischen Pages und deren Controllern. Wie vorher schon erwähnt hat also eine Page immer einen Controller, und umgekehrt.
 ### View Models
 In RazorPages, das PageModel ist ebenso ein ViewModel. Deshalb wird bei RazorPages oft als MVVM Pattern beschrieben. (Model View ViewModel) 
+![MVVM Pattern explained](images/MVVMPattern.PNG)
 
 ## Tag Helper
 Tag Helper sind wiederverwendbare Komponenten um HTML in RazorPages automatisch zu generieren. Tag Helpers beziehen sich dabei auf spezifische HTML Tags, im folgenden die meist genutzten.
