@@ -384,7 +384,7 @@ In der Startup Klasse wird die API konfgiguriert.
 Über die ConfigureServices Methode können diverse Dienste konfiguriert werden. Unter anderem UnitOfWork, Authentifizierung, Blob Service, Cors, usw.
 
 ## Route Attribute
-Durch das Route Attribut wir erreicht der jeweilige Request die gewünschte Ressource und Methode.
+Durch das Route Attribut erreicht der jeweilige Request die gewünschte Ressource und HTTP - Methode.
 Der nach außen sichtbare Controller Name stammt vom Controller Klassenname.
 
 Controller Klasse --> UserController
@@ -399,7 +399,7 @@ Die Route
 ```csharp
 "www.easyTicket.com/api/user" 
 ```
-verweist auf den User Controller und Ressource. 
+verweist auf den Controller und die Ressource von USER. 
 Die jeweilige Methode wird im Request Header festgelegt. 
 
 ## HTTP Attributes
