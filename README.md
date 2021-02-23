@@ -80,33 +80,33 @@ public class UserDto
 
 # 3. CLIENT
 
-Der Request kann von unterschiedlichsten Clients generiert werden. So kann eine Angluar Applikation einen Request über eine Login API von Microsoft absetzen 
+  - Der Request kann von unterschiedlichsten Clients generiert werden. So kann eine Angluar Applikation einen Request über eine Login API von Microsoft absetzen 
 oder eine WPF Anwendung auf eine SMS-API zugreifen. Die jeweilige Applikation generiert den Request an den Webserver mit der entsprechenden HTTP-Methode.
 Zu den Requestdaten wird ein Header angefügt, welcher Metadaten beinhaltet.
-Dieser beinhaltet folgende Inforamtionen:
-- Authorization --> beinhaltet den Token für die Authorizierung 
-- Accept --> Spezifiziert den Request bzw. Response Type. BSP. "application/json".
-- Client-request-ID --> Eindeutige Kennung des Requestes zur Nachverfolgung und Netzwerkanalyse
-- IF-Match --> Der If-Match-HTTP-Anforderungsheader macht die Anforderung abhängig. Bei GET- und HEAD-Methoden sendet der Server die angeforderte Ressource nur zurück, wenn sie mit einem der aufgelisteten ETags (Tag zur Vermeidung von Änderungen und Redundanz) übereinstimmt. Bei PUT und anderen nicht sicheren Methoden wird die Ressource nur in diesem Fall hochgeladen.
+Dieser beinhaltet unter anderem folgende Inforamtionen:
+    - Authorization --> beinhaltet den Token für die Authorizierung 
+    - Accept --> Spezifiziert den Request bzw. Response Type. BSP. "application/json".
+    - Client-request-ID --> Eindeutige Kennung des Requestes zur Nachverfolgung und Netzwerkanalyse
+    - IF-Match --> Der If-Match-HTTP-Anforderungsheader macht die Anforderung abhängig. Bei GET- und HEAD-Methoden sendet der Server die angeforderte Ressource nur zurück, wenn sie mit einem der aufgelisteten ETags (Tag zur Vermeidung von Änderungen und Redundanz) übereinstimmt. Bei PUT und anderen nicht sicheren Methoden wird die Ressource nur in diesem Fall hochgeladen.
 
-Die Responsedaten werden vom Server erstellt und werden auch inkl. Header zurückgeschickt.
+  - Die Responsedaten werden vom Server erstellt und werden auch inkl. Header zurückgeschickt.
 Der Responseheader besteht aus folgenden Informationen:
-- Accept --> Gleiche Funktionsweise wie beim Request
-- Request-Id --> Ist eine eindeutige Kennung für den Anruf, mit der die ID des Requestes sichergestellt wird. Im Falle einer Zeitüberschreitung sollte der Wiederholungsaufruf denselben Wert enthalten. Nach Erhalt einer Antwort sollte der Wert für den nächsten Anruf zurückgesetzt werden.
-- Client-Request-ID --> Gleiche Funktionsweise wie beim Request
-- x-ms-ags-diagnostic --> Diagnoseinformationen vom Serverdienst
-- Timestamp --> Zeitstempel, wann der Request eingetroffen ist
-- ETag --> Tag zur Vermeidung von Änderungen und Redundanz. (Request wird unter Übermittlung verändert)
+    - Accept --> Gleiche Funktionsweise wie beim Request
+    - Request-Id --> Ist eine eindeutige Kennung für den Anruf, mit der die ID des Requestes sichergestellt wird. Im Falle einer Zeitüberschreitung sollte der Wiederholungsaufruf denselben Wert enthalten. Nach Erhalt einer Antwort sollte der Wert für den nächsten Anruf zurückgesetzt werden.
+    - Client-Request-ID --> Gleiche Funktionsweise wie beim Request
+    - x-ms-ags-diagnostic --> Diagnoseinformationen vom Serverdienst
+    - Timestamp --> Zeitstempel, wann der Request eingetroffen ist
+    - ETag --> Tag zur Vermeidung von Änderungen und Redundanz. (Request wird unter Übermittlung verändert)
 
 ## CONTENT - TYPE
 
 ### Was ist der Content Type?
-Der Content Type, auch MIME-Type genannt, ist eine Angabe im Response Header des Webservers, in dem einem Browser mitgeteilt wird, um was für einen Typ Ressource es sich bei der übertragenen Datei handelt. Damit kann der Browser schneller arbeiten, da der Typ der Datei nicht erst, nach Ankunft der Datei, identifiziert werden muss.
+  - Der Content Type, auch MIME-Type genannt, ist eine Angabe im Response Header des Webservers, in dem einem Browser mitgeteilt wird, um was für einen Typ Ressource es sich bei der übertragenen Datei handelt. Damit kann der Browser schneller arbeiten, da der Typ der Datei nicht erst, nach Ankunft der Datei, identifiziert werden muss.
 
 ### Welche Content Typen gibt es?
-Es gibt eine Vielzahl an verschiedenen Content Typen, die alle dazu dienen, eine übermittelte Ressource zu kennzeichnen.
+  - Es gibt eine Vielzahl an verschiedenen Content Typen, die alle dazu dienen, eine übermittelte Ressource zu kennzeichnen.
 
-Der MIME-Type wird immer als eine Kombination aus zwei Informationen ausgespielt, die zum einen angibt um welchen Typ Medium es sich handelt und dann, was für ein Unter-Typ dieses Mediums es ist. Schematisch sieht das dann so aus:
+  - Der MIME-Type wird immer als eine Kombination aus zwei Informationen ausgespielt, die zum einen angibt um welchen Typ Medium es sich handelt und dann, was für ein Unter-Typ dieses Mediums es ist. Schematisch sieht das dann so aus:
 
 medientyp/subtyp
 
@@ -311,23 +311,23 @@ Ein gutes Beispiel hierfür ist, wenn eine mobile App YouTube-Videos über eine 
 
 ## Skalierbarkeit
 
-Die REST-API bietet eine hervorragende Skalierbarkeit. Da die Clients und Server voneinander getrennt sind, kann das Produkt vom Entwicklerteam problemlos skaliert werden.
+  - Die REST-API bietet eine hervorragende Skalierbarkeit. Da die Clients und Server voneinander getrennt sind, kann das Produkt vom Entwicklerteam problemlos skaliert werden.
 
 ## Integrität
 
-Es ist möglich, REST in vorhandene Websites zu integrieren, ohne die Website-Infrastruktur umzugestalten. So können Entwickler schneller arbeiten, anstatt eine Website von Grund auf neu zu überarbeiten. Alternativ können sie lediglich zusätzliche Funktionen hinzufügen.
+  - Es ist möglich, REST in vorhandene Websites zu integrieren, ohne die Website-Infrastruktur umzugestalten. So können Entwickler schneller arbeiten, anstatt eine Website von Grund auf neu zu überarbeiten. Alternativ können sie lediglich zusätzliche Funktionen hinzufügen.
 
 ## Flexibilität
 
-Entwickler können ohne Probleme auf andere Server migrieren oder Änderungen in der Datenbank vornehmen, vorausgesetzt, die Daten werden von jeder Anfrage korrekt gesendet. Die Trennung erhöht somit insgesamt die Flexibilität bei der Entwicklung.
+  - Entwickler können ohne Probleme auf andere Server migrieren oder Änderungen in der Datenbank vornehmen, vorausgesetzt, die Daten werden von jeder Anfrage korrekt gesendet. Die Trennung erhöht somit insgesamt die Flexibilität bei der Entwicklung.
 
 ## Unabhängigkeit
 
-Dank der Trennung zwischen Client und Server können mit dem REST-Protokoll Entwicklungen in den verschiedenen Bereichen eines Projekts problemlos autonom durchgeführt werden. Darüber hinaus ist die REST-API an die betriebliche Syntax und Plattform anpassbar und bietet die Möglichkeit, zahlreiche Umgebungen während der Entwicklung zu testen.
+  - Dank der Trennung zwischen Client und Server können mit dem REST-Protokoll Entwicklungen in den verschiedenen Bereichen eines Projekts problemlos autonom durchgeführt werden. Darüber hinaus ist die REST-API an die betriebliche Syntax und Plattform anpassbar und bietet die Möglichkeit, zahlreiche Umgebungen während der Entwicklung zu testen.
 
 ## Asynchrone Webservices
 
-Für bestimmte Webservices ist es wünschenswert, dass Anfrage und Antwort zeitlich entkoppelt sind. Da HTTP für diesen Fall keinerlei Mechanismen bietet, bleibt einzig die Option die Abarbeitungen der Anfragen als Serviceanbieter selbst zu verwalten und auf gezielte Anfrage der Nutzer weiterzuleiten.
+  - Für bestimmte Webservices ist es wünschenswert, dass Anfrage und Antwort zeitlich entkoppelt sind. Da HTTP für diesen Fall keinerlei Mechanismen bietet, bleibt einzig die Option die Abarbeitungen der Anfragen als Serviceanbieter selbst zu verwalten und auf gezielte Anfrage der Nutzer weiterzuleiten.
 Dies kann mit einer REST - API reibungslos implementiert werden.
 
 # NACHTEILE EINER REST-API
@@ -373,26 +373,29 @@ API Controller sind die jeweiligen HTTP Methoden, die nach Außen für eine Ress
 Ein Controller muss daher auch zugang zu der jeweiligen Ressource haben. Dies erfolgt meist über das UnitOfWork Pattern.
 Jeder Controller erbt von der ControllerBase Klasse und besteht aus folgendem Aufbau:
 
-## Erweiterungen
+## ERWEITERUNGEN
 Es werden folgende Nugget Packeges für eine WEB API in ASP.net CORE benötigt.
 - Swashbuckle.AspNetCore
 - Newtonsoft.Json
 - Microsoft.AspNetCore.Mvc.NewtonsoftJson
 
-## Startup Klasse
+## START UP KLASSE
 In der Startup Klasse wird die API konfgiguriert.
 Über die ConfigureServices Methode können diverse Dienste konfiguriert werden. Unter anderem UnitOfWork, Authentifizierung, Blob Service, Cors, usw.
 
-## Route Attribute
-Durch das Route Attribut erreicht der jeweilige Request die gewünschte Ressource und HTTP - Methode.
+## ROUTING 
+Durch das Route Attribut erreicht der jeweilige Request die gewünschte Ressource und die in der Header angeführte HTTP - Methode.
 Der nach außen sichtbare Controller Name stammt vom Controller Klassenname.
+
+```csharp
+    [Route("api/[controller]")]
+    [ApiController]
+    public class UserController : ControllerBase
+    {
+```
 
 Controller Klasse --> UserController
 Controller Name --> User
-
-```csharp
-[Route("api/[controller]")]
-```
 
 Die Route 
 
