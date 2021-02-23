@@ -37,7 +37,7 @@ Der Architektur-Stil verweist auf sechs Eigenschaften, die ein Dienst haben muss
 
 
 - Code on Demand
-Code on Demand, die vielleicht am wenigsten bekannte der sechs Beschränkungen und die einzige optionale Einschränkung, ermöglicht die Übertragung von Code oder Applets über die API zur Verwendung innerhalb der Anwendung. Im Wesentlichen schafft sie eine intelligente Anwendung, die nicht mehr nur von ihrer eigenen Code-Struktur abhängig ist.
+  - Code on Demand, die vielleicht am wenigsten bekannte der sechs Beschränkungen und die einzige optionale Einschränkung, ermöglicht die Übertragung von ausführbaren Programmcode über die API zur Verwendung innerhalb der Anwendung am Client. Im Wesentlichen schafft sie eine intelligente Anwendung, die nicht mehr nur von ihrer eigenen Code-Struktur abhängig ist.
 
 # AUFBAU
 
@@ -337,6 +337,36 @@ Namensgebung kommt von Entwickler.
 
 # IMPLEMENTIERUNG SERVER REST-API
 
+## PROJEKTINFORMATION
+
+Um eine REST-API in ASP.net Core zu implementieren, wird ein Ressourcenprojekt und ein ASP.NET Core Web Projekt.
+Bei Neuerstellung wird initial die Grundtruktur der API angelegt.
+Gehostet wird das Projekt am localem Webserver. 127.0.0.1 localhost.
+
+### HOSTING
+
+  - Die fertig implementierte REST API muss über einen Web Service online zur Verfügung gestellt werden.
+Diese Web Services können von vielen Anbietern herangezogen werden.
+
+### AZURE
+
+  - Azure Web Service ist eine Hosting Plattform von Microsoft und bietet zahlreiche Dienste an.
+Dort ist es möglich einen App-Service zu "mieten" und die REST - API gegen Entgeld zu hosten.
+
+### AZURE PIPELINES
+
+  - Azure Pipelines sind Tools von Mircosoft, um die REST API direkt aus dem Visual Studio zu releasen.
+Bei einem Commit auf den definierten Git-Branch wird die implementierte Pipeline angestoßen.
+Dort werden definierte Tasks ausgeführt, um das API Projekt zu releasen.
+Mehr dazu in der live Demo.
+
+### DEBUGGING
+
+  - Um Fehler im Source Code zu finden, kann man über die standard Debug Funktion im Visual Studio debuggen.
+Um Netzwerktransaktionen zu analysieren und Verbindungsfehler ausfindig zu machen, kann man im Browser auf die Entwicklertools zurückgreifen.
+Dort findet man die Requests und Response und die damit verbunden Overhead Daten, so wie Header und HTTP Status Codes.
+Swagger ist auch ein hilfreiches Tool um Bugs in der REST API zu finden.
+
 ## API - Controller
 
 API Controller sind die jeweiligen HTTP Methoden, die nach Außen für eine Ressource zur Verfügung stehen.
@@ -508,6 +538,17 @@ Erreichbar ist Swagger unter der Route http://url/swagger/index.html
  ![alt text](https://www.baeldung.com/wp-content/uploads/2019/11/1-swagger-ui.png "Logo Title Text 1")
  ![alt text](https://www.baeldung.com/wp-content/uploads/2019/11/2-swagger-ui-api-details.png "Logo Title Text 1")
 
+# LIVE DEMO
+
+## VISUAL STUDIO
+### ASP.NET CORE WEB APPLICATION
+### NUGGET PACKAGES 
+### RESSOURCE PROJEKT
+### CONTROLLER
+### SWAGGER
+## DEBUGGING
+## AZURE WEB APP
+## AZURE PIPELINES
 
 # FAZIT
 
