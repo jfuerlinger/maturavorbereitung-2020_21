@@ -202,9 +202,7 @@ __OrderBy/OrderByDescending__
 Im Allgemeinen garantieren LINQ-Abfragen nicht, dass Elemente in einer bestimmten Reihenfolge zurückgeliefert werden es sei denn, wir definieren explizit die gewünschte Reihenfolge. Dies geschieht in einem Abfrageausdruck
 mit einer „OrderBy“-Klausel.  
 __ThenBy/ThenByDescending__  
-Diese Operatoren verwendet man, wenn nacheinander nach mehreren Schlüsseln sortiert werden soll. Da
-ThenBy und ThenByDescending nicht auf den Typ IEnumerable(Of T), sondern nur auf den Typ IOrdered-Sequence(Of T) anwendbar sind, können diese Operatoren nur im Anschluss an OrderBy/OrderByDescending
-eingesetzt werden. 
+Diese Operatoren verwendet man, wenn nacheinander nach mehreren Schlüsseln sortiert werden soll.  
 ```csharp
 List<Student> students = new List<Student>();
 students.Add(new Student { Id = 1, Name = "Rudi", Rank = 1, Age = 39 });
