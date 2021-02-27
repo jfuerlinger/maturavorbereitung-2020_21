@@ -3,7 +3,7 @@
 ## Einführung
 **L**anguage-**In**tegrated **Q**uery (LINQ) ist eine Kurzform für sprachintegrierten Abfrage und wird hauptsächlich zum Abfragen von Daten (Speichern und Abrufen) aus einer anderen Datenquelle wie SQL-Datenbank, JSON und XML-Dokumenten, ADO.Net-Dataset, HTTP-basierte Informationsdienste und .NET-Sammlungen verwendet.
 ### Datenbankzugriff unter LINQ
-Ein zentraler LINQ Aspekt ist, das LINQ die Zusammenarbeit mit beliebigen Typen von Objekten oder Datenquellen ermöglicht und dazu ein konsistentes Programmiermodell bereitstellt. Syntax und Konzepte für den Datenzugriff sind dieselben.
+Ein zentraler LINQ Aspekt ist, das LINQ die Zusammenarbeit mit beliebigen Typen von Objekten oder Datenquellen ermöglicht und dazu ein konsistentes Programmiermodell bereitstellt. 
 #### Wichtige LINQ-Eigenschaften:
 - Erweiterung der Programmiersprachen wie Visual Basic und C#
 - Ist streng typisiert
