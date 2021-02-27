@@ -329,32 +329,6 @@ Das wird erreicht mit die Methoden:
 *ToArray()*, *ToList()*, *ToDictionary()*, *AsEnumerable()*, *Cast()* und *ToLookup()*. Die Methoden __ToArray()__ als auch __ToList()__ forcieren ein sofortiges Durchführen der Abfrage.  
 ### PLINQ (Parallel LINQ)
 PLINQ ist eine parallele Implementierung von LINQ to Objects und kombiniert die Einfachheit und Lesbarkeit der LINQ Syntax mit der Leistungsfähigkeit der parallelen Programmierung. Es steht das komplette Angebot an Standard-Abfrageoperatoren zur Verfügung, zusätzlich gibt es spezielle Operatoren für parallele Operationen. Auf diese Weise können LINQ-Abfragen auf Multi-Core- / Multi-Prozessor-Systemen parallel ausgeführt werden, um sie (hoffentlich) zu beschleunigen.  
-### LINQ to XML
-__XElement und XAttribute__  
-Die beiden wichtigsten Klassen von LINQ to XML sind *XElement* und *XAttribute*. *XElement*
-speichert ein XML-Element, wie z.B.:
-`<name>Max</name> ` 
-Es kann wie folgt erzeugt werden:  
-> XElement e = new XElement(“name”, “Max”);  
-
-Wir können aber auch geschachtelte Elemente erzeugen, wobei jedes Element Attribute
-haben kann, die durch *XAttribute* repräsentiert werden, z.B.:  
-```csharp
-XElement e = new XElement(“student”,
-new XAttribute(“id”, 91),
-new XElement(“name”, “Max”),
-new XElement(“field”, “IT“),
-```
-
-Wenn wir das erzeugte Element mittels  
-> Console.WriteLine(e); 
- ausgeben, erhalten wir:  
-```csharp
-<student id=“91”>
-  <name>Max</name>
-  <field>IT</field>
-</student>
-```
 ### Anhang Table 10-1  
 |Operator|Zweck|
 |--------|-------|
