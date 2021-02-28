@@ -53,7 +53,27 @@ Der Delegate-Typ
 `delegate bool Predicate<T> (T val);`  
 beschreibt zum Beispiel alle Methoden, die einen Wert eines beliebigen Typs T als
 Parameter bekommen, irgendeine Eigenschaft dieses Werts prüfen und true oder false
-zurückliefern.
+zurückliefern.  
+```charp
+//Get the average of the odd Fibonacci numbers in the series... 
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace lambdaexample {
+   class Program {     
+      static void Main(string[] args)
+      {
+         int[] fibNum = { 1, 1, 2, 3, 5, 8, 13, 21, 34 };
+         double averageValue = fibNum.Where(num ⇒ num % 2 == 1).Average();
+         Console.WriteLine(averageValue);
+         Console.ReadLine();
+      }
+   }
+}
+```  
 ### Objekt-Initialisierer
 Durch Objekt-Initialisierer wird es möglich, ähnlich wie bei der Initialisierung von Attributen, Felder und Eigenschaften einer Klasse (oder Struktur) auf Anfangswerte zu setzen.  
 #### Beispiel:
