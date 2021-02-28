@@ -54,7 +54,7 @@ Der Delegate-Typ
 beschreibt zum Beispiel alle Methoden, die einen Wert eines beliebigen Typs T als
 Parameter bekommen, irgendeine Eigenschaft dieses Werts prüfen und true oder false
 zurückliefern.  
-```charp
+```csharp
 //Get the average of the odd Fibonacci numbers in the series... 
 
 using System;
