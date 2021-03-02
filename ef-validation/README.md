@@ -14,9 +14,9 @@
     * Ermöglicht Validierung in allen Bereichen
     * ValidationExecption zum Transport von Exceptions 
     * Kernklasse Validator (statisch):
-        * ValidateObject(Object, ValidationConext)
-        * TryValidateObject(Object, ValidationContext ICollection <ValidationResult<x>>)
-        * ValidateProperty(Object, ValidationContext)
+        * `ValidateObject(Object, ValidationConext)`
+        * `TryValidateObject(Object, ValidationContext ICollection <ValidationResult>)`
+        * `ValidateProperty(Object, ValidationContext)`
     
 ## Möglichkeiten
 * DataAnnotations für einzelne Properties:
@@ -165,7 +165,21 @@ catch (ValidationException ve)
     }
 }
 ```
+```c#
+public String DbError
+    {
+      get { return _dbError; }
+      set { _dbError = value; OnPropertyChanged(); }
+    }
+```
 ![](DBError.png)
+### ValidationAttribute
+* Dient als Basisklasse für alle Validierungsattribute. Ihre Methoden können überschrieben werden, um benutzerdefinierte Validierungsattribute zu erstellen.
+    * Beispiele: 
+        * Equals()
+        * IsValid()
+        * Validate()
+        * ...
 
 ### IValidatableObject
 #### Beispiel Validate() (IValidatableObject): 
@@ -207,15 +221,6 @@ public override IEnumerable<ValidationResult> Validate(ValidationContext validat
 }
 ```
 * Yield liefert mehrere Return-Werte => `IEnumberable<ValidationResult>`
-### ValidationAttribute
-* Dient als Basisklasse für alle Validierungsattribute. Ihre Methoden können überschrieben werden, um benutzerdefinierte Validierungsattribute zu erstellen.
-    * Beispiele: 
-        * Equals()
-        * IsValid()
-        * Validate()
-        * ...
-
-
 ### Ohne ValidateAttribute
 ```c#
  class EditCustomerViewModel : BaseViewModel
