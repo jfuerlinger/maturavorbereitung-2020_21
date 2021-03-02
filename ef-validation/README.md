@@ -54,17 +54,22 @@ public string EditName
 
 ### Beispiel Custom Validation:
 ```c#
-public class PhoneValidator : ValidatonAttribute
-{
-    public override bool IsValid(object value)
+ public class SVNrValidation : ValidationAttribute
     {
-        return new RegularExpressionAttribute(@"^[+0]\d+").IsValid(Convert.ToString(value).Trim());
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            if (SVNrCheck(svnr))
+            {
+                return ValidationResult.Success;
+            }
+
+             return new ValidationResult($"Sozialversicherungsnummer {svnr} ist nicht gültig");
+        }
     }
-}
 ```
 ```c#
-[PhoneValidator]
-public string PhoneNumber {get; private set;}
+[SVNrValidation]
+public string SVNr { get; set; }
 ```
 
 ## Datenbank
@@ -80,15 +85,10 @@ private async Task ValidateEntity(object entity)
 {
     if (entity is Product product)
     {
-        var validationContext = new ValidationContext(product);
-        Validator.ValidateObject(product, validationContext, validateAllProperties: true);
-        if (await _dbContext.Products.AnyAsync(b => b.Id == product.Id && 
-        b.ProductNr != product.ProductNr 
-        && b.Name == product.Name 
-        && b.Price == product.Price))
+        if (await _dbContext.Products.AnyAsync(b => b.ProductNr != product.ProductNr 
+        && b.Name == product.Name))
         {
-            throw new ValidationException(new ValidationResult($"Produkt mit den Namen {product.Name} existiert bereits", new List<string> {"Isbn"}), 
-            null, new List<string> {"Isbn"});
+            throw new ValidationException($"Produkt mit den Namen {product.Name} existiert bereits");
         }
     }
 }
@@ -113,22 +113,37 @@ public async Task<int> SaveChangesAsync()
 
 * HasErrors (Property):
     * Sind Fehler am ViewModel vorhanden?
+    * Methode: 
+    ```c#
+      get { return _hasErrors; }
+      set { _hasErrors = value; OnPropertyChanged(); }
+    ```
 * ErrorsChanged (EventHandler):
     * Bei Änderungen der Validität des ViewModels
+    ```c#
+       public void OnErrorsChanged(string propertyName = null)
+        {
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+        }
+     ```
 * GetErrors (Methode):
     * Liefert pro Binding-Property die (!)
     Fehlermeldung
-
-* Wichtig ist zudem auch den UpdateSourceTrigger auf PropertyChanged zu setzen um nach jedem Zeichen die Eingabe zu validieren.
+    ```c#
+   public IEnumerable GetErrors(string propertyName)
+        {
+            return propertyName != null && Errors.ContainsKey(propertyName)
+                ? Errors[propertyName]
+                : Enumerable.Empty<string>();
+        }
+    ```
+* Wichtig ist zudem auch den `UpdateSourceTrigger` auf `PropertyChanged` zu setzen um nach jedem Zeichen die Eingabe zu validieren.
 
 ![](UpdateSourceTriggerPropertyChanged.png)
-
-
 ### Validierungsfehler
 
 * Um Validierungsfehler beim Speichern des Contexts auszuwerten, muss die ValidationException im ViewModel abgefangen werden.
 * Sollten Fehler auftreten werden diese einem ViewModel-Property (DbError) zugewiesen, welches am Window gebunden ist.
-
 
 ```c#
 try
@@ -150,16 +165,10 @@ catch (ValidationException ve)
     }
 }
 ```
+![](DBError.png)
 
-### ValidationAttribute
-* Diese Klasse erzwingt die Validierung basierend auf den Metadaten, die der Datentabelle zugeordnet sind. Sie kann überschrieben werden, um benutzerdefinierte Validierungsattribute zu erstellen.
-    * Beispiele: 
-        * Equals()
-        * IsValid()
-        * Validate()
-        * ...
-
-#### Beispiel Validate(): 
+### IValidatableObject
+#### Beispiel Validate() (IValidatableObject): 
 * Diese wird in den Properties aufgerufen, in welchen sie benötigt wird.
 
 ```c#
@@ -178,8 +187,9 @@ class EditCustomerViewModel : BaseViewModel
 }
 ```
 
-* Die Validate-Methode der BaseViewModel wird überschrieben
-* Sie wird zur Validierung der einzelnen Properties verwendet.
+
+* Die Validate-Methode der BaseViewModel vom Interface IValidatableObject wird überschrieben
+* Sie wird zur Validierung der einzelnen Properties verwendet und stellt eine Alternative zur Validierung per Validierungunsattribute in den Modellklassen dar!
 
 ```c#
 public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -196,6 +206,16 @@ public override IEnumerable<ValidationResult> Validate(ValidationContext validat
      }
 }
 ```
+* Yield liefert mehrere Return-Werte => `IEnumberable<ValidationResult>`
+### ValidationAttribute
+* Dient als Basisklasse für alle Validierungsattribute. Ihre Methoden können überschrieben werden, um benutzerdefinierte Validierungsattribute zu erstellen.
+    * Beispiele: 
+        * Equals()
+        * IsValid()
+        * Validate()
+        * ...
+
+
 ### Ohne ValidateAttribute
 ```c#
  class EditCustomerViewModel : BaseViewModel
@@ -245,7 +265,7 @@ public partial class Customer
 
  ### Beispiel eigene Annotationsklassen:
 ```c#
-[ClassicMovieDuration(isClassicMovieUntilYear: 1950, maxDurationForClassicMovie: 60)]
+[ClassicMovieMaxDurationAttribute(isClassicMovieUntilYear: 1950, maxDurationForClassicMovie: 60)]
 public int Duration {get; set;}
 ```
 * Über ValidationAttribute
@@ -275,5 +295,42 @@ public int Duration {get; set;}
         public int MaxDurationForClassicMovie { get; }
 
     }
+```
+### Validierung Razor Pages
+Beispiel Edit:
+```c# 
+  <div class="form-group">
+    <label asp-for="Sensor.Name class="control-label"></label>
+    <input asp-for="Sensor.Name" class="form-control" />
+    <span asp-validation-for="Sensor.Name" class="text-danger"></span>
+  </div>
+```
+```c#
+ public async Task<IActionResult> OnPost()
+ {
+    if (!ModelState.IsValid)
+    {
+        return Page();
+    }
+    var dbSensor = await _unitOfWork.SensorRepository.GetByIdAsync(Sensor.Id);
+
+    if (dbSensor == null)
+    {
+        return NotFound();
+    }
+
+    dbSensor.Name = Sensor.Name;
+    try
+    {
+        await _unitOfWork.SaveChangesAsync();
+        return RedirectToPage("/Index");
+    }
+    catch (ValidationException validationException)
+    {
+        ValidationResult valResult = validationException.ValidationResult;
+        ModelState.AddModelError("", valResult.ErrorMessage);
+    }
+    return Page();
+ }
 ```
 [Zur Übersicht](../README.md)
