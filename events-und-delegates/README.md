@@ -4,6 +4,7 @@
 ## Übersicht
 * Delegates
 * Eigenschaften von Delegates
+* Verwenden von Varianz bei Delegates
 * Events
 * EventHandler
 * Event data
@@ -26,8 +27,73 @@ public delegate int PerformCalculation(int x, int y);
 * ermöglichen es Methoden als Parameter zu übergeben.
 * können zum Definieren von Rückrufmethoden verwendet werden.
 * können miteinander verkettet werden (Es können mehrere Methoden für ein einziges Event aufgerufen werden).
+* Methoden müssen nicht exakt mit dem Typ des Delegaten übereinstimmen (Varianz in Delgates).
+* Lambdaausdrücke sind eine präzisere Methode zum Schreiben von Inlinecodeblöcken. Lambdaausdrücke werden (in bestimmten Kontexten) in Delegattypen kompiliert. 
 
 
+### Verwenden von Varianz bei Delegates
+Wenn man einem Delegate eine Methode zuweist, bieten Kovarianz und Kontravarianz Flexibilität für das Abgleichen eines Delegattyps mit einer Methodensignatur. Kovarianz lässt die Verfügung einer Methode über einen Rückgabetyp zu, der stärker abgeleitet ist als der im Delegat definierte Typ. Kontravarianz lässt eine Methode zu, die über Typen verfügt, die weniger abgeleitet sind als die im Delegattyp.
+
+**Kovarianz**
+Delegates können mit Methoden verwendet werden, die über Rückgabetypen verfügen, die von den Rückgabetypen in der Delegatsignatur abgeleitet sind. Der von DogsHandler zurückgegebene Datentyp ist vom Typ Dogs, der vom im Delegat definierten Typ Mammals abhängt.
+~~~cs
+class Mammals {}  
+class Dogs : Mammals {}  
+  
+class Program  
+{  
+    // Define the delegate.  
+    public delegate Mammals HandlerMethod();  
+  
+    public static Mammals MammalsHandler()  
+    {  
+        return null;  
+    }  
+  
+    public static Dogs DogsHandler()  
+    {  
+        return null;  
+    }  
+  
+    static void Test()  
+    {  
+        HandlerMethod handlerMammals = MammalsHandler;  
+  
+        // Covariance enables this assignment.  
+        HandlerMethod handlerDogs = DogsHandler;  
+    }  
+}
+~~~
+
+**Kontravarianz**
+In diesem Beispiel wird veranschaulicht, wie Delegaten mit Methoden verwendet werden können, die über Parameter eines Typs verfügen, die Basistypen von den Parametertypen der Delegatsignatur sind. Mithilfe von Kontravarianz können Sie einen Ereignishandler anstelle getrennter Handler verwenden.
+
+~~~cs
+public delegate void KeyEventHandler(object sender, KeyEventArgs e)
+public delegate void MouseEventHandler(object sender, MouseEventArgs e)
+~~~
+Das Beispiel definiert einen Ereignishandler mit einem EventArgs-Parameter und verwendet diesen, um die Ereignisse Button.KeyDown und Button.MouseClick zu bearbeiten. Dies ist möglich, weil EventArgs der Basistyp sowohl von KeyEventArgs als auch von MouseEventArgs ist.
+
+~~~cs
+// Event handler that accepts a parameter of the EventArgs type.  
+private void MultiHandler(object sender, System.EventArgs e)  
+{  
+    label1.Text = System.DateTime.Now.ToString();  
+}  
+  
+public Form1()  
+{  
+    InitializeComponent();  
+  
+    // You can use a method that has an EventArgs parameter,  
+    // although the event expects the KeyEventArgs parameter.  
+    this.button1.KeyDown += this.MultiHandler;  
+  
+    // You can use the same method
+    // for an event that expects the MouseEventArgs parameter.  
+    this.button1.MouseClick += this.MultiHandler;  
+}
+~~~
 
 ### Events
 Events basieren auf dem Delegate-Modell. Im Kontext der Events ist ein Delegat ein Mittler (ein zeigerähnlicher Mechanismus) zwischen der Ereignisquelle und dem Code, mit dem das Ereignis behandelt wird.
@@ -52,7 +118,7 @@ protected virtual void OnThresholdReached(EventArgs e)
 }
 ~~~
 
-Um auf ein Event zu reagieren, definiert man eine EventHandler-Methode im Ereignisempfänger. Diese Methode muss der Signatur des Delegates für das behandelte Event entsprechen.Um bei Auftreten des Ereignisses Benachrichtigungen zu empfangen, muss die EventHandler-Methode das Ereignis abonnieren.
+Um auf ein Event zu reagieren, definiert man eine EventHandler-Methode im Ereignisempfänger. Diese Methode muss der Signatur des Delegates für das behandelte Event entsprechen. Um bei Auftreten des Ereignisses Benachrichtigungen zu empfangen, muss die EventHandler-Methode das Ereignis abonnieren.
 
 ~~~cs
 class Program
