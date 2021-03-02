@@ -20,9 +20,9 @@ Damit kann man auch ohne viel Erfahrung und mit einem ansprechenden Layout das U
 <br><br>
 
 ### Stack Panel
-Im Stack-Panel können untergeordnete Elemente je nach Ausrichtungseigenschaft horizontal oder vertikal in einer einzigen Linie angeordnet werden.
+Im Stack-Panel können untergeordnete Elemente je nach Ausrichtungseigenschaft vertikal oder horizontal in einer einzigen Linie angeordnet werden.
 
-<img src="./images/wpf-stackpanel.png" alt="StackPanel-Layout" width="50%" />
+![StackPanel-Layout](./images/wpf-stackpanel.png)
 
 ```xml
 <StackPanel Orientation="Horizontal"> 
@@ -36,7 +36,7 @@ Im Stack-Panel können untergeordnete Elemente je nach Ausrichtungseigenschaft h
 ### WrapPanel
 Im WrapPanel werden untergeordnete Elemente in der Reihenfolge von links nach rechts oder von oben nach unten positioniert. Das WrapPanel nutzt dabei die gegebene Länge und Höhe aus und bricht bei Bedarf die einzelnen Elemente in eine neue Reihe um.
 
-<img src="./images/wpf-wrappanel.gif" alt="WrapPanel-Layout" width="50%" />
+![WrapPanel-Layout](./images/wpf-wrappanel.gif)
 
 ```xml
 <WrapPanel ItemWidth="100" ItemHeight="60">  
@@ -54,9 +54,9 @@ Im WrapPanel werden untergeordnete Elemente in der Reihenfolge von links nach re
 <br><br>
 
 ### DockPanel
-Das DockPanel definiert einen Bereich, in dem untergeordnete Elemente horizontal oder vertikal relativ zueinander angeordnet werden. Mit DockPanel können untergeordnete Elemente mithilfe der Dock-Eigenschaft ganz einfach nach oben, unten, rechts, links und in der Mitte angedockt werden
+Das DockPanel definiert einen Bereich, in dem untergeordnete Elemente horizontal oder vertikal relativ zueinander angeordnet werden. Mit DockPanel können untergeordnete Elemente mithilfe der Dock-Eigenschaft ganz einfach nach oben, unten, rechts, links und in der Mitte angedockt werden.
 
-<img src="./images/wpf-dockpanel.png" alt="DockPanel-Layout" width="50%" />
+![DockPanel-Layout](./images/wpf-dockpanel.png)
 
 ```xml
 <DockPanel>
@@ -68,12 +68,19 @@ Das DockPanel definiert einen Bereich, in dem untergeordnete Elemente horizontal
 </DockPanel>
 ```
 
+<br>
+
+Ein wichtiges Property beim DockPanel ist außerdem _LastChildFill_ vom Datentyp bool.
+Dieses gibt an, ob sich das letzte untergeordnete Element in einem DockPanel ausdehnt, um den noch verbleibenden Platz zu füllen. 
+
 <br><br>
 
 ### CanvasPanel
 Das CanvasPanel ist das grundlegende Layout-Bedienfeld, in dem die untergeordneten Elemente explizit mithilfe von Koordinaten positioniert werden können, die sich relativ zum Canvas auf einer beliebigen Seite wie links, rechts, oben und unten befinden.
+<br><br>
+Dieses Layout sollte jedoch nur für "Zeichnungen" verwendet werden, da sich der Inhalt aufgrund der fix positionierten Elemente nicht an die Größe des Fensters anpassen kann. Sollte der Benutzer beispielsweise die Fenstergröße verkleinern, kann es sein, dass der Inhalt nicht vollständig angezeigt wird.
 
-<img src="./images/wpf-canvaspanel.png" alt="CanvasPanel-Layout" width="50%" />
+![CanvasPanel-Layout](./images/wpf-canvaspanel.png)
 
 ```xml
 <Canvas> 
@@ -93,7 +100,7 @@ Das CanvasPanel ist das grundlegende Layout-Bedienfeld, in dem die untergeordnet
 ### GridPanel
 Ein Grid-Panel (Rasterfeld) bietet einen flexiblen Bereich, der aus Zeilen und Spalten besteht. In einem Raster können untergeordnete Elemente in Tabellenform angeordnet werden.
 
-<img src="./images/wpf-gridpanel.png" alt="GridPanel-Layout" width="50%" />
+![GridPanel-Layout](./images/wpf-gridpanel.png)
 
 ```xml
 <Grid Background="AliceBlue"> 
@@ -119,6 +126,13 @@ Ein Grid-Panel (Rasterfeld) bietet einen flexiblen Bereich, der aus Zeilen und S
     <TextBox Grid.Row="2" Grid.Column="1" Margin="10" /> 
 </Grid> 
 ```
+<br>
+Der Wert auto gibt an, dass die Größe an den Inhalt angepasst wird.<br>Hat eine ColumnDefinition also beispielsweise das Attribut und den Wert Width="Auto", dann sind alle diese Spalten genauso groß wie das breiteste Element in dieser Spalten-Reihe.
+<br><br>
+Wird jedoch der Wert * angegeben, so nimmt sich diese Spalte, Reihe, etc. den noch verbleibenden Platz und dehnt sich aus.
+<br><br>
+Mit ColumnSpan und RowSpan können zusätzlich noch Layouts oder Elemente über mehrere definierte Spalten und Reihen gestreckt werden. 
+
 
 <br><br>
 <hr>
@@ -168,8 +182,8 @@ Viele Steuerelemente verfügen über Properties, mit denen man die Darstellung d
 Beispiele:
 - Width
 - Height
-- Margin
-- Padding
+- Margin (Außenabstand)
+- Padding (Innenabstand)
 - Orientation
 - Visibility
 - Opacity
