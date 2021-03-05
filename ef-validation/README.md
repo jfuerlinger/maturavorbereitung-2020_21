@@ -12,7 +12,7 @@
 
 * Validation-Framework:
     * Ermöglicht Validierung in allen Bereichen
-    * ValidationExecption zum Transport von Exceptions 
+    * Validation Execption zum Transport von Exceptions 
     * Kernklasse Validator (statisch):
         * `ValidateObject(Object, ValidationConext)`
         * `TryValidateObject(Object, ValidationContext ICollection <ValidationResult>)`
