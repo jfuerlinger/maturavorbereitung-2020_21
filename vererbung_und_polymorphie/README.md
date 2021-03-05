@@ -72,6 +72,7 @@ class Passagiermaschine : Luftfahrzeug
 
     public override string Abheben()
     {
+
         return $"{passagiermaschine} {base.Abheben()}";
     }
 }
@@ -211,6 +212,7 @@ Ein Auto
 
 public class B : A
 {
+
     string motorrad = "und ein Motorrad";
     string fahrrad = "Es ist ein Fahrrad.";
 

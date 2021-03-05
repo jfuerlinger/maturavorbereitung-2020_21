@@ -292,29 +292,29 @@ await foreach (var number in GenerateSequence())
     Console.WriteLine(number);
 }
 ```
-Anwendungsgebiete:
+### Anwendungsgebiete:
 * Zyklische HTTP-calls mit Verarbeitung der Empfangsdaten.
-    ```cs
-    await foreach(var someValue from someAsyncIterator(5))
-    {
-        ...
-    }
+```cs
+await foreach(var someValue from someAsyncIterator(5))
+{
+    ...
+}
 
-    IAsyncEnumerable<string> someAsyncIterator(int max)
+IAsyncEnumerable<string> someAsyncIterator(int max)
+{
+    for(int i=0;i<max;i++)
     {
-        for(int i=0;i<max;i++)
-        {
-            var response=await httpClient.GetStringAsync($"{baseUrl}/{i}");
-            yield return response;
-        }
+        var response=await httpClient.GetStringAsync($"{baseUrl}/{i}");
+        yield return response;
     }
-    ```
+}
+```
 ___
 ## C# 9.0 - Records
 ### Anforderung
 Man benötigt das Targetframework `.NET5` und den C#9.0 Compiler. Der C#9.0 Compiler ist ab `Visual Studio 2019 version 16.8` verfügbar.
 Im Projektfile muss das Targetframework auf .NET5 eingestellt werden:
-```cs
+```
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
@@ -424,7 +424,7 @@ Console.WriteLine(last);
 * API Aufrufe
 * Verwaltung von Prozessdaten
 * Verwaltung von ReadOnly Daten
-### Don´ts 
+### Do Not 
 Records sollen immer als readonly verwendet werden. Das nachfolgende Beispiel funktioniert, ist allerdings ein schlechter Programmierstil:
 ```cs
 public record Person // No constructor so no deconstructor
