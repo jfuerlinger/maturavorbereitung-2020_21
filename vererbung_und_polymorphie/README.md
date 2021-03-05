@@ -57,12 +57,14 @@ public abstract class Luftfahrzeug
         
     public virtual string Abheben()
     {
-        return " hebt ab.";
+        return "abheben";
     }
 }
 
 class Passagiermaschine : Luftfahrzeug
 {
+    string passagiermaschine = "Die Passagiermaschine";
+
     public override void Start()
     {
         Console.WriteLine("Die Passagiermaschine begibt sich auf die Startfläche.");
@@ -70,12 +72,15 @@ class Passagiermaschine : Luftfahrzeug
 
     public override string Abheben()
     {
-        return "Die Passagiermaschine" + base.Abheben();
+
+        return $"{passagiermaschine} {base.Abheben()}";
     }
 }
 
 public class Zeppelin : Luftfahrzeug
 {
+    string zeppelin = "Der Zeppelin";
+
     public override void Start()
     {
         Console.WriteLine("Der Zeppelin löst die Leinen.");
@@ -83,12 +88,14 @@ public class Zeppelin : Luftfahrzeug
 
     public override string Abheben()
     {
-        return "Der Zeppelin" + base.Abheben();
+        return $"{zeppelin} {base.Abheben()}";
     }
 }
 
 public class Luftballon : Luftfahrzeug
 {
+    string ballon = "Der Luftballon ist kein Luftfahrzeug und hebt trotzdem ab!";
+
     public override void Start()
     {
         Console.WriteLine("Der Luftballon füllt sich mit Helium.");
@@ -96,7 +103,7 @@ public class Luftballon : Luftfahrzeug
 
     public override string Abheben()
     {
-        return string.Format("Der Luftballon ist kein Luftfahrzeug und hebt trotzdem ab!");
+        return ballon;
     }
 }
 
@@ -190,9 +197,11 @@ Methoden in der Basisklasse die mit `virtual` versehen sind, kann man in der abg
 
 public class A                        
 {
+    string auto = "Ein Auto ";
+
     public virtual string Method()
     {
-        return "Ein Auto ";
+        return auto;
     }
 }
 
@@ -203,22 +212,29 @@ Ein Auto
 
 public class B : A
 {
-    public override void Method()
+
+    string motorrad = "und ein Motorrad";
+    string fahrrad = "Es ist ein Fahrrad.";
+
+    public override void Method1()
     {
         // 1. Die Basismethode wird hier ergänzt
-        return base.Method() + "und ein Motorad.";
-        
-        // oder
+        return $"{base.Method()} {motorrad}";
+    }
 
+    // oder
+
+    public override void Method2()
+    {
         // 2. Die Basismethode wird zu 100 % überschrieben
-        return string.Format("Es ist ein Fahrrad.");
+        return fahrrad;
     }
 }
 
-# 1. Output
+#Output Method1
 Ein Auto und ein Motorrad.
 
-# 2. Output
+#Output Method2
 Es ist ein Fahrrad.
 ```
 </br>
@@ -234,7 +250,7 @@ public abstract class A
     public abstract string Method();
 }
 
-public class B
+public class B : A
 {
     public override string Method()
     {
