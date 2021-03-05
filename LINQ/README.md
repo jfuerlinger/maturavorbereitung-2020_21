@@ -1,5 +1,6 @@
 # LINQ
 [Zur Übersicht](../README.md)
+
 ## Einführung
 **L**anguage-**In**tegrated **Q**uery (LINQ) ist eine Kurzform für sprachintegrierten Abfrage und wird hauptsächlich zum Abfragen von Daten (Speichern und Abrufen) aus einer anderen Datenquelle wie SQL-Datenbank, JSON und XML-Dokumenten, ADO.Net-Dataset, HTTP-basierte Informationsdienste und .NET-Sammlungen verwendet.
 ### Datenbankzugriff unter LINQ
