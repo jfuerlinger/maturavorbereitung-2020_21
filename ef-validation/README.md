@@ -1,6 +1,6 @@
 # Entity Framework Validation
 
-## Validierung allgemein 
+## Validierung allgemein
 
 * Bietet eine Möglichkeit, eine benutzerdefinierte Regel zu erstellen, um die Gültigkeit von Benutzereingaben zu überprüfen.
 
@@ -12,12 +12,12 @@
 
 * Validation-Framework:
     * Ermöglicht Validierung in allen Bereichen
-    * ValidationException zum Transport von Exceptions 
+    * Validation Exception zum Transport von Exceptions
     * Kernklasse Validator (statisch):
         * `ValidateObject(Object, ValidationConext)`
         * `TryValidateObject(Object, ValidationContext ICollection <ValidationResult>)`
         * `ValidateProperty(Object, ValidationContext)`
-    
+
 ## Möglichkeiten
 * DataAnnotations für einzelne Properties:
     * MaxLength, RegEx, EmailAddress, ...
@@ -36,7 +36,7 @@ public int Round {get; set;}
 * Required, MinLength, MaxLength
 ```c#
 private string _editName;
- 
+
 [Required]
 [MinLength(1, ErrorMessage = "Produktname muss mindestens 1 Zeichen lang sein")]
 [MaxLength(20, ErrorMessage = "Produktname darf maximal 20 Zeichen lang sein")]
@@ -50,7 +50,7 @@ public string EditName
     }
 }
 ```
-![](ValidationProduct.png)
+![ValidationProduct](images/ValidationProduct.png)
 
 ### Beispiel Custom Validation:
 ```c#
@@ -85,7 +85,7 @@ private async Task ValidateEntity(object entity)
 {
     if (entity is Product product)
     {
-        if (await _dbContext.Products.AnyAsync(b => b.ProductNr != product.ProductNr 
+        if (await _dbContext.Products.AnyAsync(b => b.ProductNr != product.ProductNr
         && b.Name == product.Name))
         {
             throw new ValidationException($"Produkt mit den Namen {product.Name} existiert bereits");
@@ -113,7 +113,7 @@ public async Task<int> SaveChangesAsync()
 
 * HasErrors (Property):
     * Sind Fehler am ViewModel vorhanden?
-    * Methode: 
+    * Methode:
     ```c#
       get { return _hasErrors; }
       set { _hasErrors = value; OnPropertyChanged(); }
@@ -139,8 +139,7 @@ public async Task<int> SaveChangesAsync()
     ```
 * Wichtig ist zudem auch den `UpdateSourceTrigger` auf `PropertyChanged` zu setzen um nach jedem Zeichen die Eingabe zu validieren.
 
-![](UpdateSourceTriggerPropertyChanged.png)
-### Validierungsfehler
+![UpdateSourceTriggerPropertyChanged](images/UpdateSourceTriggerPropertyChanged.png)
 
 * Um Validierungsfehler beim Speichern des Contexts auszuwerten, muss die ValidationException im ViewModel abgefangen werden.
 * Sollten Fehler auftreten werden diese einem ViewModel-Property (DbError) zugewiesen, welches am Window gebunden ist.
@@ -165,6 +164,7 @@ catch (ValidationException ve)
     }
 }
 ```
+
 ```c#
 public String DbError
     {
@@ -172,17 +172,18 @@ public String DbError
       set { _dbError = value; OnPropertyChanged(); }
     }
 ```
-![](DBError.png)
+
+![DBError](images/DBError.png)
 ### ValidationAttribute
 * Dient als Basisklasse für alle Validierungsattribute. Ihre Methoden können überschrieben werden, um benutzerdefinierte Validierungsattribute zu erstellen.
-    * Beispiele: 
+    * Beispiele:
         * Equals()
         * IsValid()
         * Validate()
         * ...
 
 ### IValidatableObject
-#### Beispiel Validate() (IValidatableObject): 
+#### Beispiel Validate() (IValidatableObject):
 * Diese wird in den Properties aufgerufen, in welchen sie benötigt wird.
 
 ```c#
@@ -225,8 +226,8 @@ public override IEnumerable<ValidationResult> Validate(ValidationContext validat
 ```c#
  class EditCustomerViewModel : BaseViewModel
     {
-        
-        public string _lastname;
+
+public string _lastname;
 
         [Required(ErrorMessage ="Lastname is required")]
         [MinLength(2, ErrorMessage ="Minimum length of Lastname is 2")]
@@ -251,7 +252,7 @@ public partial class Customer
     [DisplayName("Kundennr.")]
     public string CustomerNr { get; set; }
 
-    [MaxLength(20)] 
+    [MaxLength(20)]
     [DisplayName("Vorname")]
     public string FirstName { get; set; }
 }
@@ -259,14 +260,16 @@ public partial class Customer
 
 ## Web-UI clientseitig
 * Durch Verwendung von vordefinierten Annotationen, eigenen Annotationen oder Custom Validations
- 
+
 ### Beispiel vordefinierte Annoationen:
  ```c#
  [Range(1900,2099)]
  public int Year {get; set;}
  ```
- ![](WebApi1.png)
- ![](WebApi2.png)
+
+ ![WebApi1](images/WebApi1.png)
+
+ ![WebApi2](images/WebApi2.png)
 
  ### Beispiel eigene Annotationsklassen:
 ```c#
@@ -303,7 +306,7 @@ public int Duration {get; set;}
 ```
 ### Validierung Razor Pages
 Beispiel Edit:
-```c# 
+```c#
   <div class="form-group">
     <label asp-for="Sensor.Name class="control-label"></label>
     <input asp-for="Sensor.Name" class="form-control" />
