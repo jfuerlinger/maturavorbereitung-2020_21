@@ -50,7 +50,7 @@ public string EditName
     }
 }
 ```
-![ValidationProduct](ValidationProduct.png)
+![ValidationProduct](images/ValidationProduct.png)
 
 ### Beispiel Custom Validation:
 ```c#
@@ -139,7 +139,7 @@ public async Task<int> SaveChangesAsync()
     ```
 * Wichtig ist zudem auch den `UpdateSourceTrigger` auf `PropertyChanged` zu setzen um nach jedem Zeichen die Eingabe zu validieren.
 
-![UpdateSourceTriggerPropertyChanged](UpdateSourceTriggerPropertyChanged.PNG)
+![UpdateSourceTriggerPropertyChanged](images/UpdateSourceTriggerPropertyChanged.png)
 ### Validierungsfehler
 
 * Um Validierungsfehler beim Speichern des Contexts auszuwerten, muss die ValidationException im ViewModel abgefangen werden.
@@ -174,7 +174,7 @@ public String DbError
     }
 ```
 
-![DBError](DBError.PNG)
+![DBError](images/DBError.png)
 ### ValidationAttribute
 * Dient als Basisklasse für alle Validierungsattribute. Ihre Methoden können überschrieben werden, um benutzerdefinierte Validierungsattribute zu erstellen.
     * Beispiele:
@@ -268,9 +268,9 @@ public partial class Customer
  public int Year {get; set;}
  ```
 
- ![WebApi1](WebApi1.PNG)
+ ![WebApi1](images/WebApi1.png)
 
- ![WebApi2](WebApi2.PNG)
+ ![WebApi2](images/WebApi2.png)
 
  ### Beispiel eigene Annotationsklassen:
 ```c#
