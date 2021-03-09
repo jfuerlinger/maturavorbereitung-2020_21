@@ -139,7 +139,7 @@ public async Task<int> SaveChangesAsync()
     ```
 * Wichtig ist zudem auch den `UpdateSourceTrigger` auf `PropertyChanged` zu setzen um nach jedem Zeichen die Eingabe zu validieren.
 
-![UpdateSourceTriggerPropertyChanged](UpdateSourceTriggerPropertyChanged.png)
+![UpdateSourceTriggerPropertyChanged](UpdateSourceTriggerPropertyChanged.PNG)
 ### Validierungsfehler
 
 * Um Validierungsfehler beim Speichern des Contexts auszuwerten, muss die ValidationException im ViewModel abgefangen werden.
@@ -174,7 +174,7 @@ public String DbError
     }
 ```
 
-![DBError](DBError.png)
+![DBError](DBError.PNG)
 ### ValidationAttribute
 * Dient als Basisklasse für alle Validierungsattribute. Ihre Methoden können überschrieben werden, um benutzerdefinierte Validierungsattribute zu erstellen.
     * Beispiele:
@@ -268,9 +268,9 @@ public partial class Customer
  public int Year {get; set;}
  ```
 
- ![WebApi1](WebApi1.png)
+ ![WebApi1](WebApi1.PNG)
 
- ![WebApi2](WebApi2.png)
+ ![WebApi2](WebApi2.PNG)
 
  ### Beispiel eigene Annotationsklassen:
 ```c#
