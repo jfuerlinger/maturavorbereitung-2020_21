@@ -140,7 +140,6 @@ public async Task<int> SaveChangesAsync()
 * Wichtig ist zudem auch den `UpdateSourceTrigger` auf `PropertyChanged` zu setzen um nach jedem Zeichen die Eingabe zu validieren.
 
 ![UpdateSourceTriggerPropertyChanged](images/UpdateSourceTriggerPropertyChanged.png)
-### Validierungsfehler
 
 * Um Validierungsfehler beim Speichern des Contexts auszuwerten, muss die ValidationException im ViewModel abgefangen werden.
 * Sollten Fehler auftreten werden diese einem ViewModel-Property (DbError) zugewiesen, welches am Window gebunden ist.
@@ -228,7 +227,7 @@ public override IEnumerable<ValidationResult> Validate(ValidationContext validat
  class EditCustomerViewModel : BaseViewModel
     {
 
-        public string _lastname;
+public string _lastname;
 
         [Required(ErrorMessage ="Lastname is required")]
         [MinLength(2, ErrorMessage ="Minimum length of Lastname is 2")]
