@@ -261,7 +261,7 @@ public partial class Customer
 ## Web-UI clientseitig
 * Durch Verwendung von vordefinierten Annotationen, eigenen Annotationen oder Custom Validations
 
-### Beispiel vordefinierte Annoationen:
+### Beispiel vordefinierte Annotationen:
  ```c#
  [Range(1900,2099)]
  public int Year {get; set;}
