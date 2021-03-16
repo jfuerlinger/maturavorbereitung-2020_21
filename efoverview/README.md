@@ -31,15 +31,22 @@ EF bietet eine Reihe von Migration Commands, die über die NuGet Package Manager
 ## Architektur
 ![alt text](https://www.entityframeworktutorial.net/Images/ef-architecture.PNG)
 
-EDM (Entity Data Model): Das EDM besteht aus drei Hauptteilen - Conceptual Model, Mapping und Storage Model.
-Conceptual Model: Das konzeptionelle Modell enthält die Modellklassen und ihre Beziehungen. 
+- EDM (Entity Data Model): Das EDM besteht aus drei Hauptteilen - Conceptual Model, Mapping und Storage Model.
+
+- Conceptual Model: Das konzeptionelle Modell enthält die Modellklassen und ihre Beziehungen. 
 Storage Model: Das Storage Model ist das Datenbankdesignmodell, sie enthält die Tabellen, Views, Stored Procedures, Beziehungen und Schlüsseln. 
-Mapping: Das Mapping holt sich die Informationen durch die Abbildung vom Conceptual Model zum Storage Model.
-LINQ to Entities: LINQ-to-Entities (L2E) ist eine Abfragesprache für Instanzen in der Model. Die Abfragen geben die Entitäten, welche in der Conceptual Model definiert sind, zurück. 
-Entity SQL: Entity SQL ist eine weitere Abfragesprache (nur für EF 6). 
-Object Service: Object service bietet Zugriff auf die Daten von der Datenbank. Sie ist veranwortlich für die Materialization (Konvertierung der zurückgegebenen Daten von einem Entity Client Data Provider in einem Entity Object Structure).
-Entity Client Data Provider: Der Entity Client Data Provider ist hauptsächlich für die Konvertierung von LINQ-To-Entities und Entity SQL Abfragen in geeigente SQL Abfragen für die hintergelegte Datenbank zuständig. Zusätzlich kommuniziert er mit dem ADO.Net Data Provider, der wiederum Daten aus der Datenbank sendet und abruft. 
-ADO.Net Data Provider: Diese Schicht kommuniziert mit der Datenbank über das Standard ADO.Net.
+
+- Mapping: Das Mapping holt sich die Informationen durch die Abbildung vom Conceptual Model zum Storage Model.
+
+- LINQ to Entities: LINQ-to-Entities (L2E) ist eine Abfragesprache für Instanzen in der Model. Die Abfragen geben die Entitäten, welche in der Conceptual Model definiert sind, zurück. 
+
+- Entity SQL: Entity SQL ist eine weitere Abfragesprache (nur für EF 6). 
+
+- Object Service: Object service bietet Zugriff auf die Daten von der Datenbank. Sie ist veranwortlich für die Materialization (Konvertierung der zurückgegebenen Daten von einem Entity Client Data Provider in einem Entity Object Structure).
+
+- Entity Client Data Provider: Der Entity Client Data Provider ist hauptsächlich für die Konvertierung von LINQ-To-Entities und Entity SQL Abfragen in geeigente SQL Abfragen für die hintergelegte Datenbank zuständig. Zusätzlich kommuniziert er mit dem ADO.Net Data Provider, der wiederum Daten aus der Datenbank sendet und abruft. 
+
+- ADO.Net Data Provider: Diese Schicht kommuniziert mit der Datenbank über das Standard ADO.Net.
 
 ## Varianten
 
