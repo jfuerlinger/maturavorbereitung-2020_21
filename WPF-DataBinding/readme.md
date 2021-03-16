@@ -14,16 +14,16 @@
 ## Definition
 
 Data binding ist der Prozess, der die Verbindung zwischen einem UI-Element und den Daten, die diese anzeigt, herstellt.
-Wenn die Daten, gegen welche gebunden wurden, sich geändert haben, werden diese auch automatisch im UI-Element aktualisiert. Hierbei können die Daten auch von außerhalb in der UI durch den
-Benutzer verändert werden, dies ändert ein Property im ViewModel, welches dann beim Anstoss des Speicherns durch den Code in der DB gespeichert wird. 
+Wenn die Daten, gegen welche gebunden wurden, sich geÃ¤ndert haben, werden diese auch automatisch im UI-Element aktualisiert. Hierbei kÃ¶nnen die Daten auch von auÃŸerhalb in der UI durch den
+Benutzer verÃ¤ndert werden, dies Ã¤ndert ein Property im ViewModel, welches dann beim Anstoss des Speicherns durch den Code in der DB gespeichert wird. 
 
 
 ## Basic data binding concepts
 
 Egal welches Element gebunden wird, alle Bindings folgen dem folgenden Model:
-![](https://github.com/mflieger/testreadme/blob/main/basic-data-binding-diagram.png "Basic Data Binding Diagram")
+![](https://github.com/jfuerlinger/maturavorbereitung-2020_21/blob/topic/WPF-DataBinding-Flieger/WPF-DataBinding/images/basic-data-binding-diagram.png "Basic Data Binding Diagram")
 
-Wie das Model zeigt, bildet data binding die Brücke zwischen dem binding target und der binding source.
+Wie das Model zeigt, bildet data binding die BrÃ¼cke zwischen dem binding target und der binding source.
 
 
 
@@ -33,36 +33,36 @@ Jedes binding besteht aus 4 Komponenten:
 - binding source
 - Einen Pfad zum Wert, den die binding source verwenden kann
 
-z.B. Wenn man den Inhalt einer TextBox an einen Employee.Name binden möchte, so ist das target object die TextBox, target property ist die text property,
+z.B. Wenn man den Inhalt einer TextBox an einen Employee.Name binden mÃ¶chte, so ist das target object die TextBox, target property ist die text property,
 der zu verwendende Wert ist Name und das source object ist das Employee object.
 
 
-- Jedes target property muss ein dependency property sein. Die meisten UI Elemente properties sind dependency properties und bis auf read-only properties unterstützen
+- Jedes target property muss ein dependency property sein. Die meisten UI Elemente properties sind dependency properties und bis auf read-only properties unterstÃ¼tzen
 die meisten auch data binding.
 
 
 ## Richtung des data flows
 
 Der data flow beim data binding kann in eine Richting, als wie auch in beide Richtungen gehen.
-Somit kann man kontrollieren, ob der Benutzer Daten im source verändern kann oder nicht.
+Somit kann man kontrollieren, ob der Benutzer Daten im source verÃ¤ndern kann oder nicht.
 
-![](https://github.com/mflieger/testreadme/blob/main/databinding-dataflow.png "dataflow")
+![](https://github.com/jfuerlinger/maturavorbereitung-2020_21/blob/topic/WPF-DataBinding-Flieger/WPF-DataBinding/images/databinding-dataflow.png "dataflow")
 
-- OneWay bindings sorgen dafür, dass Veränderungen im source property auch am target property aktualisiert werden. Dies ist nützlich für read-only properties.
-- TwoWay bindings sorgen dafür, dass Veränderungen in beiden Richtungen aktualisiert werden. Besonders hilfreich für editierbaren Formularen oder interaktiven UI's.
+- OneWay bindings sorgen dafÃ¼r, dass VerÃ¤nderungen im source property auch am target property aktualisiert werden. Dies ist nÃ¼tzlich fÃ¼r read-only properties.
+- TwoWay bindings sorgen dafÃ¼r, dass VerÃ¤nderungen in beiden Richtungen aktualisiert werden. Besonders hilfreich fÃ¼r editierbaren Formularen oder interaktiven UI's.
 Die meisten properties sind TwoWay bindings bei default.
-- OneWayToSource ist genau das Gegenteil vom OneWay binding, bei dem Änderungen in der UI im Source gespeichert werden. 
-- OneTime beschreibt nur eine einzige Veränderung die von der source im target property aktualisiert wird.
+- OneWayToSource ist genau das Gegenteil vom OneWay binding, bei dem Ã„nderungen in der UI im Source gespeichert werden. 
+- OneTime beschreibt nur eine einzige VerÃ¤nderung die von der source im target property aktualisiert wird.
 - Default ist der Standardmodus. Ist meist ein TwoWay binding.
 
 
 ## Synchronisation
 
 Updatesourcetriggers:
-- Explicit: Die Änderung muss explizit durch den Aufruf der UpdateSource-Methode des Zielobjekts erfolgen.
+- Explicit: Die Ã„nderung muss explizit durch den Aufruf der UpdateSource-Methode des Zielobjekts erfolgen.
 - LostFocus: Die source wird aktualisiert, wenn die Zielkomponente den Fokus verliert.
-- PropertyChanged: Die Aktualisierung erfolgt bei jeder Änderung. Allerdings beansprucht diese Einstellung die Ressourcen sehr intensiv.
-- Default: Der default variiert von Komponente zu Komponente, ist allerdings meist ein PropertyChanged und in selten Fällen ein LostFocus.
+- PropertyChanged: Die Aktualisierung erfolgt bei jeder Ã„nderung. Allerdings beansprucht diese Einstellung die Ressourcen sehr intensiv.
+- Default: Der default variiert von Komponente zu Komponente, ist allerdings meist ein PropertyChanged und in selten FÃ¤llen ein LostFocus.
 
 
 ## Binding erstellen mit XAML
@@ -87,22 +87,22 @@ Updatesourcetriggers:
 
 ```
 
-![](https://github.com/mflieger/testreadme/blob/main/Hello!.PNG "Hello!")
+![](https://github.com/jfuerlinger/maturavorbereitung-2020_21/blob/topic/WPF-DataBinding-Flieger/WPF-DataBinding/images/Hello!.PNG "Hello!")
 
-In diesem Beispiel zeigen wir mit der Verknüpfung den Wert einer TextBox, in einer anderen TextBox an. Ohne data binding müssten wir dafür ein event erzeugen.
+In diesem Beispiel zeigen wir mit der VerknÃ¼pfung den Wert einer TextBox, in einer anderen TextBox an. Ohne data binding mÃ¼ssten wir dafÃ¼r ein event erzeugen.
 
 ### Binding Syntax
 
 - {Binding Path = NameDerEigenschaft}
-Path-Element beschreibt die Eigenschaft, zu der man die Verknüpfung realisieren möchte.
+Path-Element beschreibt die Eigenschaft, zu der man die VerknÃ¼pfung realisieren mÃ¶chte.
 
 - {Binding Path=Text, ElementName=txtValue}
-Eine Verknüpfung kann durch verschiedene Eigenschaften erfolgen, unter Anderem die Eigenschaft ElementName, welche wir in unserem Beispiel verwendeten. 
-Dies gibt uns die Möglichkeit direkt an andere UI-Elemente als source zu verknüpfen. Jede Eigenschaft, die wir im Binding setzen, wird mit einem Komma (',') getrennt.
+Eine VerknÃ¼pfung kann durch verschiedene Eigenschaften erfolgen, unter Anderem die Eigenschaft ElementName, welche wir in unserem Beispiel verwendeten. 
+Dies gibt uns die MÃ¶glichkeit direkt an andere UI-Elemente als source zu verknÃ¼pfen. Jede Eigenschaft, die wir im Binding setzen, wird mit einem Komma (',') getrennt.
 
 ## Data binding code behind
 
-- Data binding sollte eigentlich ausschließlich im XAML definiert werden. Man kann es allerdings auch im code behind definieren.
+- Data binding sollte eigentlich ausschlieÃŸlich im XAML definiert werden. Man kann es allerdings auch im code behind definieren.
 
 ```xaml
 <Window x:Class="WpfTutorialSamples.DataBinding.CodeBehindBindingsSample"
@@ -141,12 +141,12 @@ namespace WpfTutorialSamples.DataBinding
 }
 ```
 
-Wir erstellen eine binding instance und geben im constructor den Pfad an ("Text"), geben als nächstes die source an (txtValue) und in der letzten Zeile fügen wir unser binding object 
-mit dem target property zusammen. SetBinding Methode benötigt hierbei 2 Parameter: an welches dependency property wir binden möchten und einen, der das binding object enthält.
+Wir erstellen eine binding instance und geben im constructor den Pfad an ("Text"), geben als nÃ¤chstes die source an (txtValue) und in der letzten Zeile fÃ¼gen wir unser binding object 
+mit dem target property zusammen. SetBinding Methode benÃ¶tigt hierbei 2 Parameter: an welches dependency property wir binden mÃ¶chten und einen, der das binding object enthÃ¤lt.
 
 ## INotifyPropertyChanged
 
-Objects die OneWay or TwoWay bindings nutzen, müssen das 'INotifyPropertyChanged' interface implementieren. 
+Objects die OneWay or TwoWay bindings nutzen, mÃ¼ssen das 'INotifyPropertyChanged' interface implementieren. 
 
 Beispiel:
 
@@ -236,8 +236,8 @@ namespace WpfTutorialSamples.DataBinding
 ```
 
 
-Wir haben einen Konverter, in der die Convert()-Methode davon ausgeht, dass sie einen String als Eingabe (den value-Parameter) erhält
+Wir haben einen Konverter, in der die Convert()-Methode davon ausgeht, dass sie einen String als Eingabe (den value-Parameter) erhÃ¤lt
 und diesen dann in einen booleschen wahren oder falschen Wert mit einem Ersatz-Wert von false umwandelt. 
 
-Die ConvertBack Methode macht das Gegenteil: Er nimmt einen Eingabewert mit einem booleschen Typ an und gibt dann das englische Wort "yes" oder "no" zurück,
+Die ConvertBack Methode macht das Gegenteil: Er nimmt einen Eingabewert mit einem booleschen Typ an und gibt dann das englische Wort "yes" oder "no" zurÃ¼ck,
 mit einem Ersatz-Wert von "no".
