@@ -8,18 +8,19 @@
 4. Synchronisation
 5. Data binding XAML
 6. Data binding code behind
-7. Daten konvertieren
+7. INotifyPropertyChanged
+8. Data conversion
 
 ## Definition
 
-Data binding ist der Prozess, der die Verbindung zwischen einem UI-Element und den Daten die diese anzeigt herstellt.
-Wenn Daten des Data Binding geändert werden, werden diese auch automatisch im UI-Element aktualisiert. Hierbei können die Daten auch von außerhalb in der UI durch den
-Benutzer verändert werden und diese werden dann in der Datenbank aktualisiert. 
+Data binding ist der Prozess, der die Verbindung zwischen einem UI-Element und den Daten, die diese anzeigt, herstellt.
+Wenn die Daten, gegen welche gebunden wurden, sich geändert haben, werden diese auch automatisch im UI-Element aktualisiert. Hierbei können die Daten auch von außerhalb in der UI durch den
+Benutzer verändert werden, dies ändert ein Property im ViewModel, welches dann beim Anstoss des Speicherns durch den Code in der DB gespeichert wird. 
 
 
 ## Basic data binding concepts
 
-Egal welches Element gebindet wird, alle Bindings folgen dem folgenden Model:
+Egal welches Element gebunden wird, alle Bindings folgen dem folgenden Model:
 ![](https://github.com/mflieger/testreadme/blob/main/basic-data-binding-diagram.png "Basic Data Binding Diagram")
 
 Wie das Model zeigt, bildet data binding die Brücke zwischen dem binding target und der binding source.
@@ -32,7 +33,7 @@ Jedes binding besteht aus 4 Komponenten:
 - binding source
 - Einen Pfad zum Wert, den die binding source verwenden kann
 
-z.B. Wenn man den Inhalt einer TextBox an einen Employee.Name binden möchte, so ist das target object die TextBox, target property ist die Text property,
+z.B. Wenn man den Inhalt einer TextBox an einen Employee.Name binden möchte, so ist das target object die TextBox, target property ist die text property,
 der zu verwendende Wert ist Name und das source object ist das Employee object.
 
 
@@ -43,11 +44,11 @@ die meisten auch data binding.
 ## Richtung des data flows
 
 Der data flow beim data binding kann in eine Richting, als wie auch in beide Richtungen gehen.
-Somit kann man kontrollieren, ob der Benutzer Daten im source verändern zu können oder nicht.
+Somit kann man kontrollieren, ob der Benutzer Daten im source verändern kann oder nicht.
 
 ![](https://github.com/mflieger/testreadme/blob/main/databinding-dataflow.png "dataflow")
 
-- OneWay bindings sorgen dafür, dass Veränderungen im source property auch automatisch am target property aktualisiert werden. Dies ist nützlich für read-only properties.
+- OneWay bindings sorgen dafür, dass Veränderungen im source property auch am target property aktualisiert werden. Dies ist nützlich für read-only properties.
 - TwoWay bindings sorgen dafür, dass Veränderungen in beiden Richtungen aktualisiert werden. Besonders hilfreich für editierbaren Formularen oder interaktiven UI's.
 Die meisten properties sind TwoWay bindings bei default.
 - OneWayToSource ist genau das Gegenteil vom OneWay binding, bei dem Änderungen in der UI im Source gespeichert werden. 
@@ -67,22 +68,28 @@ Updatesourcetriggers:
 ## Binding erstellen mit XAML
 
 ```xaml
-<Window x:Class="WpfTutorialSamples.DataBinding.HelloBoundWorldSample"
+<Window x:Class="HelloBinding!.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="HelloBoundWorldSample" Height="110" Width="280">
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="100" Width="250">
     <StackPanel Margin="10">
-		<TextBox Name="txtValue" />
-		<WrapPanel Margin="0,10">
-			<TextBlock Text="Value: " FontWeight="Bold" />
-			<TextBlock Text="{Binding Path=Text, ElementName=txtValue}" />
-		</WrapPanel>
-	</StackPanel>
+        <TextBox Name="txtValue" />
+        <WrapPanel Margin="0,10">
+            <TextBlock Text="Value: " FontWeight="Bold" />
+            <TextBlock Text="{Binding Path=Text, ElementName=txtValue}" />
+        </WrapPanel>
+    </StackPanel>
 </Window>
 
 ```
 
-In diesem Beispiel zeigen wir den Wert eines TextBox einer anderen TextBox durch die Verknüpfun an. Ohne data binding müssten wir dafür ein Ereignis erzeugen.
+![](https://github.com/mflieger/testreadme/blob/main/Hello!.PNG "Hello!")
+
+In diesem Beispiel zeigen wir mit der Verknüpfung den Wert einer TextBox, in einer anderen TextBox an. Ohne data binding müssten wir dafür ein event erzeugen.
 
 ### Binding Syntax
 
@@ -91,9 +98,11 @@ Path-Element beschreibt die Eigenschaft, zu der man die Verknüpfung realisieren 
 
 - {Binding Path=Text, ElementName=txtValue}
 Eine Verknüpfung kann durch verschiedene Eigenschaften erfolgen, unter Anderem die Eigenschaft ElementName, welche wir in unserem Beispiel verwendeten. 
-Dies gibt uns die Möglichkeit direkt an andere UI-Elementen als Quelle zu verknüpfen. Jede Eigenschaft, die wir im Binding setzen, wird mit einem Komma getrennt.
+Dies gibt uns die Möglichkeit direkt an andere UI-Elemente als source zu verknüpfen. Jede Eigenschaft, die wir im Binding setzen, wird mit einem Komma (',') getrennt.
 
 ## Data binding code behind
+
+- Data binding sollte eigentlich ausschließlich im XAML definiert werden. Man kann es allerdings auch im code behind definieren.
 
 ```xaml
 <Window x:Class="WpfTutorialSamples.DataBinding.CodeBehindBindingsSample"
@@ -132,10 +141,34 @@ namespace WpfTutorialSamples.DataBinding
 }
 ```
 
-Wir erstellen eine Binding-Instanz und geben im Konstruktor den Pfad an ("Text"), geben als nächstes die source an (txtValue) und in der letzten Zeile fügen wir unser Binding-object 
-mit dem Ziel-Element zusammen. SetBinding Methode benöigt hierbei 2 Parameter: and welche Abhängigkeitseigenschaft wir binden möchten und einen der das Binding-object enthält.
+Wir erstellen eine binding instance und geben im constructor den Pfad an ("Text"), geben als nächstes die source an (txtValue) und in der letzten Zeile fügen wir unser binding object 
+mit dem target property zusammen. SetBinding Methode benötigt hierbei 2 Parameter: an welches dependency property wir binden möchten und einen, der das binding object enthält.
 
-## Daten konvertieren
+## INotifyPropertyChanged
+
+Objects die OneWay or TwoWay bindings nutzen, müssen das 'INotifyPropertyChanged' interface implementieren. 
+
+Beispiel:
+
+```C#
+class Person : INotifyPropertyChanged
+{
+	private string _firstName;
+	public string FirstName
+	{
+		get { return _firstName; }
+		set { _firstName = value; OnPropertyChanged(nameof(FirstName)); }
+	}
+	
+	public event PropertyChangedEventhHandler PropertyChanged;
+	private void OnPropertyChanged(string propertyName)
+	{
+		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+	}
+}
+```
+
+## Data conversion
 
 ```xaml
 <Window x:Class="WpfTutorialSamples.DataBinding.ConverterSample"
@@ -203,7 +236,7 @@ namespace WpfTutorialSamples.DataBinding
 ```
 
 
-Wir haben einen Konverter in derDie Convert()-Methode geht davon aus, dass sie einen String als Eingabe (den value-Parameter) 
+Wir haben einen Konverter, in der die Convert()-Methode davon ausgeht, dass sie einen String als Eingabe (den value-Parameter) erhält
 und diesen dann in einen booleschen wahren oder falschen Wert mit einem Ersatz-Wert von false umwandelt. 
 
 Die ConvertBack Methode macht das Gegenteil: Er nimmt einen Eingabewert mit einem booleschen Typ an und gibt dann das englische Wort "yes" oder "no" zurück,
