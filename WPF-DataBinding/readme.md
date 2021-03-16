@@ -129,14 +129,14 @@ namespace WpfTutorialSamples.DataBinding
 {
     public partial class CodeBehindBindingsSample : Window
     {
-    public CodeBehindBindingsSample()
-    {
-        InitializeComponent();
+    	public CodeBehindBindingsSample()
+    	{
+        	InitializeComponent();
 
-        Binding binding = new Binding("Text");
-        binding.Source = txtValue;
-        lblValue.SetBinding(TextBlock.TextProperty, binding);
-    }
+        	Binding binding = new Binding("Text");
+        	binding.Source = txtValue;
+        	lblValue.SetBinding(TextBlock.TextProperty, binding);
+    	}
     }
 }
 ```
