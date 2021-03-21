@@ -88,6 +88,157 @@ public class SchoolContext : DbContext
 - - -
 ## Convention over Configuration
 Viele Eigenschaften werden per Konvention festgelegt, diese können aber angepasst werden, entweder durch Annotationen oder eine eigene API (Fluent-API). Die Fluent-API ist mächtiger als Annotationen und erlaubt „saubere“ Modelklassen (Entitäten).
+### Fluent API > data annotations > default conventions
+
+In Entity Framework Core fungiert die Modelbuilder Klasse als Fluent-API.
+Diese kann angepasst werden und bietet mehr Konfigurationsmöglichkeiten als Data Annotations.
+
+Durch das Überschreiben der Methode `DbContext.OnModelCreating` und die Verwendung des Parameters `ModelBuilder` kann die Domain Klasse konfiguriert werden.
+
+``` C#
+public partial class StoreDBContext : DbContext
+{
+    public virtual DbSet<OrderDetails> OrderDetails { get; set; }
+    public virtual DbSet<Orders> Orders { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=StoreDB;");
+        }
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<OrderDetails>(entity =>
+        {
+            entity.HasKey(e => e.OrderDetailId);
+
+            entity.HasIndex(e => e.OrderId);
+
+            entity.Property(e => e.OrderDetailId).HasColumnName("OrderDetailID");
+
+            entity.Property(e => e.OrderId).HasColumnName("OrderID");
+
+            entity.Property(e => e.ProductId).HasColumnName("ProductID");
+
+            entity.HasOne(d => d.Order)
+                .WithMany(p => p.OrderDetails)
+                .HasForeignKey(d => d.OrderId);
+        });
+
+        modelBuilder.Entity<Orders>(entity =>
+        {
+            entity.HasKey(e => e.OrderId);
+
+            entity.Property(e => e.OrderId).HasColumnName("OrderID");
+
+            entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
+
+            entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
+        });
+    }
+}
+```
+
+#### FluentApi Methoden:
+
+- HasKey() 
+
+``` C#
+public class OrderDetail
+{
+    public int OrderDetailID { get; set; }
+    public int OrderID { get; set; }
+    public int ProductID { get; set; }
+    public int Quantity { get; set; }
+    public Order Order { get; set; }
+}
+
+class MyContext : DbContext
+{
+    public DbSet<OrderDetail> OrderDetails { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<OrderDetail>()
+            .HasKey(b => b.OrderDetailID);
+    }
+}
+```
+
+- HasForeignKey()
+
+```C#
+public partial class StoreDBContext : DbContext
+{
+    public virtual DbSet<OrderDetails> OrderDetails { get; set; }
+    public virtual DbSet<Orders> Orders { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<OrderDetails>(entity =>
+        {
+            entity.HasKey(e => e.OrderDetailId);
+
+            entity.HasIndex(e => e.OrderId);
+
+            entity.Property(e => e.OrderDetailId).HasColumnName("OrderDetailID");
+
+            entity.Property(e => e.OrderId).HasColumnName("OrderID");
+
+            entity.Property(e => e.ProductId).HasColumnName("ProductID");
+
+            entity.HasOne(d => d.Order)
+                .WithMany(p => p.OrderDetails)
+                .HasForeignKey(d => d.OrderId);
+        });
+    }
+}
+
+```
+- HasColumnName()
+``` C#
+class MyContext : DbContext
+{
+    public DbSet<Order> Orders { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Order>()
+            .Property(b => b.OrderID)
+            .HasColumnName("Order_Id");
+    }
+}
+```
+- IsConcurrencyToken() 
+
+Property als ConcurrencyToken konfigurieren
+``` C#
+class MyContext : DbContext
+{
+    public DbSet<Person> People { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Person>()
+            .Property(p => p.LastName)
+            .IsConcurrencyToken();
+    }
+}
+```
+
+- HasSequence()
+- HasDefaultValue() 
+- HasIndex()
+- HasDefaultSchema()
+- HasIndex()
+- IsRequired() 
+
+
+
+### Conventionen
 
 #### Primary Key
 Wenn ein Property im Namen `ID` beinhaltet, wird sie automatisch als Primary Key konfiguriert. EF Core bevorzugt ausschließlich `ID`, für den Fall falls die Klasse beides enthält.
@@ -367,3 +518,100 @@ dotnet ef migrations remove
 remove-migration
 ```
 
+#### Model Snapshot
+
+Der aktuelle Stand des Models wird in der Datei `<YourContext>ModelSnapshot.cs` archiviert. Die Datei wird bei der Erstellung der ersten Migration im `Migrations` Ordner hinzugefügt und bei jeder nachfolgenden Migration aktualisiert. Das ermöglicht die Migrations-Framework die Änderungen zu berechnen die erforderlich sind, um die Datenbank mit dem Model auf den neuesten Stand zu bringen.
+
+
+## Eager- /Lazy Loading
+
+
+#### Eagerloading:
+
+Bezugsdaten werden als Teil der Abfrage mit den Methoden `Include` und `ThenInclude` aus der Datenbank geladen.
+
+Die `Include` Methode gibt die benötigten Objekte an, die in die Abfrageergebnisse aufgenommen werden sollen.
+
+
+```C#
+using (var context = new MyContext())
+{
+    var customers = context.Customers
+        .Include(c => c.Invoices)
+        .ToList();
+}
+
+```
+#### Explicit loading:
+Zugehörige Daten werden explizit zu einem späteren Zeitpunkt aus der Datenbank geladen.
+
+
+``` C#
+using (var context = new MyContext())
+{
+    var customer = context.Customers
+        .Single(c => c.CustomerId == 1);
+
+    context.Entry(customer)
+        .Collection(c => c.Invoices)
+        .Load();
+}
+```
+
+#### Lazyloading: 
+Zugehörige Daten werden transparent aus der Datenbank geladen, wenn auf die Navigation Property zugegriffen wird. Die einfachste Möglichkeit Lazy Loading zu verwenden ist die Benützung von Proxies. Dazu ist die Installation des Pakets `Microsoft.EntityFrameworkCore.Proxies` notwendig.
+EF Core aktiviert das Lazy Loading für alle Navigation Properties, die virtual sind und sich in einer Klasse befinden, die geerbt werden kann.
+
+``` C#
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    => optionsBuilder
+        .UseLazyLoadingProxies()
+        .UseSqlServer(myConnectionString);
+```        
+
+Lazy Loading wird für die Navigation Property `Post.Blog` und `Blog.Posts` durchgeführt.
+
+``` C#
+public class Blog
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+
+    public virtual ICollection<Post> Posts { get; set; }
+}
+
+public class Post
+{
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public string Content { get; set; }
+
+    public virtual Blog Blog { get; set; }
+}
+```
+
+## Client Evaluation vs. Server Evaluation
+
+Die Client- vs. Server Evaluierung ist eine Funktion, die das Schreiben von Abfragen an die Datenbank erleichtert. Ein Teil der Abfragen werden vom Client ausgewertet und der andere Teil der Datenbank übergegeben. 
+Der Datenbankanbieter bestimmt, welche Teile der Abfrage in der Datenbank ausgewertet werden.
+Die Client/Server Evaluation ermöglicht das Abfragen die eine Logik enthalten, die nicht in der Datenbank ausgewertet werden kann, nach Abruf der Daten zuerst im Speicher ausgewertet werden.
+
+Beispiel: Vorname und Nachname aus einer SQL DB kombinieren
+``` C# 
+private static string CombineNames(string firstName, string lastName)
+{
+    return firstName + " " + lastName;
+}
+```
+
+``` C#
+var customer = context.Customers
+    .Where(c => c.CustomerId == 1)
+    .Select(cust => new
+    {
+        FullName = CombineNames(cust.FirstName, cust.LastName)
+    }).FirstOrDefault();
+```
+
+Nachteil:
+Bei aufwändigen Abfragen leidet die Perfomance! 
