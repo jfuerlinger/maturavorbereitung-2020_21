@@ -254,10 +254,11 @@ public class Book
     public string Title { get; set;}
 }
 
-public class Book
+public class Author
 {
+	public int AuthorId { get; set; }
+    public string Name { get; set; }
     public int BookId { get; set; }
-    public string Title { get; set; }
 }
 
 ```
